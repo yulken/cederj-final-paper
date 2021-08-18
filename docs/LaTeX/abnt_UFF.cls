@@ -831,7 +831,6 @@ Para mais informacoes, leia o manual da classe.\MessageBreak%
       \renewcommand{\ABNTBeginOfTextualPart}%
         {%
          \renewcommand{\thepage}{\arabic{page}}
-         \setcounter{page}{1}
         }%
      }%
   }%
@@ -960,6 +959,7 @@ Para mais informacoes, leia o manual da classe.\MessageBreak%
     {%
      \if@openright\cleardoublepage\else\clearpage\fi%
      \thispagestyle{\chaptertitlepagestyle}
+     \renewcommand{\rmdefault}{phv}
      \global\@topnum\z@%
      \@afterindentfalse%
      \@schapter%
@@ -1990,35 +1990,10 @@ Para mais informacoes, leia o manual da classe.\MessageBreak%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% I will no longer include List of Symbols in the wishlist for this class.
 
-%%%%%%    Opcao de fonte Times como romano default
 
-\ifthenelse{\boolean{ABNThelveticafont}}% if `times'option enabled...
 {\IfFileExists{helvetic.sty}%
 {\RequirePackage{helvetic}}%
-{\renewcommand{\rmdefault}{phv}}%
-}%
-%  {\IfFileExists{mathptmx.sty}%  try `mathptmx' first
-%     {\RequirePackage{mathptmx}}% 
-%     {\IfFileExists{mathptm.sty}% if not installed, try `mathptm'
-%        {\RequirePackage{mathptm}}%
-%        {\IfFileExists{times.sty} % 
-%          {\RequirePackage{times}}%
-%          {\renewcommand{\rmdefault}{ptm}}%
-%        }%
-%     }%
-  % {\IfFileExists{helvet.sty}% including also Helvetica as sans serif.
-  %   {\RequirePackage{helvet}}%
-    {\IfFileExists{helvetic.sty}%
-       {\RequirePackage{helvetic}}%
-       {\renewcommand{\rmdefault}{phv}}%
-    }%
-%  }%
-%  {}
-
-
- {\IfFileExists{helvetic.sty}%
- {\RequirePackage{helvetic}}%
- {\renewcommand{\rmdefault}{phv}}
+{\renewcommand{\rmdefault}{phv}}
 %%%%% auto bold math (try follow bold face in text)
 
 % plan: redefine commands that change font to bold to ALSO change math
