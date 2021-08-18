@@ -1711,19 +1711,19 @@ Para mais informacoes, leia o manual da classe.\MessageBreak%
 
 \providecommand{\ABNTinstituicaodata}{}
 \newcommand{\instituicao}[1]{\renewcommand{\ABNTinstituicaodata}{#1}}
-\newcommand{\instituicaoformat}{\large\ABNTsectionfont} % \LARGE\scshape}
+\newcommand{\instituicaoformat}{\large\bf} % \LARGE\scshape}
 
 \providecommand{\ABNTautordata}{}
 \newcommand{\autor}[1]{\renewcommand{\ABNTautordata}{#1}}
-\newcommand{\autorformat}{\large\ABNTsectionfont}
+\newcommand{\autorformat}{\large\bf}
 
 \providecommand{\ABNTorientadordata}{}
 \providecommand{\ABNTorientadorname}{}
-\newcommand{\orientador}[2][Orientador:\vspace{1mm}\\]%
+\newcommand{\orientador}[2][{\bf Orientador}:\vspace{1mm}\\]%
   {\renewcommand{\ABNTorientadorname}{#1}%
    \renewcommand{\ABNTorientadordata}{#2}}
 \newcommand{\orientadornameformat}{}
-\newcommand{\orientadorformat}{\large}
+\newcommand{\orientadorformat}{\ABNTsectionfont}{\large}
 
 \providecommand{\ABNTorientadoradata}{}
 \providecommand{\ABNTorientadoraname}{}
@@ -1751,7 +1751,7 @@ Para mais informacoes, leia o manual da classe.\MessageBreak%
 
 \providecommand{\ABNTtitulodata}{}
 \newcommand{\titulo}[1]{\renewcommand{\ABNTtitulodata}{#1}}
-\newcommand{\tituloformat}{\ABNTsectionfont}{\large}
+\newcommand{\tituloformat}{\large\bf}
 
 \providecommand{\ABNTcomentariodata}{}
 \newcommand{\comentario}[1]{\renewcommand{\ABNTcomentariodata}{#1}}
@@ -1759,11 +1759,11 @@ Para mais informacoes, leia o manual da classe.\MessageBreak%
 
 \providecommand{\ABNTlocaldata}{}
 \newcommand{\local}[1]{\renewcommand{\ABNTlocaldata}{#1}}
-\newcommand{\localformat}{\ABNTsectionfont}
+\newcommand{\localformat}{\large\bf}
 
 \providecommand{\ABNTdatadata}{}
 \newcommand{\data}[1]{\renewcommand{\ABNTdatadata}{#1}}
-\newcommand{\dataformat}{\ABNTsectionfont}
+\newcommand{\dataformat}{\large\bf}
 
 \newcommand{\ABNTifnotempty}[2]{\ifthenelse{\not\equal{#1}{}}{#2}{}}
 
@@ -1778,13 +1778,11 @@ Para mais informacoes, leia o manual da classe.\MessageBreak%
 \fi
 \thispagestyle{empty}%
 \setcounter{page}\z@
-\vspace*{1cm}
+\vspace*{0.25cm}
 \espaco{1.1}
 \begin{center}
-  \setlength{\parskip}{.3cm}
   \ABNTifnotempty{\ABNTinstituicaodata}%
     {%
-     \setlength{\parskip}{0cm}
      {\instituicaoformat\ABNTinstituicaodata\par}
     %  \setlength{\parskip}{.3cm}\par
     }
@@ -1795,7 +1793,6 @@ Para mais informacoes, leia o manual da classe.\MessageBreak%
 %  \autorformat{\ABNTinstituicaodata}%
 %\end{center}
 %}
-
 \ABNTifnotempty{\ABNTautordata}%
   {%
   \begin{center}
@@ -1809,9 +1806,8 @@ Para mais informacoes, leia o manual da classe.\MessageBreak%
      {\tituloformat\ABNTtitulodata\par}
    \end{center}
   }%
-
 \vspace*{1cm}
-\vfill\vfill\vfill
+\vfill\vfill
 \begin{center}
   \begin{espacosimples}
     \setlength{\parskip}{.3cm}
@@ -1831,43 +1827,32 @@ Para mais informacoes, leia o manual da classe.\MessageBreak%
 {%
 \begin{titlepage}
 \espaco{1.1}
-\begin{center}
-\begin{espacosimples}
-  \setlength{\parskip}{.3cm}
-  \ABNTifnotempty{\ABNTinstituicaodata}%
-    {%
-     \setlength{\parskip}{0cm}
-     {\instituicaoformat\ABNTinstituicaodata\par}
-     \setlength{\parskip}{.3cm}\par
-     
-    }
-\end{espacosimples}
-\end{center}
-\vfill
 \ABNTifnotempty{\ABNTautordata}%
   {%
   \begin{center}
     \autorformat\ABNTautordata
   \end{center}
   }
-\vfill\vfill%\vfill
+\vspace*{2.5cm}
 \ABNTifnotempty{\ABNTtitulodata}%
   {%
    \begin{center}
      {\tituloformat\ABNTtitulodata\par}
    \end{center}
   }%
+\vspace*{1cm}
 \ABNTifnotempty{\ABNTcomentariodata}%
   {%
    \vspace{.8cm}
-   \hspace{.45\textwidth}
-     \begin{minipage}{.5\textwidth}
+   \hspace{.50\textwidth}
+     \begin{minipage}{.48\textwidth}
        \begin{espacosimples}
          {\comentarioformat\ABNTcomentariodata}\par
        \end{espacosimples}
      \end{minipage}
    }
 \vspace{.8cm}
+\vspace{4cm}
 \begin{center}
 \ABNTifnotempty{\ABNTorientadordata}%
   {%
@@ -1896,7 +1881,6 @@ Para mais informacoes, leia o manual da classe.\MessageBreak%
   }
 
 \end{center}
-\vfill\vfill
 \begin{center}
   \ABNTifnotempty{\ABNTlocaldata}
       {{\localformat\ABNTlocaldata}\par}
