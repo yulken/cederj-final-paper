@@ -1,2 +1,12 @@
-/docs/latex/*
-!/docs/latex/*.tex
+/docs/LaTeX/*.aux
+/docs/LaTeX/*.pdf
+/docs/LaTeX/*.blg
+/docs/LaTeX/*.bbl
+/docs/LaTeX/*.fdb_latexmk
+/docs/LaTeX/*.fls
+/docs/LaTeX/*.lof
+/docs/LaTeX/*.log
+/docs/LaTeX/*.lot
+/docs/LaTeX/*.toc
+/docs/LaTeX/*.toc
+/docs/LaTeX/*.gz
