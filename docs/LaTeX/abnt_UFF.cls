@@ -1768,61 +1768,6 @@ Para mais informacoes, leia o manual da classe.\MessageBreak%
 \newcommand{\ABNTifnotempty}[2]{\ifthenelse{\not\equal{#1}{}}{#2}{}}
 
 
-\newcommand{\capa}%
-{%
-% replacing \begin{titlepage}
-\if@twocolumn
-  \@restonecoltrue\onecolumn
-\else
-  \@restonecolfalse\newpage
-\fi
-\thispagestyle{empty}%
-\setcounter{page}\z@
-\vspace*{0.25cm}
-\espaco{1.1}
-\begin{center}
-  \ABNTifnotempty{\ABNTinstituicaodata}%
-    {%
-     {\instituicaoformat\ABNTinstituicaodata\par}
-    %  \setlength{\parskip}{.3cm}\par
-    }
-\end{center}
-%\ABNTifnotempty{\ABNTinstituicaodata}%
-%{%
-%\begin{center}
-%  \autorformat{\ABNTinstituicaodata}%
-%\end{center}
-%}
-\ABNTifnotempty{\ABNTautordata}%
-  {%
-  \begin{center}
-    \autorformat\ABNTautordata
-  \end{center}
-  }
-\vfill\vfill
-\ABNTifnotempty{\ABNTtitulodata}%
-  {%
-   \begin{center}
-     {\tituloformat\ABNTtitulodata\par}
-   \end{center}
-  }%
-\vspace*{1cm}
-\vfill\vfill
-\begin{center}
-  \begin{espacosimples}
-    \setlength{\parskip}{.3cm}
-    \ABNTifnotempty{\ABNTlocaldata}
-      {{\localformat\ABNTlocaldata}\par}
-    \ABNTifnotempty{\ABNTdatadata}
-      {{\dataformat\ABNTdatadata}}
-  \end{espacosimples}
-\end{center}
-\vspace*{1cm}
-% replacing \end{titlepage} by its meaning
-\if@restonecol\twocolumn \else \newpage \fi
-\espaco{\ABNTespacodefault}%Corrige bug 114
-}% end of \capa
-
 \newcommand{\folhaderosto}%
 {%
 \begin{titlepage}
