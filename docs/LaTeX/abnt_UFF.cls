@@ -1711,7 +1711,7 @@ Para mais informacoes, leia o manual da classe.\MessageBreak%
 
 \providecommand{\ABNTinstituicaodata}{}
 \newcommand{\instituicao}[1]{\renewcommand{\ABNTinstituicaodata}{#1}}
-\newcommand{\instituicaoformat}{\large\scshape} % \LARGE\scshape}
+\newcommand{\instituicaoformat}{\large\ABNTsectionfont} % \LARGE\scshape}
 
 \providecommand{\ABNTautordata}{}
 \newcommand{\autor}[1]{\renewcommand{\ABNTautordata}{#1}}
@@ -1751,7 +1751,7 @@ Para mais informacoes, leia o manual da classe.\MessageBreak%
 
 \providecommand{\ABNTtitulodata}{}
 \newcommand{\titulo}[1]{\renewcommand{\ABNTtitulodata}{#1}}
-\newcommand{\tituloformat}{\large}
+\newcommand{\tituloformat}{\ABNTsectionfont}{\large}
 
 \providecommand{\ABNTcomentariodata}{}
 \newcommand{\comentario}[1]{\renewcommand{\ABNTcomentariodata}{#1}}
@@ -1759,11 +1759,11 @@ Para mais informacoes, leia o manual da classe.\MessageBreak%
 
 \providecommand{\ABNTlocaldata}{}
 \newcommand{\local}[1]{\renewcommand{\ABNTlocaldata}{#1}}
-\newcommand{\localformat}{}
+\newcommand{\localformat}{\ABNTsectionfont}
 
 \providecommand{\ABNTdatadata}{}
 \newcommand{\data}[1]{\renewcommand{\ABNTdatadata}{#1}}
-\newcommand{\dataformat}{}
+\newcommand{\dataformat}{\ABNTsectionfont}
 
 \newcommand{\ABNTifnotempty}[2]{\ifthenelse{\not\equal{#1}{}}{#2}{}}
 
@@ -1786,7 +1786,7 @@ Para mais informacoes, leia o manual da classe.\MessageBreak%
     {%
      \setlength{\parskip}{0cm}
      {\instituicaoformat\ABNTinstituicaodata\par}
-     \setlength{\parskip}{.3cm}\par
+    %  \setlength{\parskip}{.3cm}\par
     }
 \end{center}
 %\ABNTifnotempty{\ABNTinstituicaodata}%
@@ -1795,7 +1795,7 @@ Para mais informacoes, leia o manual da classe.\MessageBreak%
 %  \autorformat{\ABNTinstituicaodata}%
 %\end{center}
 %}
-\vfill\vfill
+
 \ABNTifnotempty{\ABNTautordata}%
   {%
   \begin{center}
