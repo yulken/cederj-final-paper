@@ -10,22 +10,22 @@
 %%
 %% $Log: tabela-simbolos.sty,v $
 %% Revision 1.9  2003/10/13 09:44:08  gweber
-%% Passa a usar abntex-abrev para abreviações. Acrescentado um aviso sobre o que fazer
+%% Passa a usar abntex-abrev para abreviaï¿½ï¿½es. Acrescentado um aviso sobre o que fazer
 %% para rodar makeindex.
 %%
 %% Revision 1.8  2003/10/10 10:03:21  gweber
-%% Passa a usar cvs-id.def para gerar informações sobre data e versão.
+%% Passa a usar cvs-id.def para gerar informaï¿½ï¿½es sobre data e versï¿½o.
 %%
 %% Revision 1.7  2003/10/07 16:16:03  gweber
-%% Informação sobre o pacote (comando \ProvidesPackage) automáticamente atualizado via
+%% Informaï¿½ï¿½o sobre o pacote (comando \ProvidesPackage) automï¿½ticamente atualizado via
 %% CVS Id tags.
 %%
 %% Revision 1.6  2003/10/03 08:50:58  gweber
-%% Correção do bug 204 que mantinha a vírgula após o texto com paginas=nao.
+%% Correï¿½ï¿½o do bug 204 que mantinha a vï¿½rgula apï¿½s o texto com paginas=nao.
 %%
 %% Revision 1.5  2003/03/19 21:04:44  gweber
 %% Corrigida uma incompatibilidade com hyperref e consequentemente
-%% com pdflatex. O estilo agora passa a opção hyperindex=false para
+%% com pdflatex. O estilo agora passa a opï¿½ï¿½o hyperindex=false para
 %% o hypereref.
 %%
 %%
@@ -35,10 +35,10 @@
 \CVSExtract$Id: tabela-simbolos.sty,v 1.9 2003/10/13 09:44:08 gweber Exp $
 \CVSPackage{tabelasimbolos}{\space Tabela de simbolos e siglas}
 
-%pacote misc/index.sty, bastante desatualizado, poderá
-%não funcionar com algumas instalações latex
+%pacote misc/index.sty, bastante desatualizado, poderï¿½
+%nï¿½o funcionar com algumas instalaï¿½ï¿½es latex
 \RequirePackage{index}
-%pacotes padrão do latex
+%pacotes padrï¿½o do latex
 \RequirePackage{ifthen}
 
 \RequirePackage{abntex-abrev}
@@ -135,17 +135,17 @@
 \newindex{sigla}{siglax}{sigla}{Lista de abreviaturas e siglas}
 
 \ifthenelse{\boolean{SeparateSortScheme}}{%
-\newindex{romanlow}{romanlowx}{romanlow}{Lista de símbolos romanos minúsculos}%
-\newindex{romanupp}{romanuppx}{romanupp}{Lista de símbolos romanos maiúsculos}%
-\newindex{greeklow}{greeklowx}{greeklow}{Lista de símbolos gregos minúsculos}%
-\newindex{greekupp}{greekuppx}{greekupp}{Lista de símbolos gregos maiúsculos}%
-\newindex{miscelan}{miscelanx}{miscelan}{Lista de outros símbolos}%
+\newindex{romanlow}{romanlowx}{romanlow}{Lista de sï¿½mbolos romanos minï¿½sculos}%
+\newindex{romanupp}{romanuppx}{romanupp}{Lista de sï¿½mbolos romanos maiï¿½sculos}%
+\newindex{greeklow}{greeklowx}{greeklow}{Lista de sï¿½mbolos gregos minï¿½sculos}%
+\newindex{greekupp}{greekuppx}{greekupp}{Lista de sï¿½mbolos gregos maiï¿½sculos}%
+\newindex{miscelan}{miscelanx}{miscelan}{Lista de outros sï¿½mbolos}%
 \def\RomanLow{romanlow}%
 \def\GreekLow{greeklow}%
 \ifthenelse{\boolean{CaseSortScheme}}{\def\RomanUpp{romanupp}\def\GreekUpp{greekupp}}
 {\def\RomanUpp{romanlow}\def\GreekUpp{greeklow}}
 \def\Miscelan{miscelan}}{%
-\newindex{symbols}{symbolsx}{symbols}{Lista de símbolos}%
+\newindex{symbols}{symbolsx}{symbols}{Lista de sï¿½mbolos}%
 \def\RomanLow{symbols}%
 \def\RomanUpp{symbols}%
 \def\GreekLow{symbols}%
@@ -217,10 +217,10 @@
 \providecommand{\pretextualchapter}[1]{\chapter*{#1}}
 
 \newcommand{\listofabreviationsname}{Lista de abreviaturas e siglas}
-\newcommand{\listofsymbolsname}{Lista de símbolos}
-\newcommand{\romansymbolsname}{Símbolos romanos}
-\newcommand{\greeksymbolsname}{Símbolos gregos}
-\newcommand{\othersymbolsname}{Outros símbolos}
+\newcommand{\listofsymbolsname}{Lista de sï¿½mbolos}
+\newcommand{\romansymbolsname}{Sï¿½mbolos romanos}
+\newcommand{\greeksymbolsname}{Sï¿½mbolos gregos}
+\newcommand{\othersymbolsname}{Outros sï¿½mbolos}
 
 \newcommand{\abrevtablewidth}{0.7\textwidth}
 \newcommand{\abrevcolumns}{lp{\abrevtablewidth}l}
