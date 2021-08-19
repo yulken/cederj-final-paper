@@ -267,7 +267,7 @@
 %%%%%%%%%%%%        IDENTIFICATION        %%%%%%%%%%%%
 
 \NeedsTeXFormat{LaTeX2e}%
-\input{./libs/cvs-id.def}
+\input{./LaTeX/libs/cvs-id.def}
 \CVSExtract$Id: abnt_UFF.cls,v 1.27.2.1 2004/11/02 15:04:29 gweber Exp $
 \CVSClass{abnt_UFF}{\space Classe abnt_UFF (NBR6024, NBR6027, NBR6028, NBR14724)} %substitui \ProvidesPackage (replaces \ProvidesPackage)
 
@@ -2009,4 +2009,3 @@ http://abntex.codigolivre.org.br\space\spABNT\spABNT|}%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \endinput
-

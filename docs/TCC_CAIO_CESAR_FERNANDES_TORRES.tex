@@ -3,7 +3,7 @@
 % --- EXPRESS�ES ENTRE <> DEVER�O SER COMPLETADAS COM A INFORMA��O ESPEC�FICA DO TRABALHO 
 % ---------------------------------------------------------------------
 
-\documentclass[12pt]{./libs/abnt_UFF}
+\documentclass[12pt]{./LaTeX/libs/abnt_UFF}
 
 %---pacotes para hiphenizacao e acentuacao em portugues
 \usepackage[brazil]{babel}
@@ -27,8 +27,8 @@
 \usepackage{amssymb}
 
 %--- pacote para gerar pseudo-codigo
-\usepackage{./libs/algorithm}
-\usepackage{./libs/algorithmic}
+\usepackage{./LaTeX/libs/algorithm}
+\usepackage{./LaTeX/libs/algorithmic}
 \floatname{algorithm}{Algoritmo}
 
 %--- outros pacotes
@@ -67,15 +67,15 @@ di-men-sio-na-men-to
 % --- Titulo, abstract, dedicatorias e agradecimentos.
 % --- Indice geral, lista de figuras e tabelas.
 % --- -----------------------------------------------------------------
-\include{parts/variables}
-\include{parts/cover}
-\include{parts/terms}
-\include{parts/abstracts}
+\include{LaTeX/chapters/variables}
+\include{LaTeX/chapters/cover}
+\include{LaTeX/chapters/terms}
+\include{LaTeX/chapters/abstracts}
 % --- -----------------------------------------------------------------
 % --- Insercao dos capitulos.
 % --- -----------------------------------------------------------------
 \pagenumbering{arabic}
-\include{parts/introduction}
+\include{LaTeX/chapters/introduction}
 
 
 
@@ -83,15 +83,15 @@ di-men-sio-na-men-to
 % --- Referencias Bibliograficas. (Obrigatorio)
 % --- -----------------------------------------------------------------
 \cleardoublepage
-\bibliographystyle{./libs/acm-2} % abbrv - abnt-num
+\bibliographystyle{./LaTeX/libs/acm-2} % abbrv - abnt-num
 %\bibliographystyle{uff-ic}
-\bibliography{parts/bibliografia} % arquivo fonte com a bibilografia
+\bibliography{LaTeX/chapters/bibliografia} % arquivo fonte com a bibilografia
 
 % --- -----------------------------------------------------------------
 % --- Apendice.(Opcional)
 % --- -----------------------------------------------------------------
 \cleardoublepage
 \appendix
-\include{parts/appendixA}
+\include{LaTeX/chapters/appendixA}
 
 \end{document}
