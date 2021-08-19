@@ -661,35 +661,35 @@ Para mais informacoes, leia o manual da classe.\MessageBreak%
 }% 
  %%  Defining pagestyle ruledheader
 %
-\newcommand{\ps@ruledheader}{%
-  \renewcommand{\@oddfoot}{}%
-  \renewcommand{\@evenfoot}{}%
-  \renewcommand{\@oddhead}%
-     {\underline{\makebox[\textwidth]{\raisebox{-.5ex}{}%
-       {\rightmarkformat\rightmark}\hfill{\thepageformat\thepage}}}}%
-  \renewcommand{\@evenhead}%
-     {\underline{\makebox[\textwidth]{\raisebox{-.5ex}{}%
-       {\thepageformat\thepage}\hfill{\leftmarkformat\leftmark}}}}%
-  \let\@mkboth\ABNTmarkboth%
-  \renewcommand{\chaptermark}[1]{%
-    \markboth%
-       {\ifnum \c@secnumdepth >\m@ne%
-            \thechapter\ \ %
-        \fi%
-        ##1}%
-       {\ifnum \c@secnumdepth >\m@ne%
-            \thechapter\ \ %
-        \fi%
-        ##1}%
-  }%
-  \renewcommand{\sectionmark}[1]{%
-    \markright{%
-      \ifnum \c@secnumdepth >\z@%
-        \thesection\ \ %
-      \fi%
-      ##1}%
-  }%   
-}% 
+% \newcommand{\ps@ruledheader}{%
+%   \renewcommand{\@oddfoot}{}%
+%   \renewcommand{\@evenfoot}{}%
+%   \renewcommand{\@oddhead}%
+%      {\underline{\makebox[\textwidth]{\raisebox{-.5ex}{}%
+%        {\rightmarkformat\rightmark}\hfill{\thepageformat\thepage}}}}%
+%   \renewcommand{\@evenhead}%
+%      {\underline{\makebox[\textwidth]{\raisebox{-.5ex}{}%
+%        {\thepageformat\thepage}\hfill{\leftmarkformat\leftmark}}}}%
+%   \let\@mkboth\ABNTmarkboth%
+%   \renewcommand{\chaptermark}[1]{%
+%     \markboth%
+%        {\ifnum \c@secnumdepth >\m@ne%
+%             \thechapter\ \ %
+%         \fi%
+%         ##1}%
+%        {\ifnum \c@secnumdepth >\m@ne%
+%             \thechapter\ \ %
+%         \fi%
+%         ##1}%
+%   }%
+  % \renewcommand{\sectionmark}[1]{%
+  %   \markright{%
+  %     \ifnum \c@secnumdepth >\z@%
+  %       \thesection\ \ %
+  %     \fi%
+  %     ##1}%
+  % }%   
+% }% 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -697,7 +697,7 @@ Para mais informacoes, leia o manual da classe.\MessageBreak%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newboolean{ABNTinpretext}
-\setboolean{ABNTinpretext}{true}
+\setboolean{ABNTinpretext}{false}
 
 \newboolean{ABNTaftertoc}
 \setboolean{ABNTaftertoc}{false}
@@ -706,95 +706,10 @@ Para mais informacoes, leia o manual da classe.\MessageBreak%
 % its end. It's intented to page style and page number settings.
 \providecommand{\ABNTBeginOfTextualPart}{}
 
-\newcommand{\chaptertitlepagestyle}{plain}
-
-\ifthenelse{\equal{\ABNTpnum}{plain}}
-  {%
-    \setboolean{ABNTinpretext}{false}
-    \setboolean{ABNTaftertoc}{true}
-    \ifthenelse{\boolean{ABNTheader}}
-       {%
-        \ifthenelse{\equal{\ABNTheadertype}{plain}}%
-          {\pagestyle{plainheader}}
-          {%
-           \ifthenelse{\equal{\ABNTheadertype}{normal}}%
-             {\pagestyle{header}}%
-             {\pagestyle{ruledheader}}%
-          }%
-        \renewcommand{\chaptertitlepagestyle}{plainheader}%
-       }%
-       {%
-        \pagestyle{plain}%
-        \renewcommand{\chaptertitlepagestyle}{plain}
-       }%
-  }% 
-  {%
-   \ifthenelse{\equal{\ABNTpnum}{ABNT}}%
-     {% ABNT strict
-      % - pagestyle is empty until \tableofcontents, when it becames with
-      %   numeration (depending on `header' or `plain' header style)
-      % - page counter starts AT `folha de rosto'.
-      %
-      % Makeing titlepage environment increase page counter
-      \let\ABNToldendtitlepage\endtitlepage\relax
-      \renewcommand{\endtitlepage}{\ABNToldendtitlepage\addtocounter{page}{1}}
-      \pagestyle{empty}
-      \renewcommand{\thepage}{}
-      \renewcommand{\chaptertitlepagestyle}{empty}
-      \renewcommand{\ABNTBeginOfTextualPart}%
-        {%
-         \renewcommand{\thepage}{\arabic{page}}
-         \ifthenelse{\boolean{ABNTheader}}
-           {%
-            \ifthenelse{\equal{\ABNTheadertype}{plain}}%
-              {\pagestyle{plainheader}}
-              {%
-               \ifthenelse{\equal{\ABNTheadertype}{normal}}%
-                 {\pagestyle{header}}%
-                 {\pagestyle{ruledheader}}%
-              }%
-            \renewcommand{\chaptertitlepagestyle}{plainheader}%
-           }%
-           {%
-            \pagestyle{plain}%
-            \renewcommand{\chaptertitlepagestyle}{plain}
-           }%
-
-        }%
-     }%
-     {% RomArab
-      % - page style with numeration 
-      % - BEFORE \tableofcontents
-      %     \thepage in roman
-      %     page counter starts AFTER `folha de rosto'
-      % - AFTER \tableofcontents
-      %     \thepage in arabic
-      %     page counter starts again
-      %
-      \ifthenelse{\boolean{ABNTheader}}
-        {%
-         \ifthenelse{\equal{\ABNTheadertype}{plain}}%
-           {\pagestyle{plainheader}}
-           {%
-            \ifthenelse{\equal{\ABNTheadertype}{normal}}%
-              {\pagestyle{header}}%
-              {\pagestyle{ruledheader}}%
-           }%
-         \renewcommand{\chaptertitlepagestyle}{plainheader}%
-        }%
-        {%
-         \pagestyle{plain}%
-         \renewcommand{\chaptertitlepagestyle}{plain}
-        }%
-      \renewcommand{\thepage}{\roman{page}}
-      \renewcommand{\ABNTBeginOfTextualPart}%
-        {%
-         \renewcommand{\thepage}{\arabic{page}}
-        }%
-     }%
-  }%
-
-
+\newcommand{\chaptertitlepagestyle}{
+  \pagestyle{headings}
+  \markright{\thepage}
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  Line spacing stuff
@@ -888,29 +803,18 @@ Para mais informacoes, leia o manual da classe.\MessageBreak%
 % param (after bug with hyperref, it was no longer used.)
 \def\ABNTsecdef#1#2{\@ifstar{\@dblarg{#2}}{\@dblarg{#1}}}
 
-% Changed explicit \thispagestyle{empty}
-
 \newcommand{\chaptertype}{}%
 \renewcommand\chapter%
     {%
-     \if@openright\cleardoublepage\else\clearpage\fi%
-     \thispagestyle{\chaptertitlepagestyle}
-     \ifthenelse{\boolean{ABNTinpretext}}%
-       {%
-        \ifthenelse{\boolean{ABNTaftertoc}}%
-          {% change to textual part
-           \setboolean{ABNTinpretext}{false}%
-           \ABNTBeginOfTextualPart%
-          }%
-          {}%
-       }% 
-       {}%
-     \global\@topnum\z@%
-     \@afterindentfalse%
-%     \ABNTsecdef\@chapter\@schapter%
+    \pagestyle{fancyplain}
+    \fancyhf{}
+    \renewcommand{\headrulewidth}{0pt}
+    \fancyhead[RE,RO]{\thepage}
     \secdef\@chapter\@schapter%
     }%
 
+\let\oldchapter\chapter
+\renewcommand{\chapter}[1]{\oldchapter{\MakeUppercase{#1}}}
 % To make pre-textual chapters (that fits page numbering squeme...)
 % this is equal to \chapter*{}, but ignores in witch part is it. It does
 % not change any tags.
@@ -942,78 +846,14 @@ Para mais informacoes, leia o manual da classe.\MessageBreak%
 
 \newcommand{\ABNTnextmark}{}
 \newcommand{\ProximoForaDoSumario}[1][]
-  {
-   \setboolean{ABNTNextOutOfTOC}{true}
-   \renewcommand{\ABNTnextmark}{#1}
-  }
 
 
 \newcommand{\ABNTaddcontentsline}[3]%
-  {\ifthenelse{\boolean{ABNTNextOutOfTOC}}
-     {\setboolean{ABNTNextOutOfTOC}{false}}
-     {\addcontentsline{#1}{#2}{#3}}%
-     }
 
 \newcommand{\ABNTchaptermark}[1]
-  {%
-   \ifthenelse{\boolean{ABNTNextOutOfTOC}}
-     {\markboth{\ABNTnextmark}{\ABNTnextmark}}
-     {\chaptermark{#1}}%
-  }
 
 \newcommand{\ABNTsectionmark}[1]
-  {%
-   \ifthenelse{\boolean{ABNTNextOutOfTOC}}
-     {\markright{\ABNTnextmark}}
-     {\sectionmark{#1}}%
-  }
 
-
-
-% \@chapter : 
-\def\@chapter[#1]#2%
-      {\ifthenelse{\boolean{ABNThypertoc}}{\renewcommand{\theHchapter}{\chaptertype\thechapter}}{}
-       \ifnum \c@secnumdepth >\m@ne
-         \refstepcounter{chapter}%
-         \ABNTchaptermark{#1}% This command MUST came before addcontentsline
-         \typeout{\@chapapp\space\thechapter.}%
-         \ifthenelse{\boolean{ABNTaftertoc}}
-           {\ABNTaddcontentsline{toc}{chapter}%
-                   {\protect\numberline{\thechapter}#1}}
-           {}
-       \else
-         \ABNTchaptermark{#1}% This command MUST came before addcontentsline
-         \ifthenelse{\boolean{ABNTaftertoc}}%
-           {\ABNTaddcontentsline{toc}{chapter}{#1}}%
-           {}%
-       \fi       
-       \if@twocolumn
-         \@topnewpage[\@makechapterhead{#2}]%
-       \else
-         \@makechapterhead{#2}%
-         \@afterheading
-       \fi\par}
-
-%% From the \@chapter code. Now \@schapter does almost the same as
-%% \@chapter. Added \resetsubcounters.
-\def\@schapter#1{%
-      \ifthenelse{\boolean{ABNThypertoc}}{\renewcommand{\theHchapter}{\chaptertype\thechapter}}{}
-      \if@twocolumn
-        \@topnewpage[\@makeschapterhead{#1}]
-      \else
-        \@makeschapterhead{#1}
-        \@afterheading
-      \fi
-      \@mkboth{#1}{#1}  % <-- inserted (must be before addcontentsline)
-      \ifthenelse{\boolean{ABNTincludeintoc}}%
-        {%
-         \ifthenelse{\boolean{ABNTaftertoc}}
-           {\ABNTaddcontentsline{toc}{chapter}{#1}}
-           {}
-        }%
-        {}
-      \resetsubcounters{chapter}\par
-    }%
 
 % Fonts in \@part and \@part* changed. Some \resetsubcounters added.
 \def\@part[#1]#2{%
@@ -1174,50 +1014,6 @@ Para mais informacoes, leia o manual da classe.\MessageBreak%
 %  }
 %  {}
 \newcommand{\ABNTchaptersize}{\huge}
-
-%\def\@makechapterhead#1{%
-%  {%
-%  \noindent\rule{\textwidth}{1.7pt}\\\par
-%  \normalfont\ABNTchaptersize\ABNTchapterfont%
-%  \espaco{simples}%
-%  \vspace*{30pt}%
-% \noindent%
-%  \parbox[b]{\textwidth}{%
-%    \parbox[t]{4ex}{\thechapter}%
-%    \parbox[t]{\textwidth-4ex-1ex}%
-%      {\interlinepenalty\@M\raggedright%
-%        \ifthenelse{\boolean{ABNTcapchap}}%
-%          {\MakeUppercase{#1}}%
-%          {#1}
-%      }%
-%    \vspace*{0cm}
-%    }\\[2pt]%
-%  \vspace{50pt}%
-%  }%
-%}
-
-%\def\@makechapterhead#1{%
-%  {%
-%  \noindent\rule{\textwidth}{1.7pt}\\\par
-%  \normalfont\ABNTchaptersize\ABNTchapterfont%
-%  \espaco{simples}%
-% \vspace*{30pt}%
-%   \thispagestyle{empty}%   
-%  \noindent%
-%  \parbox[b]{962ex}{%
-%    \parbox[t]{12ex}{Cap\'itulo~\thechapter}%
-%    \parbox[t]{950ex}%%
-%      {\vspace{50pt}%
-%      \interlinepenalty\@M\raggedright%
-%        \ifthenelse{\boolean{ABNTcapchap}}%
-%          {\MakeUppercase{#1}}%
-%          {#1}
-%      }%
-%    \vspace*{0cm}
-%    }\\[2pt]%
-%  \vspace{50pt}%
-%  }%
-%}
 
 \def\@makechapterhead#1{%
 \vspace*{50\p@}%
@@ -1473,7 +1269,6 @@ Para mais informacoes, leia o manual da classe.\MessageBreak%
 % thebibliography, theindex extracing explicit \MakeUpercase in page marks
 
 \newboolean{ABNTrestorecol} % new boolean to avoid conflicts
-
 
 % ====  \tableofcontents  ====
 % do exactly what old \tableofcontents used to do, but had to be redefined
