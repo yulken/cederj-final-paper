@@ -3,7 +3,7 @@
 % --- EXPRESS�ES ENTRE <> DEVER�O SER COMPLETADAS COM A INFORMA��O ESPEC�FICA DO TRABALHO 
 % ---------------------------------------------------------------------
 
-\documentclass[12pt]{abnt_UFF}
+\documentclass[12pt]{./libs/abnt_UFF}
 
 %---pacotes para hiphenizacao e acentuacao em portugues
 \usepackage[brazil]{babel}
@@ -27,8 +27,8 @@
 \usepackage{amssymb}
 
 %--- pacote para gerar pseudo-codigo
-\usepackage{libs/algorithm}
-\usepackage{libs/algorithmic}
+\usepackage{./libs/algorithm}
+\usepackage{./libs/algorithmic}
 \floatname{algorithm}{Algoritmo}
 
 %--- outros pacotes
@@ -67,16 +67,15 @@ di-men-sio-na-men-to
 % --- Titulo, abstract, dedicatorias e agradecimentos.
 % --- Indice geral, lista de figuras e tabelas.
 % --- -----------------------------------------------------------------
-\include{variables}
-\include{cover}
-\include{terms}
-\include{abstracts}
+\include{parts/variables}
+\include{parts/cover}
+\include{parts/terms}
+\include{parts/abstracts}
 % --- -----------------------------------------------------------------
 % --- Insercao dos capitulos.
 % --- -----------------------------------------------------------------
-\pagestyle{ruledheader}
 \pagenumbering{arabic}
-\include{cap1}
+\include{parts/introduction}
 
 
 
@@ -84,15 +83,15 @@ di-men-sio-na-men-to
 % --- Referencias Bibliograficas. (Obrigatorio)
 % --- -----------------------------------------------------------------
 \cleardoublepage
-\bibliographystyle{acm-2} % abbrv - abnt-num
+\bibliographystyle{./libs/acm-2} % abbrv - abnt-num
 %\bibliographystyle{uff-ic}
-\bibliography{bibliografia} % arquivo fonte com a bibilografia
+\bibliography{parts/bibliografia} % arquivo fonte com a bibilografia
 
 % --- -----------------------------------------------------------------
 % --- Apendice.(Opcional)
 % --- -----------------------------------------------------------------
 \cleardoublepage
 \appendix
-\include{appendixA}
+\include{parts/appendixA}
 
 \end{document}

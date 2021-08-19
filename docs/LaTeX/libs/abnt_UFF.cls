@@ -267,7 +267,7 @@
 %%%%%%%%%%%%        IDENTIFICATION        %%%%%%%%%%%%
 
 \NeedsTeXFormat{LaTeX2e}%
-\input{cvs-id.def}
+\input{./libs/cvs-id.def}
 \CVSExtract$Id: abnt_UFF.cls,v 1.27.2.1 2004/11/02 15:04:29 gweber Exp $
 \CVSClass{abnt_UFF}{\space Classe abnt_UFF (NBR6024, NBR6027, NBR6028, NBR14724)} %substitui \ProvidesPackage (replaces \ProvidesPackage)
 
@@ -647,27 +647,6 @@ Para mais informacoes, leia o manual da classe.\MessageBreak%
     {{\rightmarkformat\rightmark}\hfill{\thepageformat\thepage}}%
   \renewcommand{\@evenhead}%
        {{\thepageformat\thepage}\hfill{\leftmarkformat\leftmark}}%
-% Para \chapter* mostrar o cabecalho
-  \let\@mkboth\ABNTmarkboth%
-% Definindo a maneira como o comando o \chapter marca o cabecalho
-  \renewcommand{\chaptermark}[1]{%
-    \markboth%
-       {\ifnum \c@secnumdepth >\m@ne%
-            \thechapter{}  %
-        \fi%
-        ##1}%
-       {\ifnum \c@secnumdepth >\m@ne%
-            \thechapter{}  %
-        \fi%
-        ##1}%
-  }%
-  \renewcommand{\sectionmark}[1]{%
-    \markright{%
-      \ifnum \c@secnumdepth >\z@%
-        \thesection\ \ %
-      \fi%
-      ##1}%
-  }%   
 }% 
  %%  Defining pagestyle plainheader
 %
@@ -678,25 +657,7 @@ Para mais informacoes, leia o manual da classe.\MessageBreak%
   \renewcommand{\@evenhead}{{\thepageformat\thepage}\hfill}%
 % Para \chapter* mostrar o cabecalho
   \let\@mkboth\ABNTmarkboth%
-% Definindo a maneira como o comando o \chapter marca o cabecalho
-  \renewcommand{\chaptermark}[1]{%
-    \markboth%
-       {\ifnum \c@secnumdepth >\m@ne%
-            \thechapter\ \ %
-        \fi%
-        ##1}%
-       {\ifnum \c@secnumdepth >\m@ne%
-            \thechapter\ \ %
-        \fi%
-        ##1}%
-  }%
-  \renewcommand{\sectionmark}[1]{%
-    \markright{%
-      \ifnum \c@secnumdepth >\z@%
-        \thesection\ \ %
-      \fi%
-      ##1}%
-  }%   
+% Definindo a maneira como o comando o \chapter marca o cabecalho  
 }% 
  %%  Defining pagestyle ruledheader
 %
@@ -709,9 +670,7 @@ Para mais informacoes, leia o manual da classe.\MessageBreak%
   \renewcommand{\@evenhead}%
      {\underline{\makebox[\textwidth]{\raisebox{-.5ex}{}%
        {\thepageformat\thepage}\hfill{\leftmarkformat\leftmark}}}}%
-% Para \chapter* mostrar o cabecalho
   \let\@mkboth\ABNTmarkboth%
-% Definindo a maneira como o comando o \chapter marca o cabecalho
   \renewcommand{\chaptermark}[1]{%
     \markboth%
        {\ifnum \c@secnumdepth >\m@ne%
@@ -1261,42 +1220,38 @@ Para mais informacoes, leia o manual da classe.\MessageBreak%
 %}
 
 \def\@makechapterhead#1{%
-  {%
-%  \noindent\rule{\textwidth}{1.7pt}\\\par
-  \normalfont\ABNTchaptersize\ABNTchapterfont%
-  \espaco{simples}%
-  \vspace*{30pt}%
-   \thispagestyle{empty}%   
-  \noindent%
-  \parbox[b]{15cm}{%
-    \parbox[t]{14.5cm}{Cap\'itulo~\thechapter
-        \vfill \vspace{50pt} 
-        \ifthenelse{\boolean{ABNTcapchap}}%
-       {\MakeUppercase{#1}}%
-       {#1}
-    }  
-  }%
-   }\\[2pt]%
-  \vspace{50pt}%
-  }%
-
-
-
-% Defining how is typeset the \chapter*
+\vspace*{50\p@}%
+{\parindent \z@ \raggedright \normalfont
+  \interlinepenalty\@M
+  \Large \bfseries #1\par\nobreak
+  \vskip 40\p@
+}}
 \def\@makeschapterhead#1{%
-\thispagestyle{empty}%
-  \vspace*{0pt}\par
-  {\centering\normalfont\ABNTchaptersize\ABNTchapterfont%
- % \interlinepenalty\@M
- %%         \vspace{50pt}
- %       \par\nobreak  \ifthenelse{\boolean{ABNTcapchap}}
-   \ifthenelse{\boolean{ABNTcapchap}}%
-     {\MakeUppercase{#1}}%
-     {#1}
-    \par}%
-  \vspace{50pt}%
-  \par%
-}
+\vspace*{50\p@}%
+{\parindent \z@ \raggedright
+  \normalfont
+  \interlinepenalty\@M
+  \Large \bfseries  #1\par\nobreak
+  \vskip 40\p@
+}}
+
+
+
+% % Defining how is typeset the \chapter*
+% \def\@makeschapterhead#1{%
+% \thispagestyle{empty}%
+%   \vspace*{0pt}\par
+%   {\centering\normalfont\ABNTchaptersize\ABNTchapterfont%
+%  % \interlinepenalty\@M
+%  %%         \vspace{50pt}
+%  %       \par\nobreak  \ifthenelse{\boolean{ABNTcapchap}}
+%    \ifthenelse{\boolean{ABNTcapchap}}%
+%      {\MakeUppercase{#1}}%
+%      {#1}
+%     \par}%
+%   \vspace{50pt}%
+%   \par%
+% }
 
 % redefining to apply tocnumpageabnt
 \renewcommand\l@chapter[2]{%
@@ -1354,27 +1309,27 @@ Para mais informacoes, leia o manual da classe.\MessageBreak%
                            {-3.5ex \@plus -1ex \@minus -.2ex}%
                            {2.3ex \@plus.2ex}%
                            {\espaco{simples}\normalfont%
-                            \ABNTsectionfont\Large}}
+                            \large\bf}}
 \renewcommand\subsection{\ABNTstartsection{subsection}{2}{\z@}%
                            {-3.25ex\@plus -1ex \@minus -.2ex}%
                            {1.5ex \@plus .2ex}%
                            {\espaco{simples}\normalfont%
-                            \ABNTsectionfont\large}}
+                            \large}}
 \renewcommand\subsubsection{\ABNTstartsection{subsubsection}{3}{\z@}%
                            {-3.25ex\@plus -1ex \@minus -.2ex}%
                            {1.5ex \@plus .2ex}%
                            {\espaco{simples}\normalfont%
-                            \ABNTsectionfont\normalsize}}
+                            \normalsize}}
 \renewcommand\paragraph{\ABNTstartsection{paragraph}{4}{\z@}%
                            {3.25ex \@plus1ex \@minus.2ex}%
                            {-1em}%
                            {\espaco{simples}\normalfont%
-                            \ABNTsectionfont\normalsize}}
+                            \normalsize}}
 \renewcommand\subparagraph{\ABNTstartsection{subparagraph}{5}{\parindent}%
                            {3.25ex \@plus1ex \@minus .2ex}%
                            {-1em}%
                            {\espaco{simples}\normalfont%
-                            \ABNTsectionfont\normalsize}}
+                            \normalsize}}
 
 %\renewcommand*\l@section{\@dottedtocline{1}{1.5em}{2.3em}}
 %\renewcommand*\l@subsection{\@dottedtocline{2}{3.8em}{3.2em}}
