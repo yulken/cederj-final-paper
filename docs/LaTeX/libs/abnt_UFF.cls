@@ -1,262 +1,3 @@
-%$Id: abnt.cls,v 1.27.2.1 2004/11/02 15:04:29 gweber Exp $
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-% ABNT.CLS
-%
-%
-%   Licence: LPPL (LaTeX Project Public License)
-%     You can change this file in the terms of LPPL
-%     (http://www.latex-project.org/lppl.html)
-% 
-%   Licenca: LPPL (LaTeX Project Public License)
-%     Esta licenca diz basicamente que se voce editar o codigo desta
-%     classe, mesmo localmente (no seu micro), voce DEVE RENOMEAR o arquivo
-%     da classe!! Como sempre, nao eh dada nenhuma garantia.
-%     Para o texto completo da licenca, favor seguir o endereco
-%        http://www.latex-project.org/lppl.html
-%
-%   Classe para confeccao de monografias, dissertacoes ou teses
-%   de acordo com as normas da Associacao Brasileira de Normas
-%   Tecnicas (ABNT). Esta classe, junto com o estilo bibTeX, foram
-%   desenvolvidos no grupo de trabalho abnTeX (ABsurd Norms for TeX :-)
-%   (http://abntex.codigolivre.org.br) 
-%
-%   Class to make theses or monographies following norms defined by
-%   Brazilian Association for Tecnical Norms. This class is developed
-%   by abnTeX group (http://abntex.codigolivre.org.br), together with two
-%   bibTeX styles.
-%
-%   Author (class): Miguel Vinicius Santini Frasson
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%  Implementation of this class:
-%
-%  preamble
-%    class identification
-%    including required packages
-%    option declarations
-%      pnumabnt (default), pnumplain, pnumromarab
-%      sumariocompleto (default), sumarioincompleto
-%      abnttocpagnum (default), tocpagnumnormal
-%      abntfigtabnum (default), normalfigtabnum
-%      noheader, header,  plainheader (default), ruledheader,
-%      capchap, capsec
-%      anapmaiusc (default), anapnormal
-%      apapindentindic (default), anapindentcustom
-%      anapname (default), anapnoname
-%      espacosimples, espacoumemeio (default), espacoduplo
-%      sempaccomuns (default), paccomuns
-%          -> no longer supported (kept for compatibility)
-%      autobm (default), noautobm
-%      times, notimes (default)
-%      indentfirst (default), noindentfirst
-%    mechanism for saving other options names
-%    perform tests to set fontsize, openright and paper properly 
-%      (in order to get 12pt, a4 and openright as default, but user can change)
-%    option procession
-%    work around for prevent report to add figure and table counter in the
-%      reset list of chapter counter (option disables it)
-%    class 'report' loaded
-%    undo work figure and table around if necessary.
-%
-%  implementation
-%    setting default spacings
-%    (NOT) loading commom packages
-%       inputenc[latin1], amsmath, amssymb,
-%       amsbsy, dsfont, eucal[mathscr]
-%    loading 'setspace' package, but providing 'workaround' if user don't
-%      use it.
-%    setting margins with simple commands
-%    creating page styles 'plainheader', 'header' and 'ruledheader'
-%    Page numbering section
-%      setting switches and defining \ABNTBeginOfTextualPart according to
-%      the page numbering scheme in option
-%    line spacing commands and environments
-%    Chapter and section: titles, page numbering, etc
-%        This is a very delicated part. Let's give a flavour of what
-%        happened. See comments in implementation for details.
-%      redefining \chapter
-%        - tests for determine begin of textual part and make changes at this
-%          event.
-%        - \pretextualchapter: a stared chapter in the pre-textual part
-%        - ProximoForaDoSumario -> switches off \ABNTaddcontentsline.
-%        - Marks: care is they are inserted by default or not.
-%        - redefinig \@schapter: now \chapter* is almost equal to \chapter,
-%          appart from the title display. It also includes an entry in TOC.
-%        - \@part and \@spart redefined: font purposes.
-%        - defined \ABNTstartsection: stared section with centralized titles
-%           and inclusion in TOC.
-%        - new \@dottedtoline for compleance with NBR 6027-1989
-%        - \@makechapterhead and \@makeschapterheadredefined to fit
-%          norms. Paying attention to capchap and fonts.
-%        - redefined all \section like commands (apply last redefinitions
-%          and font purposes)
-%        - \anexo and \apendice -> apply old \appendix changes and
-%          replaces \@chapter by \@anapchapter.
-
-
-%    redefining important commands (those that set page marks, getting rid
-%      of explicit \MakeUppercase)
-%        \tableofcontents
-%        \listoffigures
-%        \listoftables
-%        thebibliography
-%        theindex (now balanced columns) or use \IndiceNaoBalanceado
-%    custumizable caption separator -> temporarely commented (not required)
-%    environment citado = citacao, for long quotations
-%    pre-textual elements
-%      Capa (cover) and Folha de rosto (face page): defining commands
-%        \instituicao
-%        \autor
-%        \orientador
-%        \orientadora
-%        \coorientador
-%        \coorientadora
-%        \titulo
-%        \comentario
-%        \local
-%        \data
-%      and
-%        \capa, displaying what is required according to norms.
-%        \folhaderosto, that prints the face page, according to norms.
-%      Resumo and Abstract.
-%      Environment folhadeaprovacao  and \assinatura(*){}
-%      prototype for list of symbols -> no future, I think.
-%   Loading fonts if required.
-%   Auto bold math
-%   Indentation of first paragraph
-%   commented announcements.
-%
-%  That is it ;-D
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%  List of Changes
-%  ---------------
-% $Log: abnt.cls,v $
-% Revision 1.27.2.1  2004/11/02 15:04:29  gweber
-% resolvido problema com bookmarks e hyperrefs.
-%
-% Revision 1.27  2004/04/01 14:07:46  mvsfrasson
-%
-%
-% Retirado um bug no \@chapter que causa o cabecalho ter o numero do capitulo errado
-%
-% Revision 1.26  2003/10/13 09:40:01  gweber
-% Passa a usar cvs-id.def para gerar informa��es sobre data e vers�o.
-%
-% Revision 1.25  2003/09/16 16:49:29  gweber
-% Troca de \bibname por \refname o que equivale a trocar "Refer�ncas Bibliogr�ficas" por
-% "Refer�ncias". Isto atende ao que entendemos esteja impl�cito na NBR14724-2002.
-%
-% Revision 1.24  2003/08/22 14:45:18  gweber
-% Resolvido bug 178 que fazia o texto de \part aparecer duas vezes.
-%
-% Revision 1.23  2003/06/30 14:10:47  gweber
-% Links criados com hyperref para ap�ndices e anexos n�o misturam mais com os links para cap�tulos comuns,
-% resolvendo o bug #140.
-%
-% Revision 1.22  2003/05/30 10:39:19  gweber
-% Altera��es introduzidas em 0.7-beta.
-%
-% Revision 1.21.2.1  2003/05/30 10:16:07  gweber
-% Correction of bug 137 which causes the class to fail when loading
-% the package hyperref and using \tableofcontents.
-% This also resolves partially bugs 82 and 51.
-%
-%
-% Added in version 1.1 patch 1
-%
-% - fixed bug of undefined \ABNT<section name>mark, which shows twice the
-%   section name (only for subsection, subsubsection, and paragraph)
-%
-% Added in version 1.1
-%
-% - Fixed bug of missing paragraphy after \chapter
-% - \ProximoForaDoSumario has optional parameter to et page marks
-% - Fixed bug of abscense of package setspace.
-% - Added options `abntfigtabnum' and `normalfigtabnum' to deal with
-%   figure and table counters.
-% - Added abnt style for toc. Options `abnttoc' and
-%   `normaltoc' were added.
-% - Fixed bug of defining pagestyles only if non-noheader.
-%
-% Added in version 1 (finally)
-%
-% - Fixed mispelling on command \espaco.
-% - Fixed "capsec" (not working before).
-% - Added full support for Annex and Appendix, with several class options
-%   and commands for customization.
-% - Not using package "textcase" anymore, since there is a undesirable
-%   extra space included with \MakeUppercase.
-% - Fixed default options. Now "openright" is really default.
-% - Now using feature of "setspace" to avoid extra spacing on display
-%   math. No bugs if the version of setspace is not up to date.
-% - Added \ProximoForaDoSumario, to avoid one to not include all \chapter*
-%   if one wants to set diferently the title and contents of such chapters.
-% - Fixed bug on \part toc entries (buggy extra space)
-% - Now font size for \capter(*) is given by \ABNTchaptersize, preventing a
-%   boring redefinition of \ABNTtocchapterfont.
-% - Option paccomuns no longer default.
-%
-% Added in version 1 beta 3
-%
-% - Fixed bug in page marks for \section*{}.
-% - "setspace" no longer require especific (new) version.
-% - Added "no displayskip stretch" support offered by 'setspace' for better
-%   aesthetic.
-% - Added compatibility with "hyperref" package (no more incompatible
-%   optional parameter on \chapter* -- hyperref redefines some commands)
-% - Useless commands removed: \cabecalhoesq and \cabecalhodir.
-%
-% Added in version 1 beta 2
-%
-% - Correct figure and table counter.
-% - Some support to "folha de apresentacao", including environment
-%     \begin{folhadeapresentacao} e \assinatura{} (signature).
-% - Fixed bug in pnumplain and headers.
-% - Fixed bug in page marks for \@schapter.
-%
-% Added in version 1 beta
-%
-%   Total reformulation of the class! The main added feature are:
-% - Good machanism for "Folha de Rosto" (face page) added.
-% - Page numbering squemes according to the norms.
-% - Right page headings.
-% - Correct section titles.
-% - Several options added.
-% - Features removed, like margin care
-% ...too many changes to list. Just like a "new" class.
-%
-% Added in version 0.4.3
-%
-% - Stupid but severe bug on \listoffigures and \listoftables
-%     left from previous version finally removed
-% - Bug fixes in theindex and thebibliography
-% - Redefinition of \cleardoublepage (empty page => page style empty)
-% - This `list of changes' added
-%
-% Added in version 0.4.2
-%
-% - Added \StarChaptersInTOC, \StarChaptersNotInTOC to differenciate  
-%    from "standard" (old) stared chapters like \tableofcontents,
-%    \listoffigures, \listoftables, thebibliography and theindex.
-% - Huge bugs in commands or environments \tableofcontents, \listoffigures,
-%    \listoftables, thebibliography and theindex fixed.
-% - Command \SpAcEs changed to \spABNT (more reliable than before)
-%
-% Added in version 0.4.1
-%
-% - Extract forgotten debug command
-% - Fix conflict (\Sp command) in final messagem, creating \SpAcEs (and
-%     hoping nobody made it before)
-%
-%
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                                                  %
 %                            PREAMBLE                              %
@@ -505,9 +246,9 @@
 
 %% Stretch factor for default line spacing schemes
 
-\newcommand*{\taxaespacosimples}{1.}
-\newcommand*{\taxaespacoumemeio}{1.35}
-\newcommand*{\taxaespacoduplo}{1.7}
+\newcommand*{\taxaespacosimples}{1.5}
+\newcommand*{\taxaespacoumemeio}{1.5}
+\newcommand*{\taxaespacoduplo}{1.5}
 
 
 %%%%%%%%   Load interesting packages : OBSOLET!!!   %%%%%%%%%%%%%%%%
@@ -805,16 +546,10 @@ Para mais informacoes, leia o manual da classe.\MessageBreak%
 
 \newcommand{\chaptertype}{}%
 \renewcommand\chapter%
-    {%
-    \pagestyle{fancyplain}
-    \fancyhf{}
-    \renewcommand{\headrulewidth}{0pt}
-    \fancyhead[RE,RO]{\thepage}
-    \secdef\@chapter\@schapter%
-    }%
+  {%
+  \secdef\@chapter\@schapter%
+  }%
 
-\let\oldchapter\chapter
-\renewcommand{\chapter}[1]{\oldchapter{\MakeUppercase{#1}}}
 % To make pre-textual chapters (that fits page numbering squeme...)
 % this is equal to \chapter*{}, but ignores in witch part is it. It does
 % not change any tags.
@@ -1541,9 +1276,9 @@ Para mais informacoes, leia o manual da classe.\MessageBreak%
    \vspace{.8cm}
    \hspace{.50\textwidth}
      \begin{minipage}{.48\textwidth}
-       \begin{espacosimples}
+       \begin{\espaco{1.5}}
          {\comentarioformat\ABNTcomentariodata}\par
-       \end{espacosimples}
+       \end{\espaco{1.5}}
      \end{minipage}
    }
 \vspace{.8cm}
@@ -1802,5 +1537,12 @@ http://abntex.codigolivre.org.br\space\spABNT\spABNT|}%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %  End of ABNT.CLS
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\let\oldchapter\chapter
+\renewcommand{\chapter}[1]{\oldchapter{\MakeUppercase{#1}}}
+
+\let\oldclearpage\clearpage
+\renewcommand{\clearpage}{\oldclearpage{\espaco{1.5}}}
 
 \endinput

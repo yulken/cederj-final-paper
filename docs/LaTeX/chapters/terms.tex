@@ -1,12 +1,10 @@
-\pagenumbering{roman}
-
 % --- -----------------------------------------------------------------
 % --- Termo de aprovacao. (Obrigatorio)
 % --- ----------------------------------------------------------------
-\cleardoublepage
+\clearpage
+\addtocounter{page}{2}
 \thispagestyle{empty}
 \vspace{-60mm}
-\espaco{1.5}
 
 \begin{center}
    {\large\bf \ABNTautordata}\\
@@ -18,11 +16,13 @@
 
 \noindent
 \begin{flushright}
-\begin{minipage}[t]{8cm}
-
-  \ABNTcomentariodata
-
-\end{minipage}
+  \vspace{.8cm}
+  \hspace{.50\textwidth}
+    \begin{minipage}{.48\textwidth}
+      \begin{espacosimples}
+        {\comentarioformat\ABNTcomentariodata}\par
+      \end{espacosimples}
+    \end{minipage}
 \end{flushright}
 \vspace{1.0 cm}
 \begin{center}
@@ -45,7 +45,7 @@ Banca Examinadora:
 % --- -----------------------------------------------------------------
 % --- Agradecimentos.(Opcional)
 % --- -----------------------------------------------------------------
-\cleardoublepage
+\clearpage
 \thispagestyle{empty}
 
 \vspace{-60mm}
