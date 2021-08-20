@@ -838,7 +838,7 @@ Para mais informacoes, leia o manual da classe.\MessageBreak%
 
 \renewcommand\section{\ABNTstartsection{section}{1}{\z@}%
                            {-3.5ex \@plus -1ex \@minus -.2ex}%
-                           {2.3ex \@plus.2ex}%
+                           {2cm \@plus.2ex}%
                            {\espaco{simples}\normalfont%
                             \large\bf}}
 \renewcommand\subsection{\ABNTstartsection{subsection}{2}{\z@}%
@@ -1321,85 +1321,6 @@ Para mais informacoes, leia o manual da classe.\MessageBreak%
 \end{titlepage}
 }% end of \folhaderosto
 
-%\newcommand{\folhaderosto}%
-%{%
-%\begin{titlepage}
-%\espaco{1.1}
-%\ABNTifnotempty{\ABNTautordata}%
-%  {%
-%  \begin{center}
-%    \autorformat\ABNTautordata
-%  \end{center}
-%  }
-%\vfill\vfill\vfill
-%\ABNTifnotempty{\ABNTtitulodata}%
-%  {%
-%   \begin{center}
-%     {\tituloformat\ABNTtitulodata\par}
-%   \end{center}
-%  }%
-%\ABNTifnotempty{\ABNTcomentariodata}%
-%  {%
-%   \vspace{.8cm}
-%   \hspace{.45\textwidth}
-%     \begin{minipage}{.5\textwidth}
-%       \begin{espacosimples}
-%         {\comentarioformat\ABNTcomentariodata}\par
-%       \end{espacosimples}
-%     \end{minipage}
-%   }
-%\vspace{.8cm}
-%\begin{center}
-%\ABNTifnotempty{\ABNTorientadordata}%
-%  {%
-%   {\orientadornameformat\ABNTorientadorname}
-%   {\orientadorformat\ABNTorientadordata}\protect\\
-%   \vspace{0.7cm}
-%  }
-%\ABNTifnotempty{\ABNTorientadoradata}%
-%  {%
-%   {\orientadoranameformat\ABNTorientadoraname}
-%   {\orientadoraformat\ABNTorientadoradata}\protect\\
-%   \vspace{0.7cm}
-%  }
-%\ABNTifnotempty{\ABNTcoorientadordata}
-%  {%
-%   {\coorientadornameformat\ABNTcoorientadorname}
-%   {\coorientadorformat\ABNTcoorientadordata}
-%  }
-%\ABNTifnotempty{\ABNTcoorientadoradata}
-%  {%
-%   {\coorientadoranameformat\ABNTcoorientadoraname}
-%   {\coorientadoraformat\ABNTcoorientadoradata}
-%  }
-
-%\end{center}
-%\vfill
-%\begin{center}
-%\begin{espacosimples}
-%  \setlength{\parskip}{.3cm}
-%  \ABNTifnotempty{\ABNTinstituicaodata}%
-%    {%
-%     \setlength{\parskip}{0cm}
-%     {\instituicaoformat\ABNTinstituicaodata\par}
-%     \setlength{\parskip}{.3cm}\par
-%     
-%    }
-%\end{espacosimples}
-%\end{center}
-%\vfill\vfill
-%\begin{center}
-%  \ABNTifnotempty{\ABNTlocaldata}
-%      {{\localformat\ABNTlocaldata}\par}
-%    \ABNTifnotempty{\ABNTdatadata}
-%      {{\dataformat\ABNTdatadata}}
-
-%\end{center}
-%\end{titlepage}
-%}% end of \folhaderosto
-
-
-
 
 %%%%%%%%%%%   abstract  %%%%%%%%%%%
 % Ambiente para Abstract. Por default, coloca fonte de tamanho 10pt
@@ -1476,9 +1397,7 @@ Para mais informacoes, leia o manual da classe.\MessageBreak%
 %%% I will no longer include List of Symbols in the wishlist for this class.
 
 
-{\IfFileExists{helvetic.sty}%
-{\RequirePackage{helvetic}}%
-{\renewcommand{\rmdefault}{phv}}
+
 %%%%% auto bold math (try follow bold face in text)
 
 % plan: redefine commands that change font to bold to ALSO change math
@@ -1544,5 +1463,7 @@ http://abntex.codigolivre.org.br\space\spABNT\spABNT|}%
 
 \let\oldclearpage\clearpage
 \renewcommand{\clearpage}{\oldclearpage{\espaco{1.5}}}
+
+\newcommand{\tab}{\setlength{\parindent}{2cm}}
 
 \endinput

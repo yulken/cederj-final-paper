@@ -1,4 +1,4 @@
-\documentclass[12pt]{./LaTeX/libs/abnt_UFF}
+\documentclass[12pt,a4paper]{article}
 
 %---pacotes para hiphenizacao e acentuacao em portugues
 \usepackage[brazil]{babel}
@@ -11,7 +11,8 @@
 \usepackage{epsf}
 \usepackage[dvips]{epsfig,graphicx}
 \usepackage{subfigure}
-
+\usepackage{setspace}
+\usepackage{hyperref, bookmark}
 
 %--- pacote de simbolos
 \usepackage{latexsym}
@@ -40,17 +41,17 @@
 \usepackage{multicol}
 \usepackage{multirow}
 \usepackage{rotating}
-
+\usepackage[lmargin=3cm,rmargin=1.5cm,top=3.5cm,bottom=2.5cm]{geometry}
 
 \hyphenation{
 a-de-qua-da-men-te 
 di-men-sio-na-men-to 
 }
+{\IfFileExists{helvetic.sty}%
+{\RequirePackage{helvetic}}%
+{\renewcommand{\rmdefault}{phv}}
 
 %---------usando tipo de fonte padrao
-\renewcommand{\ABNTchapterfont}{\bfseries\fontfamily{cmr}\fontseries{b}\selectfont}
-\renewcommand{\ABNTsectionfont}{\bfseries\fontfamily{cmr}}
-
 
 % --- -----------------------------------------------------------------
 % --- Documento Principal.
@@ -58,24 +59,24 @@ di-men-sio-na-men-to
 % \usepackage[pdftex]{hyperref}
 % \hypersetup{colorlinks, sitecolor=black, pdftex}
 \begin{document}
-
+\setstretch{1.5}
 % --- -----------------------------------------------------------------
 % --- Titulo, abstract, dedicatorias e agradecimentos.
 % --- Indice geral, lista de figuras e tabelas.
 % --- -----------------------------------------------------------------
+\include{LaTeX/libs/environments}
 \include{LaTeX/chapters/variables}
-\include{LaTeX/chapters/cover}
-\include{LaTeX/chapters/terms}
-\include{LaTeX/chapters/abstracts}
-% --- -----------------------------------------------------------------
-% --- Insercao dos capitulos.
-% --- -----------------------------------------------------------------
-\pagestyle{fancyplain}
-\fancyhf{}
-\renewcommand{\headrulewidth}{0pt}
-\fancyhead[R]{\thepage}
+\include{LaTeX/pretextual/cover}
+\include{LaTeX/pretextual/catalog-file}
+\include{LaTeX/pretextual/terms}
+\include{LaTeX/pretextual/thanks}
+\input{LaTeX/pretextual/abstracts}
+% % --- -----------------------------------------------------------------
+% % --- Insercao dos capitulos.
+% % --- -----------------------------------------------------------------
+\newcounter{chapter}
+\setcounter{chapter}{1}
 \include{LaTeX/chapters/introduction}
-
 
 
 % --- -----------------------------------------------------------------
@@ -89,8 +90,8 @@ di-men-sio-na-men-to
 % --- -----------------------------------------------------------------
 % --- Apendice.(Opcional)
 % --- -----------------------------------------------------------------
-\clearpage
-\appendix
-\include{LaTeX/chapters/appendixA}
+% \clearpage
+% \appendix
+% \include{LaTeX/chapters/appendixA}
 
 \end{document}

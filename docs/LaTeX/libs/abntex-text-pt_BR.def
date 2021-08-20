@@ -21,7 +21,7 @@
 \def\chaptername{Cap\'{\i}tulo}%
 \def\appendixname{Ap\^endice}%
 \def\contentsname{Sum\'ario}%
-\def\listfigurename{Lista de Figuras}%
+\def\listfigurename{Lista de Ilustrações}%
 \def\listtablename{Lista de Tabelas}%
 \def\indexname{\'Indice Remissivo}%
 \def\figurename{Figura}%
@@ -40,6 +40,6 @@
 \def\appendixname{Ap\^endice} % for completeness ;-)
 \def\bibname{Refer\^encias}
 \def\contentsname{Sum\'ario}
-\def\listfigurename{Lista de Figuras}
+\def\listfigurename{Lista de Ilustrações}
 \def\listtablename{Lista de Tabelas}
 \def\indexname{\'Indice Remissivo}
