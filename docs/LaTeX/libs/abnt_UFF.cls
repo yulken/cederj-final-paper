@@ -851,7 +851,7 @@ Para mais informacoes, leia o manual da classe.\MessageBreak%
                            {1.5ex \@plus .2ex}%
                            {\espaco{simples}\normalfont%
                             \normalsize}}
-\renewcommand\paragraph{\ABNTstartsection{paragraph}{4}{\z@}%
+\renewcommand\paragraph{\ABNTstartsection{paragraph}{4}{\parindent}%
                            {3.25ex \@plus1ex \@minus.2ex}%
                            {-1em}%
                            {\espaco{simples}\normalfont%
@@ -1512,7 +1512,7 @@ Para mais informacoes, leia o manual da classe.\MessageBreak%
  {}
 
 % paragraph indentation size and skip
-\setlength{\parindent}{.7cm}
+\setlength{\parindent}{2cm}
 \setlength{\parskip}{.25cm}
 
 
@@ -1540,7 +1540,7 @@ http://abntex.codigolivre.org.br\space\spABNT\spABNT|}%
 
 
 \let\oldchapter\chapter
-\renewcommand{\chapter}[1]{\oldchapter{\MakeUppercase{#1}}}
+\renewcommand{\chapter}[1]{\oldchapter{\thechapter \hspace{3mm} \MakeUppercase{#1}}}
 
 \let\oldclearpage\clearpage
 \renewcommand{\clearpage}{\oldclearpage{\espaco{1.5}}}
