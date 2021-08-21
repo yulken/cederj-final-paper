@@ -6,6 +6,7 @@
     \begin{center}
         \large\bf \MakeUppercase{#1}
     \end{center}\hspace{5mm}
+    \addcontentsline{toc}{subsection}{#1}
 }
 {}
 
@@ -24,7 +25,7 @@
 
     \thispagestyle{chapter}
     \normalfont\normalsize
-    \addcontentsline{toc}{section}{\thechapter \hspace{5mm}#1}
+    \addcontentsline{toc}{subsection}{\thechapter \hspace{5mm}#1}
     \addtocounter{chapter}{1}
 }{}
 

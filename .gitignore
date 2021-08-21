@@ -10,3 +10,5 @@
 /docs/**/*.toc
 /docs/**/*.toc
 /docs/**/*.gz
+/docs/**/*.
+/docs/**/*.out

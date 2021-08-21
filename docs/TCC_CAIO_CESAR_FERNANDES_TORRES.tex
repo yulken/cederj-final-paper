@@ -12,7 +12,7 @@
 \usepackage[dvips]{epsfig,graphicx}
 \usepackage{subfigure}
 \usepackage{setspace}
-\usepackage{hyperref, bookmark}
+\usepackage[hidelinks]{hyperref}
 
 %--- pacote de simbolos
 \usepackage{latexsym}
@@ -23,9 +23,6 @@
 \usepackage{amssymb}
 
 %--- pacote para gerar pseudo-codigo
-\usepackage{./LaTeX/libs/algorithm}
-\usepackage{./LaTeX/libs/algorithmic}
-\floatname{algorithm}{Algoritmo}
 
 %--- outros pacotes
 \usepackage{url}
@@ -55,6 +52,8 @@ di-men-sio-na-men-to
 {\IfFileExists{helvetic.sty}%
 {\RequirePackage{helvetic}}%
 {\renewcommand{\rmdefault}{phv}}
+\usepackage{textcase}
+\usepackage{etoolbox}
 
 %---------usando tipo de fonte padrao
 
