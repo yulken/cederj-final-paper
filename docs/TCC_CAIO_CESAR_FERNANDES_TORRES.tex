@@ -41,7 +41,12 @@
 \usepackage{multicol}
 \usepackage{multirow}
 \usepackage{rotating}
-\usepackage[lmargin=3cm,rmargin=1.5cm,top=3.5cm,bottom=2.5cm]{geometry}
+
+\usepackage[tocflat]{tocstyle}
+\usetocstyle{standard}
+
+\usepackage{enumitem}
+\usepackage[lmargin=3cm,rmargin=2cm,top=3.5cm,bottom=2.5cm]{geometry}
 
 \hyphenation{
 a-de-qua-da-men-te 
@@ -53,6 +58,12 @@ di-men-sio-na-men-to
 
 %---------usando tipo de fonte padrao
 
+\fancypagestyle{chapter}{
+    \fancyhf{}
+    \fancyhead[R]{\thepage}
+    \renewcommand{\headrulewidth}{0pt}
+}
+
 % --- -----------------------------------------------------------------
 % --- Documento Principal.
 % --- -----------------------------------------------------------------
@@ -60,6 +71,7 @@ di-men-sio-na-men-to
 % \hypersetup{colorlinks, sitecolor=black, pdftex}
 \begin{document}
 \setstretch{1.5}
+
 % --- -----------------------------------------------------------------
 % --- Titulo, abstract, dedicatorias e agradecimentos.
 % --- Indice geral, lista de figuras e tabelas.
@@ -71,12 +83,16 @@ di-men-sio-na-men-to
 \include{LaTeX/pretextual/terms}
 \include{LaTeX/pretextual/thanks}
 \input{LaTeX/pretextual/abstracts}
+\input{LaTeX/pretextual/toc}
+
 % % --- -----------------------------------------------------------------
 % % --- Insercao dos capitulos.
 % % --- -----------------------------------------------------------------
 \newcounter{chapter}
 \setcounter{chapter}{1}
+\pagestyle{chapter}
 \include{LaTeX/chapters/introduction}
+\include{LaTeX/chapters/concepts}
 
 
 % --- -----------------------------------------------------------------

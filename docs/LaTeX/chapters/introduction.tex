@@ -5,13 +5,24 @@
 
 \paragrafo{Em sistemas que já estão em produção e que, consequentemente, possuem uma base robusta de clientes, alterações estruturais desse tipo podem acarretar riscos para toda a aplicação. Por exemplo, o prazo requerido para a implementação de um fluxo alternativo pode ser muito menor que o tempo necessário, o que pode fazer com que a qualidade do código entregado seja reduzida ou que novos bugs sejam introduzidos à aplicação. Ou talvez, caso um framework deixe de atender as necessidades da aplicação, será necessário reconstruir boa parte do software praticamente do zero.}
 
-\paragrafo{Ou seja, mais do que entregar um programa, hoje em dia também é importante que este seja de fácil manutenção. Por conta disso, diferentes princípios de arquitetura e padrões de design foram criados ao longo do tempo para suprir a demanda por agilidade do processo de desenvolvimento (por exemplo, Clean Architecture, Design Patterns, SOLID, DRY, DDD, TDD, entre outros).}
+\paragrafo{Ou seja, mais do que entregar um programa, hoje em dia também é importante que este seja de fácil manutenção. Por conta disso, diferentes princípios de arquitetura e padrões de design foram criados ao longo do tempo para suprir a demanda por agilidade do processo de desenvolvimento (por exemplo, \emph{Clean} Architecture, \emph{Design Patterns}, SOLID, DRY, DDD, TDD, entre outros).}
 
 \paragrafo{Por outro lado, a adoção de algumas práticas sem moderação pode ocasionar em um nível de esforço e complexidade de código adicional. Sendo assim apesar de ajudar na manutenção, pode atrapalhar a legibilidade e requisitar um conhecimento técnico mais avançado para compreender estruturas de código que, embora estejam preparadas para tal evento, talvez nunca sofram as drásticas alterações que motivaram a dita complexidade em primeiro lugar. Apoiando essa perspectiva, temos os principios KISS e YAGNI.}
 
-\paragrafo{Por isso, este projeto tem como objetivo aplicar e explicitar, na prática, implementações de Clean Architecture e Design Patterns em uma aplicação web. Ao longo deste trabalho serão expostos os desafios e benefícios de aplicar tais técnicas no desenvolvimento de uma loja virtual de jogos eletrônicos, como a Steam ou a Epic Games.}
+\paragrafo{Por isso, este projeto tem como objetivo aplicar e explicitar, na prática, implementações de \emph{Clean Architecture} e \emph{Design Patterns} em uma aplicação web. Ao longo deste trabalho serão expostos os desafios e benefícios de aplicar tais técnicas no desenvolvimento de uma loja virtual de jogos eletrônicos, como a Steam ou a Epic Games.}
 
-\paragrafo{O segundo capítulo é dedicado a apresentar os conceitos de Clean Architecture e Design Patterns e exemplificar como essas técnicas podem ajudar a mitigar os riscos apontados no início dessa introdução. Para isso será utilizado como referência as obras nas quais essas ideias foram publicadas pela primeira vez [1][2].}
+\paragrafo{A loja será desenvolvida usando as seguintes tecnologias:}
+
+\begin{itemize}[label=\raisebox{0.25ex}{\normalsize$\bullet$}]
+    \vspace{-0.3cm}
+    \setlength{\itemindent}{2cm}
+    \item \hspace{0.1cm} \emph{Back-end}: \emph{Node.js} com \emph{Typescript}
+    \item \hspace{0.1cm} \emph{Front-end}: \emph{React.js}
+    \item \hspace{0.1cm} Banco de dados: \emph{PostgreSQL}
+    \vspace{0.6cm}
+\end{itemize}
+
+\paragrafo{O segundo capítulo é dedicado a apresentar os conceitos de \emph{Clean Architecture} e \emph{Design Patterns} e exemplificar como essas técnicas podem ajudar a mitigar os riscos apontados no início dessa introdução. Para isso será utilizado como referência as obras nas quais essas ideias foram publicadas pela primeira vez [1][2].}
 
 \paragrafo{O terceiro capítulo terá como foco descrever com mais profundidade as tecnologias que serão implementadas no desenvolvimento do software e o que motivou a escolha das mesmas. Além disso, também será introduzida a proposta da loja de jogos eletrônicos, assim como seus requisitos, regras de negócio, diagramas UML e toda a documentação produzida para o propósito desse trabalho.}
 
