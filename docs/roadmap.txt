@@ -1,0 +1,18 @@
+LIST OF THINGS TO BE ADDED TO PRODUCT
+
+1 -
+users should be able to login
+users should be able to buy games
+users should have libraries
+libraries should have games
+2 -
+new users should be able to register
+users should be able to befriend each other
+users shoul be able to redefine profile parameters
+libraries should display game time
+3 - 
+games should have genres
+users should be able to search games by name and genre
+4 - 
+games should have dlcs
+games should be able to be on sale

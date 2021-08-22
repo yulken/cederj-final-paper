@@ -1,4 +1,5 @@
 /docs/**/*.*
+!/docs/**/*.txt
 !/docs/**/*.tex
 !/docs/**/*.bib
 !/docs/**/*.bst
