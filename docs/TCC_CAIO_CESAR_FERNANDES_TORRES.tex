@@ -1,4 +1,4 @@
-\documentclass[12pt,a4paper]{article}
+\documentclass[12pt]{article}
 
 %---pacotes para hiphenizacao e acentuacao em portugues
 \usepackage[brazil]{babel}
@@ -17,7 +17,6 @@
 %--- pacote de simbolos
 \usepackage{latexsym}
 \usepackage{textcomp}
-
 %--- simbolos matematicos
 \usepackage{amsmath}
 \usepackage{amssymb}
@@ -38,7 +37,7 @@
 \usepackage{multicol}
 \usepackage{multirow}
 \usepackage{rotating}
-
+\usepackage{acronym}
 \usepackage[tocflat]{tocstyle}
 \usetocstyle{standard}
 
@@ -68,20 +67,21 @@ di-men-sio-na-men-to
 % --- -----------------------------------------------------------------
 % \usepackage[pdftex]{hyperref}
 % \hypersetup{colorlinks, sitecolor=black, pdftex}
+\bibliographystyle{acm}
 \begin{document}
 \setstretch{1.5}
-
 % --- -----------------------------------------------------------------
 % --- Titulo, abstract, dedicatorias e agradecimentos.
 % --- Indice geral, lista de figuras e tabelas.
 % --- -----------------------------------------------------------------
-\include{LaTeX/libs/environments}
-\include{LaTeX/chapters/variables}
-\include{LaTeX/pretextual/cover}
-\include{LaTeX/pretextual/catalog-file}
-\include{LaTeX/pretextual/terms}
-\include{LaTeX/pretextual/thanks}
+\input{LaTeX/libs/environments}
+\input{LaTeX/chapters/variables}
+\input{LaTeX/pretextual/cover}
+\input{LaTeX/pretextual/catalog-file}
+\input{LaTeX/pretextual/terms}
+\input{LaTeX/pretextual/thanks}
 \input{LaTeX/pretextual/abstracts}
+\input{LaTeX/pretextual/acronym}
 \input{LaTeX/pretextual/toc}
 
 % % --- -----------------------------------------------------------------
@@ -90,8 +90,8 @@ di-men-sio-na-men-to
 \newcounter{chapter}
 \setcounter{chapter}{1}
 \pagestyle{chapter}
-\include{LaTeX/chapters/introduction}
-\include{LaTeX/chapters/concepts}
+\input{LaTeX/chapters/introduction}
+\input{LaTeX/chapters/concepts}
 
 
 % --- -----------------------------------------------------------------
@@ -99,13 +99,13 @@ di-men-sio-na-men-to
 % --- -----------------------------------------------------------------
 % \clearpage
 % \bibliographystyle{LaTeX/libs/acm-2} % abbrv - abnt-num
-% %\bibliographystyle{uff-ic}
-% \bibliography{LaTeX/chapters/bibliografia} % arquivo fonte com a bibilografia
+% \bibliographystyle{LaTeX/_deprecated/uff-ic}
+\input{LaTeX/posttextual/bibliography}
 
 % --- -----------------------------------------------------------------
 % --- Apendice.(Opcional)
 % --- -----------------------------------------------------------------
-% \clearpage
+% \clearpagebib
 % \appendix
 % \include{LaTeX/chapters/appendixA}
 

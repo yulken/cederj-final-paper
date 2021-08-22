@@ -1,12 +1,13 @@
 \newenvironment{resumo}[1]
 {
     \clearpage
+    \phantomsection
+    \addcontentsline{toc}{subsection}{#1}
     \thispagestyle{empty}
     \setstretch{1}
     \begin{center}
         \large\bf \MakeUppercase{#1}
     \end{center}\hspace{5mm}
-    \addcontentsline{toc}{subsection}{#1}
 }
 {}
 
@@ -14,6 +15,8 @@
 % \renewcommand{\chapter}[1]{\oldchapter{\thechapter \hspace{3mm} \MakeUppercase{#1}}}
 \newenvironment{capitulo}[1]{
     \clearpage
+    \phantomsection
+    \addcontentsline{toc}{subsection}{\thechapter \hspace{5mm}#1}
     % \chapter
     \pagestyle{chapter}
     
@@ -25,12 +28,10 @@
 
     \thispagestyle{chapter}
     \normalfont\normalsize
-    \addcontentsline{toc}{subsection}{\thechapter \hspace{5mm}#1}
     \addtocounter{chapter}{1}
 }{}
 
 
-\newcommand{\tab}{\setlength{\parindent}{2cm}}
 \newcommand{\paragrafo}[1]{
     \setlength{\parindent}{2cm}
     #1\par
