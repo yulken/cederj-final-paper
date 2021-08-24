@@ -8,7 +8,7 @@ import IHashProvider from '../providers/HashProvider/models/IHashProvider';
 interface IRequest {
   token: string;
   password: string;
-  password_confirmation: string;
+  passwordConfirmation: string;
 }
 
 @injectable()
@@ -27,14 +27,14 @@ export default class ResetPasswordService {
   public async execute({
     token,
     password,
-    password_confirmation,
+    passwordConfirmation,
   }: IRequest): Promise<void> {
     const userToken = await this.userTokenRepository.findByToken(token);
 
     if (!userToken) {
       throw new AppError('User token does not exists');
     }
-    if (password !== password_confirmation) {
+    if (password !== passwordConfirmation) {
       throw new AppError(`Password and Password Confirmation won't match`);
     }
     const user = await this.usersRepository.findById(userToken.user_id);
