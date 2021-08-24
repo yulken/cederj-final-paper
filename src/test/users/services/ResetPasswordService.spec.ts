@@ -32,7 +32,7 @@ describe('ResetPassword', () => {
     await resetPasswordService.execute({
       token,
       password: '123123',
-      password_confirmation: '123123',
+      passwordConfirmation: '123123',
     });
 
     const updatedUser = await fakeUsersRepository.findById(user.id);
@@ -45,7 +45,7 @@ describe('ResetPassword', () => {
       resetPasswordService.execute({
         token: 'non-existing-token',
         password: '123456',
-        password_confirmation: '123456',
+        passwordConfirmation: '123456',
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
@@ -58,7 +58,7 @@ describe('ResetPassword', () => {
       resetPasswordService.execute({
         token,
         password: '123456',
-        password_confirmation: '123456',
+        passwordConfirmation: '123456',
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
@@ -79,7 +79,7 @@ describe('ResetPassword', () => {
       resetPasswordService.execute({
         token,
         password: '123456',
-        password_confirmation: '1231234',
+        passwordConfirmation: '1231234',
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
@@ -95,7 +95,7 @@ describe('ResetPassword', () => {
       resetPasswordService.execute({
         token,
         password: '123456',
-        password_confirmation: '123123',
+        passwordConfirmation: '123123',
       }),
     ).rejects.toBeInstanceOf(AppError);
   });

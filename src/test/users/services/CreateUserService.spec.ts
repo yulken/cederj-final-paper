@@ -18,6 +18,7 @@ describe('CreateUser', () => {
       name: 'John Doe',
       email: 'johndoe@example.com',
       password: '123456',
+      passwordConfirmation: '123456',
     });
 
     expect(user).toHaveProperty('id');
@@ -27,6 +28,7 @@ describe('CreateUser', () => {
       name: 'John Doe',
       email: 'johndoe@example.com',
       password: '123456',
+      passwordConfirmation: '123456',
     });
 
     await expect(
@@ -34,6 +36,24 @@ describe('CreateUser', () => {
         name: 'John Doe',
         email: 'johndoe@example.com',
         password: '123456',
+        passwordConfirmation: '123456',
+      }),
+    ).rejects.toBeInstanceOf(AppError);
+  });
+  it('should not be able to create a new user without password confirmation match', async () => {
+    await createUser.execute({
+      name: 'John Doe',
+      email: 'johndoe@example.com',
+      password: '123456',
+      passwordConfirmation: '123456',
+    });
+
+    await expect(
+      createUser.execute({
+        name: 'John Doe',
+        email: 'johndoe@example.com',
+        password: '123456',
+        passwordConfirmation: '123111=56',
       }),
     ).rejects.toBeInstanceOf(AppError);
   });

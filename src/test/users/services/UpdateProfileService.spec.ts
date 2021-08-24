@@ -20,6 +20,7 @@ describe('UpdateProfileService', () => {
   it('should be able to update profile', async () => {
     const user = await fakeUsersRepository.create({
       name: 'John Doe',
+      nickname: 'Noobmaster69',
       email: 'johndoe@example.com',
       password: '123456',
     });
@@ -36,12 +37,14 @@ describe('UpdateProfileService', () => {
   it('should not be able to update email to an email already in use', async () => {
     await fakeUsersRepository.create({
       name: 'user',
+      nickname: 'Noobmaster69',
       email: 'jhondoe@example.com',
       password: '123456',
     });
 
     const user = await fakeUsersRepository.create({
       name: 'John Doe',
+      nickname: 'Noobmaster69',
       email: 'johndoe@example.com',
       password: '123456',
     });
@@ -57,6 +60,7 @@ describe('UpdateProfileService', () => {
   it('should be able to update password', async () => {
     const user = await fakeUsersRepository.create({
       name: 'John Doe',
+      nickname: 'Noobmaster69',
       email: 'johndoe@example.com',
       password: '123456',
     });
@@ -74,6 +78,7 @@ describe('UpdateProfileService', () => {
   it('should not be able to update password if old password is not provided', async () => {
     const user = await fakeUsersRepository.create({
       name: 'John Doe',
+      nickname: 'Noobmaster69',
       email: 'johndoe@example.com',
       password: '123456',
     });
@@ -90,6 +95,7 @@ describe('UpdateProfileService', () => {
   it('should not be able to update password with wrong old password', async () => {
     const user = await fakeUsersRepository.create({
       name: 'John Doe',
+      nickname: 'Noobmaster69',
       email: 'johndoe@example.com',
       password: '123456',
     });

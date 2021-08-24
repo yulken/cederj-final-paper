@@ -14,6 +14,7 @@ describe('ShowProfileService', () => {
   it('should be able to show profile', async () => {
     const user = await fakeUsersRepository.create({
       name: 'John Doe',
+      nickname: 'Noobmaster69',
       email: 'johndoe@example.com',
       password: '123456',
     });

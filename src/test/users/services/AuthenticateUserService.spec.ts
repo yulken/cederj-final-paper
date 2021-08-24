@@ -25,6 +25,7 @@ describe('CreateUser', () => {
       name: 'John Doe',
       email: 'johndoe@example.com',
       password: '123456',
+      passwordConfirmation: '123456',
     });
     const response = await authenticateUser.execute({
       email: 'johndoe@example.com',
@@ -47,6 +48,7 @@ describe('CreateUser', () => {
       name: 'John Doe',
       email: 'johndoe@example.com',
       password: '123456',
+      passwordConfirmation: '123456',
     });
 
     await expect(
