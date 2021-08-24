@@ -2,15 +2,13 @@ import AppError from '@shared/errors/AppError';
 import { injectable, inject } from 'tsyringe';
 import User from '../infra/typeorm/entities/User';
 
-// import AppError from '@shared/errors/AppError';
 import IHashProvider from '../providers/HashProvider/models/IHashProvider';
 import IUsersRepository from '../repositories/IUsersRepository';
-
-// import User from '../infra/typeorm/entities/User';
 
 interface IRequest {
   user_id: string;
   name: string;
+  nickname: string;
   email: string;
   old_password?: string;
   password?: string;
@@ -29,10 +27,14 @@ export default class UpdateProfileService {
   public async execute({
     user_id,
     name,
+    nickname,
     email,
     password,
     old_password,
   }: IRequest): Promise<User> {
+    if (password && !old_password) {
+      throw new AppError('You need to provide your old password');
+    }
     const user = await this.usersRepository.findById(user_id);
     if (!user) {
       throw new AppError('User not found');
@@ -42,9 +44,7 @@ export default class UpdateProfileService {
     if (userWithUpdatedEmail && userWithUpdatedEmail.id !== user_id) {
       throw new AppError('Email already in use');
     }
-    if (password && !old_password) {
-      throw new AppError('You need to provide your old password');
-    }
+
     if (password && old_password) {
       if (!(await this.hashProvider.compareHash(old_password, user.password)))
         throw new AppError('Old password is incorrect');
@@ -53,7 +53,7 @@ export default class UpdateProfileService {
     if (password) {
       user.password = await this.hashProvider.generateHash(password);
     }
-    Object.assign(user, { name, email });
+    Object.assign(user, { name, email, nickname });
     return this.usersRepository.save(user);
   }
 }
