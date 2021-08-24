@@ -1,7 +1,6 @@
-import { getRepository, Not, Repository } from 'typeorm';
+import { getRepository, Repository } from 'typeorm';
 import IUsersRepository from '@modules/users/repositories/IUsersRepository';
 
-import IFindAllProvidersDTO from '@modules/users/dtos/IFindAllProvidersDTO';
 import ICreateUserDTO from '@modules/users/dtos/ICreateUserDTO';
 import User from '../entities/User';
 
@@ -21,19 +20,6 @@ class UsersRepository implements IUsersRepository {
       where: { email },
     });
     return user;
-  }
-
-  public async findAllProviders({
-    id_exception,
-  }: IFindAllProvidersDTO): Promise<User[]> {
-    if (id_exception) {
-      return this.ormRepository.find({
-        where: {
-          id: Not(id_exception),
-        },
-      });
-    }
-    return this.ormRepository.find();
   }
 
   public async findByDate(date: Date): Promise<User | undefined> {

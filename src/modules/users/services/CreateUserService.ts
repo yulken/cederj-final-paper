@@ -9,6 +9,7 @@ interface IRequest {
   name: string;
   email: string;
   password: string;
+  passwordConfirmation: string;
 }
 
 @injectable()
@@ -21,7 +22,16 @@ export default class CreateUserService {
     private hashProvider: IHashProvider,
   ) {}
 
-  public async execute({ name, email, password }: IRequest): Promise<User> {
+  public async execute({
+    name,
+    email,
+    password,
+    passwordConfirmation,
+  }: IRequest): Promise<User> {
+    if (password !== passwordConfirmation) {
+      throw new AppError(`Password and Password Confirmation won't match`);
+    }
+
     const checkUserExists = await this.usersRepository.findByEmail(email);
 
     if (checkUserExists) {
@@ -33,6 +43,7 @@ export default class CreateUserService {
     const user = await this.usersRepository.create({
       name,
       email,
+      nickname: name,
       password: hashedPassword,
     });
 
