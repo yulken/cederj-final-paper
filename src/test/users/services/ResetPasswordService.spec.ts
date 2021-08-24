@@ -23,6 +23,7 @@ describe('ResetPassword', () => {
   it('should be able to reset password', async () => {
     const user = await fakeUsersRepository.create({
       name: 'John Doe',
+      nickname: '123123',
       email: 'johndoe@example.com',
       password: '123456',
     });
@@ -66,6 +67,7 @@ describe('ResetPassword', () => {
   it('should not be able to reset password after 2 hours', async () => {
     const user = await fakeUsersRepository.create({
       name: 'John Doe',
+      nickname: '123123',
       email: 'johndoe@example.com',
       password: '123456',
     });
@@ -86,6 +88,7 @@ describe('ResetPassword', () => {
   it('should not be able to reset password with different confirmation password', async () => {
     const user = await fakeUsersRepository.create({
       name: 'John Doe',
+      nickname: '123123',
       email: 'johndoe@example.com',
       password: '123456',
     });

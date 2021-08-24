@@ -28,6 +28,7 @@ describe('UpdateProfileService', () => {
     const updatedUser = await updateProfileService.execute({
       user_id: user.id,
       name: 'Jhon Doe',
+      nickname: 'Noobmaster69',
       email: 'jhondoe@example.com',
     });
 
@@ -52,6 +53,7 @@ describe('UpdateProfileService', () => {
     await expect(
       updateProfileService.execute({
         user_id: user.id,
+        nickname: 'Noobmaster69',
         name: 'Jhon Doe',
         email: 'jhondoe@example.com',
       }),
@@ -68,9 +70,11 @@ describe('UpdateProfileService', () => {
     const updatedUser = await updateProfileService.execute({
       user_id: user.id,
       name: 'Jhon Doe',
+      nickname: 'Noobmaster69',
       email: 'jhondoe@example.com',
       old_password: '123456',
       password: '123123',
+      passwordConfirmation: '123123',
     });
 
     expect(updatedUser.password).toBe('123123');
@@ -87,6 +91,7 @@ describe('UpdateProfileService', () => {
       updateProfileService.execute({
         user_id: user.id,
         name: 'Jhon Doe',
+        nickname: 'Noobmaster69',
         email: 'jhondoe@example.com',
         password: '123123',
       }),
@@ -104,6 +109,7 @@ describe('UpdateProfileService', () => {
       updateProfileService.execute({
         user_id: user.id,
         name: 'Jhon Doe',
+        nickname: 'Noobmaster69',
         email: 'jhondoe@example.com',
         password: '123123',
         old_password: 'wrong_old_password',
@@ -115,9 +121,30 @@ describe('UpdateProfileService', () => {
       updateProfileService.execute({
         user_id: 'non-existing-user',
         name: 'Jhon Doe',
+        nickname: 'Noobmaster69',
         email: 'jhondoe@example.com',
         password: '123123',
         old_password: 'wrong_old_password',
+      }),
+    ).rejects.toBeInstanceOf(AppError);
+  });
+  it('should not be able to update password with different confirmation password', async () => {
+    const user = await fakeUsersRepository.create({
+      name: 'John Doe',
+      nickname: '123123',
+      email: 'johndoe@example.com',
+      password: '123456',
+    });
+
+    await expect(
+      updateProfileService.execute({
+        user_id: user.id,
+        name: 'Jhon Doe',
+        nickname: 'Noobmaster69',
+        email: 'jhondoe@example.com',
+        old_password: '123456',
+        password: '123123',
+        passwordConfirmation: '1231123453',
       }),
     ).rejects.toBeInstanceOf(AppError);
   });

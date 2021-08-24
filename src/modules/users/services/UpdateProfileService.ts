@@ -12,6 +12,7 @@ interface IRequest {
   email: string;
   old_password?: string;
   password?: string;
+  passwordConfirmation?: string;
 }
 
 @injectable()
@@ -31,10 +32,8 @@ export default class UpdateProfileService {
     email,
     password,
     old_password,
+    passwordConfirmation,
   }: IRequest): Promise<User> {
-    if (password && !old_password) {
-      throw new AppError('You need to provide your old password');
-    }
     const user = await this.usersRepository.findById(user_id);
     if (!user) {
       throw new AppError('User not found');
@@ -45,12 +44,22 @@ export default class UpdateProfileService {
       throw new AppError('Email already in use');
     }
 
-    if (password && old_password) {
+    if (password) {
+      if (!old_password) {
+        throw new AppError('You need to provide your old password');
+      }
+
+      if (!passwordConfirmation) {
+        throw new AppError('You need to confirm your new password');
+      }
+
+      if (password !== passwordConfirmation) {
+        throw new AppError('Password must match its confirmation');
+      }
+
       if (!(await this.hashProvider.compareHash(old_password, user.password)))
         throw new AppError('Old password is incorrect');
-    }
 
-    if (password) {
       user.password = await this.hashProvider.generateHash(password);
     }
     Object.assign(user, { name, email, nickname });
