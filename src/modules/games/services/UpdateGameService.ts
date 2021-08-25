@@ -34,12 +34,12 @@ export default class UpdateProfileService {
     }
     if (release_date) {
       const now = Date.now();
-      if (now > release_date.getTime()) {
-        throw new AppError("New Date can't be in the past");
-      }
-
       if (game.release_date.getTime() < now) {
         throw new AppError("Can't update if game is already release");
+      }
+
+      if (now > new Date(release_date).getTime()) {
+        throw new AppError("New Release Date can't be in the past", 400);
       }
 
       Object.assign(game, { release_date });
