@@ -104,4 +104,12 @@ describe('UpdateGameService', () => {
       }),
     ).rejects.toBeInstanceOf(AppError);
   });
+  it('should not be able to update non existent game', async () => {
+    await expect(
+      updateGameService.execute({
+        game_id: 'inexistent',
+        price: 10.0,
+      }),
+    ).rejects.toBeInstanceOf(AppError);
+  });
 });

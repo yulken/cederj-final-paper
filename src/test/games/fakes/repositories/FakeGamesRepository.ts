@@ -2,7 +2,7 @@ import IGamesRepository from '@modules/games/repositories/IGamesRepository';
 import ICreateGameDTO from '@modules/games/dtos/ICreateGameDTO';
 
 import { v4 as uuidv4 } from 'uuid';
-import Game from '../../../../modules/games/infra/typeorm/entities/Game';
+import Game from '@modules/games/infra/typeorm/entities/Game';
 
 export default class FakeGamesRepository implements IGamesRepository {
   private games: Game[] = [];
