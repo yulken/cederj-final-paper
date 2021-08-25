@@ -3,5 +3,5 @@ export default interface ICreateGameDTO {
   price: number;
   developer: string;
   publisher: string;
-  releaseDate: Date;
+  release_date: Date;
 }

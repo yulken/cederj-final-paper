@@ -17,14 +17,14 @@ export default class CreateGameService {
     price,
     developer,
     publisher,
-    releaseDate,
+    release_date,
   }: ICreateGameDTO): Promise<Game> {
     const game = await this.gamesRepository.create({
       name,
       price,
       developer,
       publisher,
-      releaseDate,
+      release_date,
     });
 
     return game;

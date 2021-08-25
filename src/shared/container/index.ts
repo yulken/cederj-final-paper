@@ -6,6 +6,9 @@ import UsersRepository from '@modules/users/infra/typeorm/repositories/UsersRepo
 import IUserTokensRepository from '@modules/users/repositories/IUserTokensRepository';
 import UserTokensRepository from '@modules/users/infra/typeorm/repositories/UserTokensRepository';
 
+import IGamesRepository from '@modules/games/repositories/IGamesRepository';
+import GamesRepository from '@modules/games/infra/typeorm/repositories/GamesRepository';
+
 import '@modules/users/providers';
 
 container.registerSingleton<IUsersRepository>(
@@ -15,4 +18,8 @@ container.registerSingleton<IUsersRepository>(
 container.registerSingleton<IUserTokensRepository>(
   'UserTokensRepository',
   UserTokensRepository,
+);
+container.registerSingleton<IGamesRepository>(
+  'GamesRepository',
+  GamesRepository,
 );

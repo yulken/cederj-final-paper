@@ -17,7 +17,7 @@ describe('ShowGameService', () => {
       price: 80.0,
       developer: 'CD Projekt Red',
       publisher: 'CD Projekt Red',
-      releaseDate: new Date(2021, 1, 1),
+      release_date: new Date(2021, 1, 1),
     });
 
     const displayedGame = await showGameService.execute({ game_id: game.id });
