@@ -6,12 +6,6 @@ import ShowGameService from '@modules/games/services/ShowGameService';
 import UpdateGameService from '@modules/games/services/UpdateGameService';
 import IndexGameService from '@modules/games/services/IndexGameService';
 
-interface IGameId extends Request {
-  query: {
-    game_id: string;
-  };
-}
-
 export default class GamesController {
   public async index(request: Request, response: Response): Promise<Response> {
     const indexGame = container.resolve(IndexGameService);
@@ -34,7 +28,7 @@ export default class GamesController {
     return response.json(classToClass(game));
   }
 
-  public async show(request: IGameId, response: Response): Promise<Response> {
+  public async show(request: Request, response: Response): Promise<Response> {
     const { game_id } = request.params;
     const showGame = container.resolve(ShowGameService);
 

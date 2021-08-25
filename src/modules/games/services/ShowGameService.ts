@@ -16,10 +16,10 @@ export default class ShowGameService {
   ) {}
 
   public async execute({ game_id }: IRequest): Promise<Game> {
-    const user = await this.gamesRepository.findById(game_id);
-    if (!user) {
+    const game = await this.gamesRepository.findById(game_id);
+    if (!game) {
       throw new AppError('Game not found', 404);
     }
-    return user;
+    return game;
   }
 }
