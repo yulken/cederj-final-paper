@@ -7,6 +7,10 @@ import Game from '../../../../modules/games/infra/typeorm/entities/Game';
 export default class FakeGamesRepository implements IGamesRepository {
   private games: Game[] = [];
 
+  public async index(): Promise<Game[]> {
+    return this.games;
+  }
+
   public async findById(id: string): Promise<Game | undefined> {
     return this.games.find(game => game.id === id);
   }

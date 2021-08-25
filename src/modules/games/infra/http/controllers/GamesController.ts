@@ -4,6 +4,7 @@ import { classToClass } from 'class-transformer';
 import CreateGameService from '@modules/games/services/CreateGameService';
 import ShowGameService from '@modules/games/services/ShowGameService';
 import UpdateGameService from '@modules/games/services/UpdateGameService';
+import IndexGameService from '@modules/games/services/IndexGameService';
 
 interface IGameId extends Request {
   query: {
@@ -12,6 +13,13 @@ interface IGameId extends Request {
 }
 
 export default class GamesController {
+  public async index(request: Request, response: Response): Promise<Response> {
+    const indexGame = container.resolve(IndexGameService);
+    const games = await indexGame.execute();
+
+    return response.json(games);
+  }
+
   public async create(request: Request, response: Response): Promise<Response> {
     const { name, price, developer, publisher, release_date } = request.body;
     const createGame = container.resolve(CreateGameService);

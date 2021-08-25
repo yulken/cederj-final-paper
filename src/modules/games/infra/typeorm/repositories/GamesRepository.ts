@@ -11,6 +11,10 @@ class GamesRepository implements IGamesRepository {
     this.ormRepository = getRepository(Game);
   }
 
+  public async index(): Promise<Game[]> {
+    return this.ormRepository.find();
+  }
+
   public async findById(id: string): Promise<Game | undefined> {
     return this.ormRepository.findOne(id);
   }
