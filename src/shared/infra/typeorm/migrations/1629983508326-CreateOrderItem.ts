@@ -1,10 +1,12 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export default class CreateLibrary1629911200210 implements MigrationInterface {
+export default class CreateOrderItem1629983508326
+  implements MigrationInterface
+{
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'libraries',
+        name: 'order_games',
         columns: [
           {
             name: 'id',
@@ -19,19 +21,10 @@ export default class CreateLibrary1629911200210 implements MigrationInterface {
             isNullable: false,
           },
           {
-            name: 'game_id',
-            type: 'uuid',
-            isNullable: false,
-          },
-          {
-            name: 'play_time',
-            type: 'integer',
-            default: 0,
-          },
-          {
-            name: 'last_played',
-            type: 'timestamp',
-            isNullable: true,
+            name: 'total_price',
+            type: 'numeric',
+            precision: 5,
+            scale: 2,
           },
           {
             name: 'created_at',
@@ -53,20 +46,12 @@ export default class CreateLibrary1629911200210 implements MigrationInterface {
             onDelete: 'CASCADE',
             onUpdate: 'CASCADE',
           },
-          {
-            name: 'GameId',
-            referencedTableName: 'games',
-            referencedColumnNames: ['id'],
-            columnNames: ['game_id'],
-            onDelete: 'CASCADE',
-            onUpdate: 'CASCADE',
-          },
         ],
       }),
     );
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('libraries');
+    await queryRunner.dropTable('order_games');
   }
 }
