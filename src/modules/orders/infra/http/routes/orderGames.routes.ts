@@ -4,7 +4,7 @@ import OrderGamesbyOrderController from '../controllers/OrderGamesByOrderControl
 const orderGamesRouter = Router();
 const orderGamesController = new OrderGamesbyOrderController();
 
-orderGamesRouter.post('/', orderGamesController.index);
+orderGamesRouter.get('/', orderGamesController.index);
 orderGamesRouter.get('/:order_game_id', orderGamesController.show);
 
 export default orderGamesRouter;
