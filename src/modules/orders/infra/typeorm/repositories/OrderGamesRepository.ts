@@ -12,11 +12,11 @@ class OrderGamesRepository implements IOrderGamesRepository {
   }
 
   public async findByGameId(game_id: string): Promise<OrderGame[]> {
-    return this.ormRepository.find({ where: game_id });
+    return this.ormRepository.find({ where: { game_id } });
   }
 
   public async findByOrderId(order_id: string): Promise<OrderGame[]> {
-    return this.ormRepository.find({ where: order_id });
+    return this.ormRepository.find({ where: { order_id } });
   }
 
   public async findById(id: string): Promise<OrderGame | undefined> {

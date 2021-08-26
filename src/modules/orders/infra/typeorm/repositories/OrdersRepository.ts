@@ -12,7 +12,7 @@ class OrdersRepository implements IOrdersRepository {
   }
 
   public async findByUserId(user_id: string): Promise<Order[]> {
-    return this.ormRepository.find({ where: user_id });
+    return this.ormRepository.find({ where: { user_id } });
   }
 
   public async findById(id: string): Promise<Order | undefined> {
