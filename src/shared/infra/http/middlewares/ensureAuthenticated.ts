@@ -18,11 +18,15 @@ export default function ensureAuthenticated(
   const authHeader = request.headers.authorization;
 
   if (!authHeader) {
-    throw new AppError('JWT Token is missing', 401);
+    throw new AppError('User is not authenticated', 401);
   }
 
   const [, token] = authHeader.split(' ');
   try {
+    if (!authConfig.jwt.secret) {
+      console.error('Secret is not available');
+      throw new AppError('Internal Server Error', 500);
+    }
     const decoded = verify(token, authConfig.jwt.secret);
     const { sub } = decoded as ITokenPayload;
     request.user = {
