@@ -11,6 +11,7 @@ games should have genres
 users should be able to search games by name and genre
 4 -
 games/coupons/cash should be able to be reedemed by a code
+add transactions to create order routine
 games should have dlcs
 games should be able to be on sale
 input data should be validated on backend
