@@ -11,6 +11,16 @@ class GamesRepository implements IGamesRepository {
     this.ormRepository = getRepository(Game);
   }
 
+  public async findByNameAndPublisherAndReleaseDate({
+    name,
+    publisher,
+    release_date,
+  }: ICreateGameDTO): Promise<Game | undefined> {
+    return this.ormRepository.findOne({
+      where: { name, publisher, release_date },
+    });
+  }
+
   public async index(): Promise<Game[]> {
     return this.ormRepository.find();
   }

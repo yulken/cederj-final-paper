@@ -13,6 +13,7 @@ export default class RemoveDeveloperColumn1630005183686
       new TableColumn({
         name: 'developer',
         type: 'varchar',
+        isNullable: true,
       }),
     );
   }

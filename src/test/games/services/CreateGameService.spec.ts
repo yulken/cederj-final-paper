@@ -1,4 +1,5 @@
 import CreateGameService from '@modules/games/services/CreateGameService';
+import AppError from '@shared/errors/AppError';
 import FakeGamesRepository from '../fakes/repositories/FakeGamesRepository';
 
 let fakeGamesRepository: FakeGamesRepository;
@@ -18,5 +19,22 @@ describe('CreateGame', () => {
     });
 
     expect(game).toHaveProperty('id');
+  });
+  it('should not be able to create a duplicated game', async () => {
+    const releaseDate = new Date(2021, 1, 1);
+    await fakeGamesRepository.create({
+      name: 'Cyberpunk',
+      price: 80.0,
+      publisher: 'CD Projekt Red',
+      release_date: releaseDate,
+    });
+    await expect(
+      createGame.execute({
+        name: 'Cyberpunk',
+        price: 80.0,
+        publisher: 'CD Projekt Red',
+        release_date: releaseDate,
+      }),
+    ).rejects.toBeInstanceOf(AppError);
   });
 });
