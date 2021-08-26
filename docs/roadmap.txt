@@ -1,17 +1,17 @@
 LIST OF THINGS TO BE ADDED TO PRODUCT
 
 2 -
-define unique game key
-games/coupons/cash should be able to be reedemed by a code
+games/cash should be able to be reedemed by a code
+users should be able to search games by name
+3 -
 users should be able to befriend each other
 libraries should display game time
-3 -
-users should be able to search games by name
 4 -
 add transactions to create order routine
 input data should be validated on backend
 
 DONE
+define unique game key
 users should be able to buy games
 users should have libraries
 libraries should have games
