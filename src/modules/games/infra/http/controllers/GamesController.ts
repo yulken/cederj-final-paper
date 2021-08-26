@@ -15,12 +15,11 @@ export default class GamesController {
   }
 
   public async create(request: Request, response: Response): Promise<Response> {
-    const { name, price, developer, publisher, release_date } = request.body;
+    const { name, price, publisher, release_date } = request.body;
     const createGame = container.resolve(CreateGameService);
     const game = await createGame.execute({
       name,
       price,
-      developer,
       publisher,
       release_date,
     });

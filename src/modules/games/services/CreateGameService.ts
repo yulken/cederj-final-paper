@@ -15,14 +15,12 @@ export default class CreateGameService {
   public async execute({
     name,
     price,
-    developer,
     publisher,
     release_date,
   }: ICreateGameDTO): Promise<Game> {
     const game = await this.gamesRepository.create({
       name,
       price,
-      developer,
       publisher,
       release_date,
     });

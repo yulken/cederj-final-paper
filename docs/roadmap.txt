@@ -1,22 +1,18 @@
 LIST OF THINGS TO BE ADDED TO PRODUCT
 
-1 -
-users should be able to buy games
 2 -
 define unique game key
 games/coupons/cash should be able to be reedemed by a code
 users should be able to befriend each other
 libraries should display game time
 3 -
-games should have genres
-users should be able to search games by name and genre
+users should be able to search games by name
 4 -
 add transactions to create order routine
-games should have dlcs
-games should be able to be on sale
 input data should be validated on backend
 
 DONE
+users should be able to buy games
 users should have libraries
 libraries should have games
 games should be displayed

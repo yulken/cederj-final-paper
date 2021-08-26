@@ -18,9 +18,6 @@ export default class Game {
   price: number;
 
   @Column()
-  developer: string;
-
-  @Column()
   publisher: string;
 
   @Column()
