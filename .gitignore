@@ -2,8 +2,8 @@ node_modules
 .vscode
 .env
 coverage
-/docs/**/*.*
-!/docs/**/*.txt
-!/docs/**/*.tex
-!/docs/**/*.bib
-!/docs/**/*.bst
+/docs/latex/**/*.*
+!/docs/latex/**/*.txt
+!/docs/latex/**/*.tex
+!/docs/latex/**/*.bib
+!/docs/latex/**/*.bst
