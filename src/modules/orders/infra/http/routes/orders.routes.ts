@@ -1,8 +1,8 @@
 import { Router } from 'express';
 import ensureAuthenticated from '@shared/infra/http/middlewares/ensureAuthenticated';
 import OrdersController from '../controllers/OrdersController';
-import orderGamesRouter from './orderGames.routes';
-import orderUsersRouter from './ordersUsers.routes';
+import orderGamesRouter from './order.games.routes';
+import orderUsersRouter from './orders.users.routes';
 
 const ordersRouter = Router();
 const ordersController = new OrdersController();
