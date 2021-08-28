@@ -4,7 +4,7 @@ import { classToClass } from 'class-transformer';
 import ListOrderGamesService from '@modules/orders/services/ListOrderGamesService';
 import ShowOrderGamesService from '@modules/orders/services/ShowOrderGamesService';
 
-export default class OrderGamesController {
+export default class OrderGamesByOrderController {
   public async index(request: Request, response: Response): Promise<Response> {
     const { order_id } = request.params;
     const listOrderGames = container.resolve(ListOrderGamesService);
