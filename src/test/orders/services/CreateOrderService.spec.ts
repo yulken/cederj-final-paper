@@ -40,14 +40,12 @@ describe('CreateOrder', () => {
     const game = await fakeGamesRepository.create({
       name: 'Cyberpunk',
       price: 80.0,
-      developer: 'CD Projekt Red',
       publisher: 'CD Projekt Red',
       release_date: new Date(2021, 1, 1),
     });
     const game2 = await fakeGamesRepository.create({
       name: 'Mario',
       price: 100.0,
-      developer: 'Nintendo',
       publisher: 'Nintendo',
       release_date: new Date(2021, 1, 1),
     });
@@ -68,14 +66,12 @@ describe('CreateOrder', () => {
     const game = await fakeGamesRepository.create({
       name: 'Cyberpunk',
       price: 80.0,
-      developer: 'CD Projekt Red',
       publisher: 'CD Projekt Red',
       release_date: new Date(2021, 1, 1),
     });
     const game2 = await fakeGamesRepository.create({
       name: 'Mario',
       price: 100.0,
-      developer: 'Nintendo',
       publisher: 'Nintendo',
       release_date: new Date(2021, 1, 1),
     });
@@ -102,7 +98,6 @@ describe('CreateOrder', () => {
     const game = await fakeGamesRepository.create({
       name: 'Cyberpunk',
       price: 80.0,
-      developer: 'CD Projekt Red',
       publisher: 'CD Projekt Red',
       release_date: new Date(2021, 1, 1),
     });

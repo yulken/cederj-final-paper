@@ -30,7 +30,6 @@ describe('ListOwnedGamesService', () => {
     const game = await fakeGamesRepository.create({
       name: 'Cyberpunk',
       price: 80.0,
-      developer: 'CD Projekt Red',
       publisher: 'CD Projekt Red',
       release_date: new Date(2021, 1, 1),
     });
