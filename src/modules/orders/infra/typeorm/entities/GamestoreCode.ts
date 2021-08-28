@@ -4,22 +4,24 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  Generated,
 } from 'typeorm';
 
-interface ICashRedeem {
+export interface ICashRedeem {
   cash: number;
 }
 
-interface IGameRedeem {
+export interface IGameRedeem {
   game: string;
 }
 
-@Entity('redeem_codes')
-export default class Game {
+@Entity('gamestore_codes')
+export default class GamestoreCode {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @Column()
+  @Generated('uuid')
   code: string;
 
   @Column()
@@ -27,6 +29,9 @@ export default class Game {
 
   @Column()
   is_redeemed: boolean;
+
+  @Column()
+  user_id: string;
 
   @Column()
   redeemed_at: Date;
