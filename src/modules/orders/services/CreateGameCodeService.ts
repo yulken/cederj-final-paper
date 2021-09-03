@@ -4,20 +4,22 @@ import { v4 as uuidv4 } from 'uuid';
 import AppError from '@shared/errors/AppError';
 import IGamesRepository from '@modules/games/repositories/IGamesRepository';
 import IGamestoreCodesRepository from '../repositories/IGamestoreCodeRepository';
-import GamestoreCode from '../infra/typeorm/entities/GamestoreCode';
+import GamestoreCode, {
+  IRedeemStrategy,
+} from '../infra/typeorm/entities/GamestoreCode';
 
 interface IRequest {
   game_id: string;
 }
 
 @injectable()
-export default class CreateOrderService {
+export default class CreateGameCodeService {
   constructor(
     @inject('GamesRepository')
     private gamesRepository: IGamesRepository,
 
-    @inject('GamestoreRepository')
-    private gamestoreRepository: IGamestoreCodesRepository,
+    @inject('GamestoreCodesRepository')
+    private gamestoreCodesRepository: IGamestoreCodesRepository,
   ) {}
 
   public async execute({ game_id }: IRequest): Promise<GamestoreCode> {
@@ -25,12 +27,12 @@ export default class CreateOrderService {
       throw new AppError('Game does not exist');
     }
 
-    const code = await this.gamestoreRepository.create({
+    const code = await this.gamestoreCodesRepository.create({
       code: uuidv4(),
       is_redeemed: false,
-      json: {
+      product: {
         game: game_id,
-      },
+      } as IRedeemStrategy,
     } as GamestoreCode);
     return code;
   }

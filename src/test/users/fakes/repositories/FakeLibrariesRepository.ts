@@ -24,7 +24,6 @@ export default class FakeLibrariesRepository implements ILibrariesRepository {
     const library = new Library();
 
     Object.assign(library, { id: uuidv4() }, libraryData, {
-      play_time: 0,
       last_played: null,
     });
 

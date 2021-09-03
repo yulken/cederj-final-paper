@@ -25,7 +25,6 @@ export default class LibrariesRepository implements ILibrariesRepository {
   public async create(libraryData: ICreateLibraryDTO): Promise<Library> {
     const library = this.ormRepository.create({
       ...libraryData,
-      play_time: 0,
     });
     await this.ormRepository.save(library);
     return library;

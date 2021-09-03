@@ -9,6 +9,6 @@ GamestoreCodesRouter.use(ensureAuthenticated);
 
 GamestoreCodesRouter.post('/cash', GamestoreCodesController.createCashCode);
 GamestoreCodesRouter.post('/game', GamestoreCodesController.createGameCode);
-GamestoreCodesRouter.post('/:code', GamestoreCodesController.createGameCode);
+GamestoreCodesRouter.post('/:code', GamestoreCodesController.redeem);
 
 export default GamestoreCodesRouter;

@@ -9,17 +9,17 @@ interface IRequest {
 }
 
 @injectable()
-export default class CreateOrderService {
+export default class CreateCashCodeService {
   constructor(
-    @inject('GamestoreRepository')
-    private gamestoreRepository: IGamestoreCodesRepository,
+    @inject('GamestoreCodesRepository')
+    private gamestoreCodesRepository: IGamestoreCodesRepository,
   ) {}
 
   public async execute({ cash }: IRequest): Promise<GamestoreCode> {
-    const code = await this.gamestoreRepository.create({
+    const code = await this.gamestoreCodesRepository.create({
       code: uuidv4(),
       is_redeemed: false,
-      json: {
+      product: {
         cash,
       },
     } as GamestoreCode);

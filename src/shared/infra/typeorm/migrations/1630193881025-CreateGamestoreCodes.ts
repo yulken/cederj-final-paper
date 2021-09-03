@@ -1,10 +1,12 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export default class CreateLibrary1629911200210 implements MigrationInterface {
+export default class CreateGamestoreCodes1630193881025
+  implements MigrationInterface
+{
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'libraries',
+        name: 'gamestore_codes',
         columns: [
           {
             name: 'id',
@@ -16,15 +18,23 @@ export default class CreateLibrary1629911200210 implements MigrationInterface {
           {
             name: 'user_id',
             type: 'uuid',
-            isNullable: false,
+            isNullable: true,
           },
           {
-            name: 'game_id',
-            type: 'uuid',
-            isNullable: false,
+            name: 'is_redeemed',
+            type: 'boolean',
+            default: false,
           },
           {
-            name: 'last_played',
+            name: 'code',
+            type: 'varchar',
+          },
+          {
+            name: 'product',
+            type: 'json',
+          },
+          {
+            name: 'redeemed_at',
             type: 'timestamp',
             isNullable: true,
           },
@@ -48,20 +58,12 @@ export default class CreateLibrary1629911200210 implements MigrationInterface {
             onDelete: 'CASCADE',
             onUpdate: 'CASCADE',
           },
-          {
-            name: 'GameId',
-            referencedTableName: 'games',
-            referencedColumnNames: ['id'],
-            columnNames: ['game_id'],
-            onDelete: 'CASCADE',
-            onUpdate: 'CASCADE',
-          },
         ],
       }),
     );
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('libraries');
+    await queryRunner.dropTable('gamestore_codes');
   }
 }

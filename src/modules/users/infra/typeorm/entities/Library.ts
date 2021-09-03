@@ -18,9 +18,6 @@ export default class Library {
   game_id: string;
 
   @Column()
-  play_time: number;
-
-  @Column()
   last_played: Date;
 
   @CreateDateColumn()

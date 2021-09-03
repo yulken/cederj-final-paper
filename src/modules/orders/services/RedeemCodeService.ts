@@ -1,3 +1,4 @@
+import ILibrariesRepository from '@modules/users/repositories/ILibrariesRepository';
 import IUsersRepository from '@modules/users/repositories/IUsersRepository';
 import AppError from '@shared/errors/AppError';
 import { injectable, inject } from 'tsyringe';
@@ -14,30 +15,46 @@ interface IRequest {
 export default class RedeemCodeService {
   constructor(
     @inject('GamestoreCodesRepository')
-    private gameStoreCodesRepository: IGamestoreCodesRepository,
+    private gamestoreCodesRepository: IGamestoreCodesRepository,
 
     @inject('UsersRepository')
     private usersRepository: IUsersRepository,
+
+    @inject('LibrariesRepository')
+    private librariesRepository: ILibrariesRepository,
   ) {}
 
   public async execute({ code, user_id }: IRequest): Promise<GamestoreCode> {
-    const item = await this.gameStoreCodesRepository.findByCode(code);
+    console.log(code);
+    const item = await this.gamestoreCodesRepository.findByCode(code);
     if (!item) {
       throw new AppError('Code is invalid');
     }
     if (item.is_redeemed) {
       throw new AppError('Code already redeemed');
     }
-    if (!(await this.usersRepository.findById(user_id))) {
+    const user = await this.usersRepository.findById(user_id);
+    if (!user) {
       throw new AppError('User does not exist');
     }
     const now = Date.now();
+
     Object.assign(item, {
       user_id,
       redeemed_at: new Date(now),
       is_redeemed: true,
     });
 
-    return this.gameStoreCodesRepository.save(item);
+    if (item.product.game) {
+      this.librariesRepository.create({
+        user_id,
+        game_id: item.product.game,
+      });
+    }
+
+    if (item.product.cash) {
+      this.usersRepository.addToBalance(user, item.product.cash);
+    }
+    return this.gamestoreCodesRepository.save(item);
   }
 }

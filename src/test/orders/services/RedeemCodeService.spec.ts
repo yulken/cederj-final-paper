@@ -8,7 +8,7 @@ let fakeGamestoreCodesRepository: FakeGamestoreCodesRepository;
 let fakeUsersRepository: FakeUsersRepository;
 let createCashCodeService: RedeemCodeService;
 
-describe('CreateGamestoreCode', () => {
+describe('RedeemCode', () => {
   beforeEach(() => {
     fakeUsersRepository = new FakeUsersRepository();
     fakeGamestoreCodesRepository = new FakeGamestoreCodesRepository();
@@ -21,7 +21,7 @@ describe('CreateGamestoreCode', () => {
     await fakeGamestoreCodesRepository.create({
       id: 'code_id',
       code: 'aaaaa',
-      json: {
+      product: {
         game: 'Amazing game',
       },
       is_redeemed: false,
@@ -39,7 +39,7 @@ describe('CreateGamestoreCode', () => {
       user_id: user.id,
     });
 
-    expect(gameCode.json).toEqual({ game: 'Amazing game' });
+    expect(gameCode.product).toEqual({ game: 'Amazing game' });
   });
   it('should not be able to redeem an invalid code', async () => {
     await expect(
@@ -53,7 +53,7 @@ describe('CreateGamestoreCode', () => {
     await fakeGamestoreCodesRepository.create({
       id: 'code_id',
       code: 'aaaaa',
-      json: {
+      product: {
         game: 'Amazing game',
       },
       is_redeemed: false,
@@ -70,7 +70,7 @@ describe('CreateGamestoreCode', () => {
     await fakeGamestoreCodesRepository.create({
       id: 'code_id',
       code: 'aaaaa',
-      json: {
+      product: {
         game: 'Amazing game',
       },
       is_redeemed: false,

@@ -7,12 +7,9 @@ import {
   Generated,
 } from 'typeorm';
 
-export interface ICashRedeem {
-  cash: number;
-}
-
-export interface IGameRedeem {
-  game: string;
+export interface IProduct {
+  cash?: number;
+  game?: string;
 }
 
 @Entity('gamestore_codes')
@@ -24,8 +21,8 @@ export default class GamestoreCode {
   @Generated('uuid')
   code: string;
 
-  @Column()
-  json: ICashRedeem | IGameRedeem;
+  @Column({ type: 'json' })
+  product: IProduct;
 
   @Column()
   is_redeemed: boolean;

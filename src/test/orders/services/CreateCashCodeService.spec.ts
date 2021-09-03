@@ -4,7 +4,7 @@ import FakeGamestoreCodesRepository from '../fakes/repositories/FakeGamestoreCod
 let fakeGamestoreCodesRepository: FakeGamestoreCodesRepository;
 let createCashCodeService: CreateCashCodeService;
 
-describe('CreateGamestoreCode', () => {
+describe('CreateCashCode', () => {
   beforeEach(() => {
     fakeGamestoreCodesRepository = new FakeGamestoreCodesRepository();
     createCashCodeService = new CreateCashCodeService(
@@ -16,6 +16,6 @@ describe('CreateGamestoreCode', () => {
       cash: 100,
     });
 
-    expect(gameCode.json).toEqual({ cash: 100 });
+    expect(gameCode.product).toEqual({ cash: 100 });
   });
 });

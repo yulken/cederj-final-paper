@@ -1,17 +1,11 @@
-interface ICashRedeem {
-  cash: number;
-}
-
-interface IGameRedeem {
-  game: string;
-}
+import { IProduct } from '../infra/typeorm/entities/GamestoreCode';
 
 export default interface ICreateGamestoreCodeDTO {
   id: string;
 
   code: string;
 
-  json: ICashRedeem | IGameRedeem;
+  product: IProduct;
 
   is_redeemed: boolean;
 

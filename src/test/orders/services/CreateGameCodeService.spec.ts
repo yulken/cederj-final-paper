@@ -7,7 +7,7 @@ let fakeGamestoreCodesRepository: FakeGamestoreCodesRepository;
 let fakeGamesRepository: FakeGamesRepository;
 let createGamestoreCode: CreateGameCodeService;
 
-describe('CreateGamestoreCode', () => {
+describe('CreateGameCode', () => {
   beforeEach(() => {
     fakeGamestoreCodesRepository = new FakeGamestoreCodesRepository();
     fakeGamesRepository = new FakeGamesRepository();
@@ -28,7 +28,7 @@ describe('CreateGamestoreCode', () => {
       game_id: game.id,
     });
 
-    expect(gameCode.json).toEqual({ game: game.id });
+    expect(gameCode.product).toEqual({ game: game.id });
   });
   it('should not be create a new order when game does not exist', async () => {
     await expect(

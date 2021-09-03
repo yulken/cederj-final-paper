@@ -22,6 +22,9 @@ export default class User {
   @Column()
   nickname: string;
 
+  @Column()
+  balance: number;
+
   @Exclude()
   @Column()
   password: string;

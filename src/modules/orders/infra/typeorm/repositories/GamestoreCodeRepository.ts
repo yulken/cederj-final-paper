@@ -15,7 +15,7 @@ class GamestoreCodesRepository implements IGamestoreCodesRepository {
   }
 
   public async findByCode(code: string): Promise<GamestoreCode | undefined> {
-    return this.ormRepository.findOne(code);
+    return this.ormRepository.findOne({ where: { code } });
   }
 
   public async create(data: ICreateGamestoreCodeDTO): Promise<GamestoreCode> {

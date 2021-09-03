@@ -38,6 +38,18 @@ class UsersRepository implements IUsersRepository {
   public async save(user: User): Promise<User> {
     return this.ormRepository.save(user);
   }
+
+  public async addToBalance(user: User, value: number): Promise<void> {
+    const newBalance = Number(user.balance) + Number(value);
+    Object.assign(user, { balance: newBalance });
+    await this.ormRepository.save(user);
+  }
+
+  public async removeFromBalance(user: User, value: number): Promise<void> {
+    const newBalance = Number(user.balance) - Number(value);
+    Object.assign(user, { balance: newBalance });
+    await this.ormRepository.save(user);
+  }
 }
 
 export default UsersRepository;
