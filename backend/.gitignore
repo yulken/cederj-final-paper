@@ -1,4 +1,7 @@
+node_modules
 .vscode
+.env
+coverage
 /docs/latex/**/*.*
 !/docs/latex/**/*.txt
 !/docs/latex/**/*.tex
