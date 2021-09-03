@@ -7,3 +7,6 @@ coverage
 !/docs/latex/**/*.tex
 !/docs/latex/**/*.bib
 !/docs/latex/**/*.bst
+/docs/**/*.*
+!/docs/**/*.txt
+!/docs/**/*.tex
