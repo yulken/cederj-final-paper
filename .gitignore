@@ -6,4 +6,5 @@
 !/docs/latex/**/*.bst
 /docs/**/*.*
 !/docs/**/*.txt
+!/docs/**/*.jpg
 !/docs/**/*.tex

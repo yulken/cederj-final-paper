@@ -1,3 +1,10 @@
+\newcounter{chapter}
+\setcounter{chapter}{0}
+\newcounter{secao}
+\setcounter{secao}{0}
+\newcounter{subsecao}
+\setcounter{subsecao}{0}
+
 \newenvironment{resumo}[1]
 {
     \clearpage
@@ -14,6 +21,8 @@
 % \let\oldchapter\chapter
 % \renewcommand{\chapter}[1]{\oldchapter{\thechapter \hspace{3mm} \MakeUppercase{#1}}}
 \newenvironment{capitulo}[1]{
+    \addtocounter{chapter}{1}
+    \setcounter{secao}{0}
     \clearpage
     \phantomsection
     \addcontentsline{toc}{subsection}{\thechapter \hspace{5mm}#1}
@@ -28,9 +37,41 @@
 
     \thispagestyle{chapter}
     \normalfont\normalsize
-    \addtocounter{chapter}{1}
 }{}
 
+\newenvironment{secao}[1]{
+    \addtocounter{secao}{1}
+    \phantomsection
+    \addcontentsline{toc}{subsection}{\thechapter.\thesecao \hspace{5mm}#1}
+    % \chapter
+    \pagestyle{chapter}
+    
+    \begin{flushleft}
+        \vspace*{1cm}
+        \large\bf{\MakeUppercase{{\thechapter.\thesecao \hspace{5mm}#1}}}
+        \vspace{2cm}
+    \end{flushleft}
+
+    \thispagestyle{chapter}
+    \normalfont\normalsize
+}{}
+
+\newenvironment{subsecao}[1]{
+    \addtocounter{subsecao}{1}
+    \phantomsection
+    \addcontentsline{toc}{subsection}{\thechapter.\thesecao.\thesubsecao \hspace{5mm}#1}
+    % \chapter
+    \pagestyle{chapter}
+    
+    \begin{flushleft}
+        \vspace*{1cm}
+        \large\bf{\MakeUppercase{{\thechapter.\thesecao.\thesubsecao \hspace{5mm}#1}}}
+        \vspace{2cm}
+    \end{flushleft}
+
+    \thispagestyle{chapter}
+    \normalfont\normalsize
+}{}
 
 \newcommand{\paragrafo}[1]{
     \setlength{\parindent}{2cm}

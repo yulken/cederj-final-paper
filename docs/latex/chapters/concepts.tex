@@ -1,28 +1,114 @@
-\begin{capitulo}{Capitulo 2} \label{cap:cap2}
+\begin{capitulo}{Conceitos} \label{cap:concepts}
 
 
-\paragrafo{Para se desenvolver uma aplicação empresarial de forma ágil, atualmente, é necessário que haja pelo menos mais de um desenvolvedor atuando no projeto e, muito provavelmente, equipes de desenvolvimento totalmente focadas em características únicas do software a ser desenvolvido. Durante esse processo de desenvolvimento, a tendência é que o próprio software sofra alterações a nível conceitual (por exemplo, um fluxo alternativo a fim de atender uma parceria nova ou a implementação do Pix como uma nova forma de pagamento) ou alterações a nível de infraestrutura (por exemplo, a migração de um servidor local para computação em nuvem ou a troca de um framework HTTP).}
+\paragrafo{Este capítulo tem como objetivo apresentar os conceitos provenientes dos livros e que serão utilizados na aplicação Web deste trabalho. }
 
-\paragrafo{Em sistemas que já estão em produção e que, consequentemente, possuem uma base robusta de clientes, alterações estruturais desse tipo podem acarretar riscos para toda a aplicação. Por exemplo, o prazo requerido para a implementação de um fluxo alternativo pode ser muito menor que o tempo necessário, o que pode fazer com que a qualidade do código entregado seja reduzida ou que novos bugs sejam introduzidos à aplicação. Ou talvez, caso um framework deixe de atender as necessidades da aplicação, será necessário reconstruir boa parte do software praticamente do zero.}
+\begin{secao}{Clean Architecture} \label{sec:carch}
 
-\paragrafo{Ou seja, mais do que entregar um programa, hoje em dia também é importante que este seja de fácil manutenção. Por conta disso, diferentes princípios de arquitetura e padrões de design foram criados ao longo do tempo para suprir a demanda por agilidade do processo de desenvolvimento (por exemplo, \emph{Clean} Architecture, \emph{Design Patterns}, SOLID, DRY, DDD, TDD, entre outros).}
+\paragrafo{O livro Arquitetura Limpa, de Robert C. Martin, aborda vários conceitos importantíssimos referentes a arquitetura e facilidade de manutenção de sistemas. Neste trabalho será descrito apenas o que foi de fato implementado no sistema, sendo assim, os Princípios de Design (SOLID) e o próprio conceito de Arquitetura Limpa }
 
-\paragrafo{Por outro lado, a adoção de algumas práticas sem moderação pode ocasionar em um nível de esforço e complexidade de código adicional. Sendo assim apesar de ajudar na manutenção, pode atrapalhar a legibilidade e requisitar um conhecimento técnico mais avançado para compreender estruturas de código que, embora estejam preparadas para tal evento, talvez nunca sofram as drásticas alterações que motivaram a dita complexidade em primeiro lugar. Apoiando essa perspectiva, temos os principios KISS e YAGNI.}
+\begin{subsecao}{Arquitetura} \label{subsec:arquitetura}
+  \paragrafo{Segundo Robert C. Martin, "Todo sistema de software fornece dois valores diferentes para os stakeholders: comportamento e estrutura. Desenvolvedores de software são responsáveis por garantir que ambos esses valores permaneçam altos."}
+  \paragrafo{O comportamento se trata da própria funcionalidade do sistema, ou seja, como o sistema se comporta de forma a economizar ou gerar dinheiro para os stakeholders. Se esse sistema para de funcionar ou necessita de uma manutenção, o desenvolvedor cria mais código a fim de tratar os problemas levantados.}
+  \paragrafo{A estrutura, ou como iremos tratar nesse trabalho, a Arquitetura, se trata da forma que essas funcionalidades são desenvolvidas e o quão fácil é mudar esse sistema. Assim, quando os stakeholders decidem mudar o curso do projeto, a implementação dessa mudança não deveria ser mais díficil de ser realizada do que o próprio escopo da mudança.}
+  \paragrafo{O problema principal que o autor levanta ao escrever o livro se trata de tanto desenvolvedores quanto gerentes de negócio priorizarem massivamente o primeiro, ignorando parcial ou totalmente o segundo valor que o software tem a oferecer. O autor argumenta, analisando as situações extremas:}
+  
+  \begin{itemize}[label=\raisebox{0.25ex}{\normalsize$\bullet$}]
+    \vspace{-0.3cm}
+    \setlength{\itemindent}{2cm}
+    \item \hspace{0.1cm} "Se você me der um programa que funcione perfeitamente, mas seja impossível de mudar, então ele não funcionará quando as exigências mudarem e eu não serei capaz de fazê-lo funcionar. Portanto, o programa será inútil."
+    \item \hspace{0.1cm} "Se você me der um programa que não funcione, mas seja fácil de mudar, então eu posso fazê-lo funcionar, e posso mantê-lo funcionando à medida que as exigências mudarem. Portanto, o programa permanecerá continuamente útil."
+    \vspace{0.6cm}
+  \end{itemize}
 
-\paragrafo{Por isso, este projeto tem como objetivo aplicar e explicitar, na prática, implementações de \emph{Clean Architecture} e \emph{Design Patterns} em uma aplicação web. Ao longo deste trabalho serão expostos os desafios e benefícios de aplicar tais técnicas no desenvolvimento de uma loja virtual de jogos eletrônicos, como a Steam ou a Epic Games.}
+  \paragrafo{Concluindo este tema, o objetivo de termos uma boa arquitetura de software pode ser descrito, conforme diz o próprio autor, de forma utópica, da seguinte forma: "O objetivo da arquitetura de software é minimizar os recursos humanos necessários para construir e manter um determinado sistema."}
 
-\paragrafo{A loja será desenvolvida usando as seguintes tecnologias:}
+\end{subsecao}
 
-\paragrafo{O segundo capítulo é dedicado a apresentar os conceitos de \emph{Clean Architecture} e \emph{Design Patterns} e exemplificar como essas técnicas podem ajudar a mitigar os riscos apontados no início dessa introdução. Para isso será utilizado como referência as obras nas quais essas ideias foram publicadas pela primeira vez [1][2].}
+\begin{subsecao}{SOLID} \label{subsec:solid}
+  \paragrafo{Os princípios SOLID, em resumo, se tratam de regras de organização de funções e estruturas de dados em agrupamentos. O principal objetivo de sua aplicação está em criar software que seja de fácil entendimento, manutenção e reaproveitamento.}
+  \paragrafo{Também proposto por Robert C. Martin, SOLID é um acrônimo para outras siglas:}
+  \begin{itemize}[label=\raisebox{0.25ex}{\normalsize$\bullet$}]
+    \vspace{-0.3cm}
+    \setlength{\itemindent}{2cm}
+    \item \hspace{0.1cm} Princípio da Responsabilidade Única (\emph{Single Responsiblity Principle})
+    \item \hspace{0.1cm} Princípio do Aberto/Fechado (\emph{Open-Closed Principle})
+    \item \hspace{0.1cm} Princípio de Substituição de Liskov (\emph{Liskov Substitution Principle})
+    \item \hspace{0.1cm} Princípio da Segregação de Interface (\emph{Interface Segregation Principle})
+    \item \hspace{0.1cm} Princípio da Inversão de Dependência (\emph{Dependency Inversion Principle})
+    \vspace{0.6cm}
+  \end{itemize}
+  \paragrafo{Definindo os príncipios, bem resumidamente, teríamos:}
+  \begin{itemize}[label=\raisebox{0.25ex}{\normalsize$\bullet$}]
+    \vspace{-0.3cm}
+    \setlength{\itemindent}{2cm}
+    \item \hspace{0.1cm} \acs{SRP} - Cada módulo de software deve ser estruturado de forma que haja uma, e apenas uma, razão para mudar.
+    \item \hspace{0.1cm} \acs{OCP} - Para que o software seja fácil de mudar, deve ser projetado para garantir que o mesmo está aberto à adição, mas fechado para alteração.
+    \item \hspace{0.1cm} \acs{LSP} - Criando um sistema a partir de partes trocáveis entre si, estas partes devem firmar um contrato que permita que uma seja substituída pela outra.
+    \item \hspace{0.1cm} \acs{ISP} - Deve-se evitar que o software dependa de métodos que não usa.
+    \item \hspace{0.1cm} \acs{DIP} - Código de nível mais alto (Próximo às regras de negócio) não deve depender de código de nível mais baixo (detalhes de implementação, \emph{frameworks}, banco de dados).
+    \vspace{0.6cm}
+  \end{itemize}
+  \paragrafo{Os exemplos da implementação desses princípios serão fornecidos posteriormente neste mesmo trabalho, no Capítulo 4.}
+\end{subsecao}
 
-\paragrafo{O terceiro capítulo terá como foco descrever com mais profundidade as tecnologias que serão implementadas no desenvolvimento do software e o que motivou a escolha das mesmas. Além disso, também será introduzida a proposta da loja de jogos eletrônicos, assim como seus requisitos, regras de negócio, diagramas UML e toda a documentação produzida para o propósito desse trabalho.}
+\begin{subsecao}{Arquitetura Limpa} \label{subsec:carch}
+\paragrafo{Robert C. Martin menciona que nas últimas décadas foram propostas várias ideias relacionadas à arquitetura de sistemas. O autor relata que embora as arquiteturas variem entre si à nível de detalhes, elas ainda são muito similares frente à seus objetivos principais: A Separação de Preocupações.}
+\paragrafo{A Separação de preocupações (\emph{Separation of Concerns}) consistiria em dividir, em níveis, todo o código desenvolvido. Sendo assim, as arquiteturas tem módulos de lógica de negócios testáveis, independentes de frameworks, UI, banco de dados ou qualquer agência externa.}
+\paragrafo{Em resumo, as características citadas acima podem definir uma arquitetura limpa.}
+\end{subsecao}
+\end{secao}
 
-\paragrafo{O capítulo 4 relacionará o conteúdo dos capítulos anteriores, expondo, no código-fonte, todas as práticas que foram possíveis de implementar dentro do escopo da loja virtual com as tecnologias apresentadas. Além disso, também será simulado alguns dos problemas exemplificados no início desse capítulo e como a adoção das práticas do tema deste trabalho ajudaram a superar os ditos problemas.}
+\begin{secao}{Design Patterns} \label{sec:patterns}
 
-\paragrafo{Por fim, o quinto capítulo trará as conclusões obtidas ao longo do processo de desenvolvimento do trabalho assim como descreverá possíveis trabalhos futuros de acordo com a conclusão obtida.}
+  \paragrafo{Como alguns princípios vistos na seção de Clean Architecture, os Design Patterns tem como principal função garantir a reusabilidade do código com baixo acoplamento. De fato, a proposta principal do livro está em ser um catálogo de soluções para problemas de sistemas orientados a objetos.}
+  \paragrafo{No total,são 23 padrões de projetos diferentes, subdividos em 3 tipos: Padrões de Criação, Padrões Comportamentais e Padrões Estruturais:}
+  
+  \paragrafo{Padrões de Criação}
+  \begin{itemize}[label=\raisebox{0.25ex}{\normalsize$\bullet$}]
+    \vspace{-0.3cm}
+    \setlength{\itemindent}{2cm}
+    \item \hspace{0.1cm} Abstract Factory
+    \item \hspace{0.1cm} Builder
+    \item \hspace{0.1cm} Factory Method
+    \item \hspace{0.1cm} Prototype
+    \item \hspace{0.1cm} Singleton
+    \vspace{0.6cm}
+  \end{itemize}
 
-\paragrafo{Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore blanditiis magnam aliquid tenetur illo, id fuga beatae, ab accusamus iure, ipsam nam ipsa totam. Distinctio reiciendis quod labore optio esse!Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore blanditiis magnam aliquid tenetur illo, id fuga beatae, ab accusamus iure, ipsam nam ipsa totam. Distinctio reiciendis quod labore optio esse!Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore blanditiis magnam aliquid tenetur illo, id fuga beatae, ab accusamus iure, ipsam nam ipsa totam. Distinctio reiciendis quod labore optio esse!Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore blanditiis magnam aliquid tenetur illo, id fuga beatae, ab accusamus iure, ipsam nam ipsa totam. Distinctio reiciendis quod labore optio esse!Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore blanditiis magnam aliquid tenetur illo, id fuga beatae, ab accusamus iure, ipsam nam ipsa totam. Distinctio reiciendis quod labore optio esse!Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore blanditiis magnam aliquid tenetur illo, id fuga beatae, ab accusamus iure, ipsam nam ipsa totam. Distinctio reiciendis quod labore optio esse!Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore blanditiis magnam aliquid tenetur illo, id fuga beatae, ab accusamus iure, ipsam nam ipsa totam. Distinctio reiciendis quod labore optio esse!Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore blanditiis magnam aliquid tenetur illo, id fuga beatae, ab accusamus iure, ipsam nam ipsa totam. Distinctio reiciendis quod labore optio esse!Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore blanditiis magnam aliquid tenetur illo, id fuga beatae, ab accusamus iure, ipsam nam ipsa totam. Distinctio reiciendis quod labore optio esse!Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore blanditiis magnam aliquid tenetur illo, id fuga beatae, ab accusamus iure, ipsam nam ipsa totam. Distinctio reiciendis quod labore optio esse!Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore blanditiis magnam aliquid tenetur illo, id fuga beatae, ab accusamus iure, ipsam nam ipsa totam. Distinctio reiciendis quod labore optio esse!Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore blanditiis magnam aliquid tenetur illo, id fuga beatae, ab accusamus iure, ipsam nam ipsa totam. Distinctio reiciendis quod labore optio esse!Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore blanditiis magnam aliquid tenetur illo, id fuga beatae, ab accusamus iure, ipsam nam ipsa totam. Distinctio reiciendis quod labore optio esse!Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore blanditiis magnam aliquid tenetur illo, id fuga beatae, ab accusamus iure, ipsam nam ipsa totam. Distinctio reiciendis quod labore optio esse!Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore blanditiis magnam aliquid tenetur illo, id fuga beatae, ab accusamus iure, ipsam nam ipsa totam. Distinctio reiciendis quod labore optio esse!Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore blanditiis magnam aliquid tenetur illo, id fuga beatae, ab accusamus iure, ipsam nam ipsa totam. Distinctio reiciendis quod labore optio esse!Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore blanditiis magnam aliquid tenetur illo, id fuga beatae, ab accusamus iure, ipsam nam ipsa totam. Distinctio reiciendis quod labore optio esse!Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore blanditiis magnam aliquid tenetur illo, id fuga beatae, ab accusamus iure, ipsam nam ipsa totam. Distinctio reiciendis quod labore optio esse!Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore blanditiis magnam aliquid tenetur illo, id fuga beatae, ab accusamus iure, ipsam nam ipsa totam. Distinctio reiciendis quod labore optio esse!Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore blanditiis magnam aliquid tenetur illo, id fuga beatae, ab accusamus iure, ipsam nam ipsa totam. Distinctio reiciendis quod labore optio esse!Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore blanditiis magnam aliquid tenetur illo, id fuga beatae, ab accusamus iure, ipsam nam ipsa totam. Distinctio reiciendis quod labore optio esse!Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore blanditiis magnam aliquid tenetur illo, id fuga beatae, ab accusamus iure, ipsam nam ipsa totam. Distinctio reiciendis quod labore optio esse!Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore blanditiis magnam aliquid tenetur illo, id fuga beatae, ab accusamus iure, ipsam nam ipsa totam. Distinctio reiciendis quod labore optio esse!Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore blanditiis magnam aliquid tenetur illo, id fuga beatae, ab accusamus iure, ipsam nam ipsa totam. Distinctio reiciendis quod labore optio esse!Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore blanditiis magnam aliquid tenetur illo, id fuga beatae, ab accusamus iure, ipsam nam ipsa totam. Distinctio reiciendis quod labore optio esse!Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore blanditiis magnam aliquid tenetur illo, id fuga beatae, ab accusamus iure, ipsam nam ipsa totam. Distinctio reiciendis quod labore optio esse!Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore blanditiis magnam aliquid tenetur illo, id fuga beatae, ab accusamus iure, ipsam nam ipsa totam. Distinctio reiciendis quod labore optio esse!Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore blanditiis magnam aliquid tenetur illo, id fuga beatae, ab accusamus iure, ipsam nam ipsa totam. Distinctio reiciendis quod labore optio esse!Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore blanditiis magnam aliquid tenetur illo, id fuga beatae, ab accusamus iure, ipsam nam ipsa totam. Distinctio reiciendis quod labore optio esse!Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore blanditiis magnam aliquid tenetur illo, id fuga beatae, ab accusamus iure, ipsam nam ipsa totam. Distinctio reiciendis quod labore optio esse!Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore blanditiis magnam aliquid tenetur illo, id fuga beatae, ab accusamus iure, ipsam nam ipsa totam. Distinctio reiciendis quod labore optio esse!Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore blanditiis magnam aliquid tenetur illo, id fuga beatae, ab accusamus iure, ipsam nam ipsa totam. Distinctio reiciendis quod labore optio esse!Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore blanditiis magnam aliquid tenetur illo, id fuga beatae, ab accusamus iure, ipsam nam ipsa totam. Distinctio reiciendis quod labore optio esse!Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore blanditiis magnam aliquid tenetur illo, id fuga beatae, ab accusamus iure, ipsam nam ipsa totam. Distinctio reiciendis quod labore optio esse!Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore blanditiis magnam aliquid tenetur illo, id fuga beatae, ab accusamus iure, ipsam nam ipsa totam. Distinctio reiciendis quod labore optio esse!Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore blanditiis magnam aliquid tenetur illo, id fuga beatae, ab accusamus iure, ipsam nam ipsa totam. Distinctio reiciendis quod labore optio esse!Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore blanditiis magnam aliquid tenetur illo, id fuga beatae, ab accusamus iure, ipsam nam ipsa totam. Distinctio reiciendis quod labore optio esse!Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore blanditiis magnam aliquid tenetur illo, id fuga beatae, ab accusamus iure, ipsam nam ipsa totam. Distinctio reiciendis quod labore optio esse!Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore blanditiis magnam aliquid tenetur illo, id fuga beatae, ab accusamus iure, ipsam nam ipsa totam. Distinctio reiciendis quod labore optio esse!Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore blanditiis magnam aliquid tenetur illo, id fuga beatae, ab accusamus iure, ipsam nam ipsa totam. Distinctio reiciendis quod labore optio esse!Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore blanditiis magnam aliquid tenetur illo, id fuga beatae, ab accusamus iure, ipsam nam ipsa totam. Distinctio reiciendis quod labore optio esse!Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore blanditiis magnam aliquid tenetur illo, id fuga beatae, ab accusamus iure, ipsam nam ipsa totam. Distinctio reiciendis quod labore optio esse!Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore blanditiis magnam aliquid tenetur illo, id fuga beatae, ab accusamus iure, ipsam nam ipsa totam. Distinctio reiciendis quod labore optio esse!Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore blanditiis magnam aliquid tenetur illo, id fuga beatae, ab accusamus iure, ipsam nam ipsa totam. Distinctio reiciendis quod labore optio esse!Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore blanditiis magnam aliquid tenetur illo, id fuga beatae, ab accusamus iure, ipsam nam ipsa totam. Distinctio reiciendis quod labore optio esse!Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore blanditiis magnam aliquid tenetur illo, id fuga beatae, ab accusamus iure, ipsam nam ipsa totam. Distinctio reiciendis quod labore optio esse!Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore blanditiis magnam aliquid tenetur illo, id fuga beatae, ab accusamus iure, ipsam nam ipsa totam. Distinctio reiciendis quod labore optio esse!Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore blanditiis magnam aliquid tenetur illo, id fuga beatae, ab accusamus iure, ipsam nam ipsa totam. Distinctio reiciendis quod labore optio esse!Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore blanditiis magnam aliquid tenetur illo, id fuga beatae, ab accusamus iure, ipsam nam ipsa totam. Distinctio reiciendis quod labore optio esse!Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore blanditiis magnam aliquid tenetur illo, id fuga beatae, ab accusamus iure, ipsam nam ipsa totam. Distinctio reiciendis quod labore optio esse!Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore blanditiis magnam aliquid tenetur illo, id fuga beatae, ab accusamus iure, ipsam nam ipsa totam. Distinctio reiciendis quod labore optio esse!Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore blanditiis magnam aliquid tenetur illo, id fuga beatae, ab accusamus iure, ipsam nam ipsa totam. Distinctio reiciendis quod labore optio esse!Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore blanditiis magnam aliquid tenetur illo, id fuga beatae, ab accusamus iure, ipsam nam ipsa totam. Distinctio reiciendis quod labore optio esse!Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore blanditiis magnam aliquid tenetur illo, id fuga beatae, ab accusamus iure, ipsam nam ipsa totam. Distinctio reiciendis quod labore optio esse!Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore blanditiis magnam aliquid tenetur illo, id fuga beatae, ab accusamus iure, ipsam nam ipsa totam. Distinctio reiciendis quod labore optio esse!Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore blanditiis magnam aliquid tenetur illo, id fuga beatae, ab accusamus iure, ipsam nam ipsa totam. Distinctio reiciendis quod labore optio esse!Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore blanditiis magnam aliquid tenetur illo, id fuga beatae, ab accusamus iure, ipsam nam ipsa totam. Distinctio reiciendis quod labore optio esse!Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore blanditiis magnam aliquid tenetur illo, id fuga beatae, ab accusamus iure, ipsam nam ipsa totam. Distinctio reiciendis quod labore optio esse!Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore blanditiis magnam aliquid tenetur illo, id fuga beatae, ab accusamus iure, ipsam nam ipsa totam. Distinctio reiciendis quod labore optio esse!Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore blanditiis magnam aliquid tenetur illo, id fuga beatae, ab accusamus iure, ipsam nam ipsa totam. Distinctio reiciendis quod labore optio esse!Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore blanditiis magnam aliquid tenetur illo, id fuga beatae, ab accusamus iure, ipsam nam ipsa totam. Distinctio reiciendis quod labore optio esse!Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore blanditiis magnam aliquid tenetur illo, id fuga beatae, ab accusamus iure, ipsam nam ipsa totam. Distinctio reiciendis quod labore optio esse!}
-% \section{Desenvolvimento}\label{sec:desenv}
+  \paragrafo{Padrões Estruturais}
+  \begin{itemize}[label=\raisebox{0.25ex}{\normalsize$\bullet$}]
+    \vspace{-0.3cm}
+    \setlength{\itemindent}{2cm}
+    \item \hspace{0.1cm} Adapter
+    \item \hspace{0.1cm} Bridge
+    \item \hspace{0.1cm} Composite
+    \item \hspace{0.1cm} Decorator
+    \item \hspace{0.1cm} Facade
+    \item \hspace{0.1cm} Flyweight
+    \item \hspace{0.1cm} Proxy
+    \vspace{0.6cm}
+  \end{itemize}
+  
+  \paragrafo{Padrões Comportamentais}
+  \begin{itemize}[label=\raisebox{0.25ex}{\normalsize$\bullet$}]
+    \vspace{-0.3cm}
+    \setlength{\itemindent}{2cm}
+    \item \hspace{0.1cm} Chain of Responsiblity
+    \item \hspace{0.1cm} Command
+    \item \hspace{0.1cm} Interpreter
+    \item \hspace{0.1cm} Iterator
+    \item \hspace{0.1cm} Mediator
+    \item \hspace{0.1cm} Memento
+    \item \hspace{0.1cm} Observer
+    \item \hspace{0.1cm} State
+    \item \hspace{0.1cm} Strategy
+    \item \hspace{0.1cm} Template Method
+    \item \hspace{0.1cm} Visitor
+    \vspace{0.6cm}
+  \end{itemize}
+  
+  \paragrafo{Não faz parte da proposta desse trabalho usar cada um dos padrões supracitados. A proposta está em identificar as oportunidades de aplicação durante as etapas de desenvolvimento. Como o sistema, até o atual momento, não está pronto, será necessário revisitar esse capítulo posteriormente listando e explicando cada padrão usado na aplicação web.}
+\end{secao}
 
-% \tab Conforme explicado na Seção\ref{sec:desenv}, nesta segunda seção será descrito o desenvolvimento.
 \end{capitulo}
