@@ -8,47 +8,41 @@
 \paragrafo{O livro Arquitetura Limpa, de Robert C. Martin, aborda vários conceitos importantíssimos referentes a arquitetura e facilidade de manutenção de sistemas. Neste trabalho será descrito apenas o que foi de fato implementado no sistema, sendo assim, os Princípios de Design (SOLID) e o próprio conceito de Arquitetura Limpa }
 
 \begin{subsecao}{Arquitetura} \label{subsec:arquitetura}
-  \paragrafo{Segundo Robert C. Martin, "Todo sistema de software fornece dois valores diferentes para os stakeholders: comportamento e estrutura. Desenvolvedores de software são responsáveis por garantir que ambos esses valores permaneçam altos."}
+  \paragrafo{Segundo Robert C. Martin, "Todo sistema de software fornece dois valores diferentes para os stakeholders: comportamento e estrutura. Desenvolvedores de software são responsáveis por garantir que ambos esses valores permaneçam altos". \cite[p.14]{clean_arch}}
   \paragrafo{O comportamento se trata da própria funcionalidade do sistema, ou seja, como o sistema se comporta de forma a economizar ou gerar dinheiro para os stakeholders. Se esse sistema para de funcionar ou necessita de uma manutenção, o desenvolvedor cria mais código a fim de tratar os problemas levantados.}
   \paragrafo{A estrutura, ou como iremos tratar nesse trabalho, a Arquitetura, se trata da forma que essas funcionalidades são desenvolvidas e o quão fácil é mudar esse sistema. Assim, quando os stakeholders decidem mudar o curso do projeto, a implementação dessa mudança não deveria ser mais díficil de ser realizada do que o próprio escopo da mudança.}
   \paragrafo{O problema principal que o autor levanta ao escrever o livro se trata de tanto desenvolvedores quanto gerentes de negócio priorizarem massivamente o primeiro, ignorando parcial ou totalmente o segundo valor que o software tem a oferecer. O autor argumenta, analisando as situações extremas:}
   
-  \begin{itemize}[label=\raisebox{0.25ex}{\normalsize$\bullet$}]
-    \vspace{-0.3cm}
-    \setlength{\itemindent}{2cm}
-    \item \hspace{0.1cm} "Se você me der um programa que funcione perfeitamente, mas seja impossível de mudar, então ele não funcionará quando as exigências mudarem e eu não serei capaz de fazê-lo funcionar. Portanto, o programa será inútil."
-    \item \hspace{0.1cm} "Se você me der um programa que não funcione, mas seja fácil de mudar, então eu posso fazê-lo funcionar, e posso mantê-lo funcionando à medida que as exigências mudarem. Portanto, o programa permanecerá continuamente útil."
+  \begin{lista}
+   \itemlista{"Se você me der um programa que funcione perfeitamente, mas seja impossível de mudar, então ele não funcionará quando as exigências mudarem e eu não serei capaz de fazê-lo funcionar. Portanto, o programa será inútil".}
+   \itemlista{"Se você me der um programa que não funcione, mas seja fácil de mudar, então eu posso fazê-lo funcionar, e posso mantê-lo funcionando à medida que as exigências mudarem. Portanto, o programa permanecerá continuamente útil".}\cite[p.16]{clean_arch}
     \vspace{0.6cm}
-  \end{itemize}
+  \end{lista}
 
-  \paragrafo{Concluindo este tema, o objetivo de termos uma boa arquitetura de software pode ser descrito, conforme diz o próprio autor, de forma utópica, da seguinte forma: "O objetivo da arquitetura de software é minimizar os recursos humanos necessários para construir e manter um determinado sistema."}
+  \paragrafo{Concluindo este tema, o objetivo de termos uma boa arquitetura de software pode ser descrito, conforme diz o próprio autor, de forma utópica, da seguinte forma: "O objetivo da arquitetura de software é minimizar os recursos humanos necessários para construir e manter um determinado sistema". \cite[p.5]{clean_arch}}
 
 \end{subsecao}
 
 \begin{subsecao}{SOLID} \label{subsec:solid}
   \paragrafo{Os princípios SOLID, em resumo, se tratam de regras de organização de funções e estruturas de dados em agrupamentos. O principal objetivo de sua aplicação está em criar software que seja de fácil entendimento, manutenção e reaproveitamento.}
   \paragrafo{Também proposto por Robert C. Martin, SOLID é um acrônimo para outras siglas:}
-  \begin{itemize}[label=\raisebox{0.25ex}{\normalsize$\bullet$}]
-    \vspace{-0.3cm}
-    \setlength{\itemindent}{2cm}
-    \item \hspace{0.1cm} Princípio da Responsabilidade Única (\emph{Single Responsiblity Principle})
-    \item \hspace{0.1cm} Princípio do Aberto/Fechado (\emph{Open-Closed Principle})
-    \item \hspace{0.1cm} Princípio de Substituição de Liskov (\emph{Liskov Substitution Principle})
-    \item \hspace{0.1cm} Princípio da Segregação de Interface (\emph{Interface Segregation Principle})
-    \item \hspace{0.1cm} Princípio da Inversão de Dependência (\emph{Dependency Inversion Principle})
+  \begin{lista}
+   \itemlista{Princípio da Responsabilidade Única (\emph{Single Responsiblity Principle})}
+   \itemlista{Princípio do Aberto/Fechado (\emph{Open-Closed Principle})}
+   \itemlista{Princípio de Substituição de Liskov (\emph{Liskov Substitution Principle})}
+   \itemlista{Princípio da Segregação de Interface (\emph{Interface Segregation Principle})}
+   \itemlista{Princípio da Inversão de Dependência (\emph{Dependency Inversion Principle})}
     \vspace{0.6cm}
-  \end{itemize}
+  \end{lista}
   \paragrafo{Definindo os príncipios, bem resumidamente, teríamos:}
-  \begin{itemize}[label=\raisebox{0.25ex}{\normalsize$\bullet$}]
-    \vspace{-0.3cm}
-    \setlength{\itemindent}{2cm}
-    \item \hspace{0.1cm} \acs{SRP} - Cada módulo de software deve ser estruturado de forma que haja uma, e apenas uma, razão para mudar.
-    \item \hspace{0.1cm} \acs{OCP} - Para que o software seja fácil de mudar, deve ser projetado para garantir que o mesmo está aberto à adição, mas fechado para alteração.
-    \item \hspace{0.1cm} \acs{LSP} - Criando um sistema a partir de partes trocáveis entre si, estas partes devem firmar um contrato que permita que uma seja substituída pela outra.
-    \item \hspace{0.1cm} \acs{ISP} - Deve-se evitar que o software dependa de métodos que não usa.
-    \item \hspace{0.1cm} \acs{DIP} - Código de nível mais alto (Próximo às regras de negócio) não deve depender de código de nível mais baixo (detalhes de implementação, \emph{frameworks}, banco de dados).
+  \begin{lista}
+   \itemlista{\acs{SRP} - Cada módulo de software deve ser estruturado de forma que haja uma, e apenas uma, razão para mudar.}
+   \itemlista{\acs{OCP} - Para que o software seja fácil de mudar, deve ser projetado para garantir que o mesmo está aberto à adição, mas fechado para alteração.}
+   \itemlista{\acs{LSP} - Criando um sistema a partir de partes trocáveis entre si, estas partes devem firmar um contrato que permita que uma seja substituída pela outra.}
+   \itemlista{\acs{ISP} - Deve-se evitar que o software dependa de métodos que não usa.}
+   \itemlista{\acs{DIP} - Código de nível mais alto (Próximo às regras de negócio) não deve depender de código de nível mais baixo (detalhes de implementação, \emph{frameworks}, banco de dados).}
     \vspace{0.6cm}
-  \end{itemize}
+  \end{lista}
   \paragrafo{Os exemplos da implementação desses princípios serão fornecidos posteriormente neste mesmo trabalho, no Capítulo 4.}
 \end{subsecao}
 
@@ -65,48 +59,39 @@
   \paragrafo{No total,são 23 padrões de projetos diferentes, subdividos em 3 tipos: Padrões de Criação, Padrões Comportamentais e Padrões Estruturais:}
   
   \paragrafo{Padrões de Criação}
-  \begin{itemize}[label=\raisebox{0.25ex}{\normalsize$\bullet$}]
-    \vspace{-0.3cm}
-    \setlength{\itemindent}{2cm}
-    \item \hspace{0.1cm} Abstract Factory
-    \item \hspace{0.1cm} Builder
-    \item \hspace{0.1cm} Factory Method
-    \item \hspace{0.1cm} Prototype
-    \item \hspace{0.1cm} Singleton
-    \vspace{0.6cm}
-  \end{itemize}
+  \begin{lista}
+   \itemlista{Abstract Factory}
+   \itemlista{Builder}
+   \itemlista{Factory Method}
+   \itemlista{Prototype}
+   \itemlista{Singleton}
+  \end{lista}
 
   \paragrafo{Padrões Estruturais}
-  \begin{itemize}[label=\raisebox{0.25ex}{\normalsize$\bullet$}]
-    \vspace{-0.3cm}
-    \setlength{\itemindent}{2cm}
-    \item \hspace{0.1cm} Adapter
-    \item \hspace{0.1cm} Bridge
-    \item \hspace{0.1cm} Composite
-    \item \hspace{0.1cm} Decorator
-    \item \hspace{0.1cm} Facade
-    \item \hspace{0.1cm} Flyweight
-    \item \hspace{0.1cm} Proxy
-    \vspace{0.6cm}
-  \end{itemize}
+  \begin{lista}
+    \itemlista{Adapter}
+    \itemlista{Bridge}
+    \itemlista{Composite}
+    \itemlista{Decorator}
+    \itemlista{Facade}
+    \itemlista{Flyweight}
+    \itemlista{Proxy}
+  \end{lista}
   
   \paragrafo{Padrões Comportamentais}
-  \begin{itemize}[label=\raisebox{0.25ex}{\normalsize$\bullet$}]
-    \vspace{-0.3cm}
-    \setlength{\itemindent}{2cm}
-    \item \hspace{0.1cm} Chain of Responsiblity
-    \item \hspace{0.1cm} Command
-    \item \hspace{0.1cm} Interpreter
-    \item \hspace{0.1cm} Iterator
-    \item \hspace{0.1cm} Mediator
-    \item \hspace{0.1cm} Memento
-    \item \hspace{0.1cm} Observer
-    \item \hspace{0.1cm} State
-    \item \hspace{0.1cm} Strategy
-    \item \hspace{0.1cm} Template Method
-    \item \hspace{0.1cm} Visitor
-    \vspace{0.6cm}
-  \end{itemize}
+  \begin{lista}
+    \itemlista{Chain of Responsiblity}
+    \itemlista{Command}
+    \itemlista{Interpreter}
+    \itemlista{Iterator}
+    \itemlista{Mediator}
+    \itemlista{Memento}
+    \itemlista{Observer}
+    \itemlista{State}
+    \itemlista{Strategy}
+    \itemlista{Template Method}
+    \itemlista{Visitor}
+  \end{lista}
   
   \paragrafo{Não faz parte da proposta desse trabalho usar cada um dos padrões supracitados. A proposta está em identificar as oportunidades de aplicação durante as etapas de desenvolvimento. Como o sistema, até o atual momento, não está pronto, será necessário revisitar esse capítulo posteriormente listando e explicando cada padrão usado na aplicação web.}
 \end{secao}

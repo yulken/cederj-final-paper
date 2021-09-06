@@ -64,17 +64,27 @@
     \pagestyle{chapter}
     
     \begin{flushleft}
-        \vspace*{1cm}
-        \large\bf{\MakeUppercase{{\thechapter.\thesecao.\thesubsecao \hspace{5mm}#1}}}
-        \vspace{2cm}
+        \vspace*{0.5cm}
+        \large{\MakeUppercase{{\thechapter.\thesecao.\thesubsecao \hspace{5mm}#1}}}
+        \vspace{1cm}
     \end{flushleft}
 
     \thispagestyle{chapter}
     \normalfont\normalsize
 }{}
 
+\newenvironment{lista}{
+    \begin{itemize}[label=\raisebox{0.25ex}{\normalsize$\bullet$}]
+        \vspace{-0.3cm}
+        \setlength{\itemindent}{2cm}
+    }
+    {
+        \vspace{0.6cm}
+        \end{itemize}
+    }
+
 \newcommand{\paragrafo}[1]{
     \setlength{\parindent}{2cm}
     #1\par
     \vspace{0.5cm}
-    }
+}
