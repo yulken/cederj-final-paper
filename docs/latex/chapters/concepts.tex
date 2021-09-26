@@ -47,16 +47,27 @@
 \end{subsecao}
 
 \begin{subsecao}{Arquitetura Limpa} \label{subsec:carch}
-\paragrafo{Robert C. Martin menciona que nas últimas décadas foram propostas várias ideias relacionadas à arquitetura de sistemas. O autor relata que embora as arquiteturas variem entre si à nível de detalhes, elas ainda são muito similares frente à seus objetivos principais: A Separação de Preocupações.}
-\paragrafo{A Separação de preocupações (\emph{Separation of Concerns}) consistiria em dividir, em níveis, todo o código desenvolvido. Sendo assim, as arquiteturas tem módulos de lógica de negócios testáveis, independentes de frameworks, UI, banco de dados ou qualquer agência externa.}
-\paragrafo{Em resumo, as características citadas acima podem definir uma arquitetura limpa.}
+\paragrafo{Robert C. Martin menciona que toda boa arquitetura teria um objetivo principal, que é a Separação de Preocupações (\emph{Separation of Concerns}). Esta consiste em dividir, em níveis, todo o código desenvolvido. Esses níveis podem ser representados como circulos circuncêntricos, de forma que as camadas de nível mais alto do código estejam mais ao centro do círculo, tal como a Figura \ref{fig:carch}.}
+\begin{figure}[h!]
+  \centering
+  \includegraphics[scale=0.5]{CleanArchitecture}
+  \caption{A arquitetura limpa}
+  \label{fig:carch}
+\end{figure}
+\paragrafo{A seguir, será detalhado do que cada nível se trata, e para ajudar nesse detalhamento, usaremos como exemplo um sistema de gerenciamento de usuários.}
+\paragrafo{Regras de Negócio de Empresa (\emph{Enterprise Business Rules}), ou as Entidades, são objetos com suas próprias funções ou estruturas de dados que possam ser utilizadas por várias aplicações diferentes numa mesma empresa. No contexto desse trabalho e na maioria das aplicações web, as entidades serão as tabelas do banco de dados, devido a sua grande tendência de reutilização em diferentes partes de um mesmo sistema. No exemplo proposto, a entidade seria uma tabela de usuários com os atributos do mesmo, como o nome, endereço, login e senha.}
+\paragrafo{Regras de Negócio da Aplicação (\emph{Application Business Rules}), ou os Casos de Uso, são todos os fluxos especificos de uma aplicação. Essas regras de negócio utilizam-se manipulam as Entidades a fim de processar o que lhes for pedido. No exemplo proposto, os casos de uso seriam os algoritmos de cadastro, autenticação, consulta, atualização, remoção e outras tarefas referentes à tabela previamente apresentada.}
+\paragrafo{Os Adaptadores de Interface (\emph{Interface Adapters}) tem como propósito converter os dados entre os níveis vizinhos de uma forma que seja conveniente para todos os envolvidos. Um exemplo de adaptador no sistema pode ser uma classe responsável por tratar as requisições recebidas pelos frameworks a fim de executar os casos de uso para gerenciar os usuários.}
+\paragrafo{Por fim, os Frameworks e Drivers são geralmente, no contexto de desenvolvimento web, as ferramentas usadas para acesso a banco de dados e web. Por serem ferramentas já prontas, geralmente só é desenvolvido nessa camada a comunicação com os níveis mais internos.}
+\paragrafo{O importante sobre essa divisão em camadas é garantir que mudanças nas camadas externas não afetem as camadas internas, possibilitando apenas que as mudanças nas camadas internas tragam consequências às camadas externas. Esse seria o conceito de Regra da Dependência, que consiste em garantir que as dependências do código partam apenas de fora para dentro do círculo.}
+\paragrafo{Em resumo, um sistema que separa suas preocupações e que segue a Regra da Dependência tendem ter uma arquitetura limpa, com módulos de lógica de negócios testáveis, independentes de frameworks, UI, banco de dados ou qualquer agência externa.}
 \end{subsecao}
 \end{secao}
 
 \begin{secao}{Design Patterns} \label{sec:patterns}
 
   \paragrafo{Como alguns princípios vistos na seção de Clean Architecture, os Design Patterns tem como principal função garantir a reusabilidade do código com baixo acoplamento. De fato, a proposta principal do livro está em ser um catálogo de soluções para problemas de sistemas orientados a objetos.}
-  \paragrafo{No total,são 23 padrões de projetos diferentes, subdividos em 3 tipos: Padrões de Criação, Padrões Comportamentais e Padrões Estruturais:}
+  \paragrafo{No total, são 23 padrões de projetos diferentes, subdividos em 3 tipos: Padrões de Criação, Padrões Comportamentais e Padrões Estruturais:}
   
   \paragrafo{Padrões de Criação}
   \begin{lista}
