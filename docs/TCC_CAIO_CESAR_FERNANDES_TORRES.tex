@@ -1,4 +1,4 @@
-\documentclass[12pt]{article}
+\documentclass[12pt]{report}
 
 %---pacotes para hiphenizacao e acentuacao em portugues
 \usepackage[brazil]{babel}
@@ -11,9 +11,10 @@
 \usepackage{epsf}
 \usepackage{graphicx}
 \usepackage{subfigure}
+\usepackage[subfigure]{tocloft}
 \usepackage{setspace}
 \usepackage[hidelinks]{hyperref}
-\graphicspath{ {./latex/resources} }
+\graphicspath{ {./latex/resources/} }
 
 %--- pacote de simbolos
 \usepackage{latexsym}
@@ -33,7 +34,11 @@
 %Tabela Colorida
 \usepackage{colortbl}
 \usepackage{fancyhdr}
+\usepackage{tocloft}
+\usepackage{chngcntr}
 
+\counterwithout{figure}{chapter}
+\counterwithout{figure}{section}
 
 \usepackage{multicol}
 \usepackage{multirow}
@@ -83,6 +88,7 @@ di-men-sio-na-men-to
 \input{latex/pretextual/thanks}
 \input{latex/pretextual/abstracts}
 \input{latex/pretextual/acronym}
+\input{latex/pretextual/tof}
 \input{latex/pretextual/toc}
 
 % % --- -----------------------------------------------------------------
