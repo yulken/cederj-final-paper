@@ -1,4 +1,4 @@
-\documentclass[12pt]{article}
+\documentclass[12pt]{report}
 
 %---pacotes para hiphenizacao e acentuacao em portugues
 \usepackage[brazil]{babel}
@@ -9,10 +9,12 @@
 
 %--- pacote para figuras
 \usepackage{epsf}
-\usepackage[dvips]{epsfig,graphicx}
+\usepackage{graphicx}
 \usepackage{subfigure}
+\usepackage[subfigure]{tocloft}
 \usepackage{setspace}
 \usepackage[hidelinks]{hyperref}
+\graphicspath{ {./latex/resources/} }
 
 %--- pacote de simbolos
 \usepackage{latexsym}
@@ -32,7 +34,11 @@
 %Tabela Colorida
 \usepackage{colortbl}
 \usepackage{fancyhdr}
+\usepackage{tocloft}
+\usepackage{chngcntr}
 
+\counterwithout{figure}{chapter}
+\counterwithout{figure}{section}
 
 \usepackage{multicol}
 \usepackage{multirow}
@@ -74,39 +80,38 @@ di-men-sio-na-men-to
 % --- Titulo, abstract, dedicatorias e agradecimentos.
 % --- Indice geral, lista de figuras e tabelas.
 % --- -----------------------------------------------------------------
-\input{LaTeX/libs/environments}
-\input{LaTeX/chapters/variables}
-\input{LaTeX/pretextual/cover}
-\input{LaTeX/pretextual/catalog-file}
-\input{LaTeX/pretextual/terms}
-\input{LaTeX/pretextual/thanks}
-\input{LaTeX/pretextual/abstracts}
-\input{LaTeX/pretextual/acronym}
-\input{LaTeX/pretextual/toc}
+\input{latex/libs/environments}
+\input{latex/chapters/variables}
+\input{latex/pretextual/cover}
+\input{latex/pretextual/catalog-file}
+\input{latex/pretextual/terms}
+\input{latex/pretextual/thanks}
+\input{latex/pretextual/abstracts}
+\input{latex/pretextual/acronym}
+\input{latex/pretextual/tof}
+\input{latex/pretextual/toc}
 
 % % --- -----------------------------------------------------------------
 % % --- Insercao dos capitulos.
 % % --- -----------------------------------------------------------------
-\newcounter{chapter}
-\setcounter{chapter}{1}
 \pagestyle{chapter}
-\input{LaTeX/chapters/introduction}
-\input{LaTeX/chapters/concepts}
+\input{latex/chapters/introduction}
+\input{latex/chapters/concepts}
 
 
 % --- -----------------------------------------------------------------
 % --- Referencias Bibliograficas. (Obrigatorio)
 % --- -----------------------------------------------------------------
 % \clearpage
-% \bibliographystyle{LaTeX/libs/acm-2} % abbrv - abnt-num
-% \bibliographystyle{LaTeX/_deprecated/uff-ic}
-\input{LaTeX/posttextual/bibliography}
+% \bibliographystyle{latex/libs/acm-2} % abbrv - abnt-num
+% \bibliographystyle{latex/_deprecated/uff-ic}
+\input{latex/posttextual/bibliography}
 
 % --- -----------------------------------------------------------------
 % --- Apendice.(Opcional)
 % --- -----------------------------------------------------------------
 % \clearpagebib
 % \appendix
-% \include{LaTeX/chapters/appendixA}
+% \include{latex/chapters/appendixA}
 
 \end{document}

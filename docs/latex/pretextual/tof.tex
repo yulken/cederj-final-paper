@@ -1,0 +1,13 @@
+\makeatletter
+\renewcommand{\listoffigures}{%
+    \clearpage
+    \covertitle{\MakeUppercase{\listfigurename}}
+    \thispagestyle{empty}
+    \vspace{1cm}
+    \@starttoc{lof}
+}%
+\renewcommand\@dotsep{0.5} %default: 4.5
+
+\makeatother
+
+\listoffigures

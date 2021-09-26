@@ -1,9 +1,10 @@
-node_modules
 .vscode
-.env
-coverage
+/docs/latex/**/*.*
+!/docs/latex/**/*.txt
+!/docs/latex/**/*.tex
+!/docs/latex/**/*.bib
+!/docs/latex/**/*.bst
 /docs/**/*.*
 !/docs/**/*.txt
+!/docs/**/*.jpg
 !/docs/**/*.tex
-!/docs/**/*.bib
-!/docs/**/*.bst

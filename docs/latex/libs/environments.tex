@@ -1,0 +1,89 @@
+\setcounter{chapter}{0}
+\newcounter{secao}
+\setcounter{secao}{0}
+\newcounter{subsecao}
+\setcounter{subsecao}{0}
+
+\newenvironment{resumo}[1]
+{
+    \clearpage
+    \phantomsection
+    \addcontentsline{toc}{subsection}{#1}
+    \thispagestyle{empty}
+    \setstretch{1}
+    \begin{center}
+        \large\bf \MakeUppercase{#1}
+    \end{center}\hspace{5mm}
+}
+{}
+
+% \let\oldchapter\chapter
+% \renewcommand{\chapter}[1]{\oldchapter{\thechapter \hspace{3mm} \MakeUppercase{#1}}}
+\newenvironment{capitulo}[1]{
+    \addtocounter{chapter}{1}
+    \setcounter{secao}{0}
+    \clearpage
+    \phantomsection
+    \addcontentsline{toc}{subsection}{\thechapter \hspace{5mm}#1}
+    % \chapter
+    \pagestyle{chapter}
+    
+    \begin{flushleft}
+        \vspace*{1cm}
+        \large\bf{\MakeUppercase{{\thechapter \hspace{5mm}#1}}}
+        \vspace{2cm}
+    \end{flushleft}
+
+    \thispagestyle{chapter}
+    \normalfont\normalsize
+}{}
+
+\newenvironment{secao}[1]{
+    \addtocounter{secao}{1}
+    \phantomsection
+    \addcontentsline{toc}{subsection}{\thechapter.\thesecao \hspace{5mm}#1}
+    % \chapter
+    \pagestyle{chapter}
+    
+    \begin{flushleft}
+        \vspace*{1cm}
+        \large\bf{\MakeUppercase{{\thechapter.\thesecao \hspace{5mm}#1}}}
+        \vspace{2cm}
+    \end{flushleft}
+
+    \thispagestyle{chapter}
+    \normalfont\normalsize
+}{}
+
+\newenvironment{subsecao}[1]{
+    \addtocounter{subsecao}{1}
+    \phantomsection
+    \addcontentsline{toc}{subsection}{\thechapter.\thesecao.\thesubsecao \hspace{5mm}#1}
+    % \chapter
+    \pagestyle{chapter}
+    
+    \begin{flushleft}
+        \vspace*{0.5cm}
+        \large{\MakeUppercase{{\thechapter.\thesecao.\thesubsecao \hspace{5mm}#1}}}
+        \vspace{1cm}
+    \end{flushleft}
+
+    \thispagestyle{chapter}
+    \normalfont\normalsize
+}{}
+
+\newenvironment{lista}{
+    \begin{itemize}[label=\raisebox{0.25ex}{\normalsize$\bullet$}]
+        \vspace{-0.3cm}
+        \setlength{\itemindent}{2cm}
+    }
+    {
+        \vspace{0.6cm}
+        \end{itemize}
+    }
+
+\newcommand{\paragrafo}[1]{
+    \setlength{\parindent}{2cm}
+    #1\par
+    \vspace{0.5cm}
+}
