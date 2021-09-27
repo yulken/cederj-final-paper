@@ -15,7 +15,7 @@
 \end{subsecao}
 
 \begin{subsecao}{Arquitetura Limpa} \label{subsec:carch}
-  \paragrafo{Robert C. Martin menciona que toda arquitetura limpa tem a Separação de Preocupações (\emph{Separation of Concerns}). Esta consiste em segregar todo o código em módulos de acordo com suas preocupações, ou seja, quais classes ou outros detalhes da aplicação este teria acesso. O conceito da arquitetura limpa reune esses módulos em diferentes níveis de acordo com sua proximidade das regras de negócio de uma empresa, sendo o software de nível mais baixo relacionado apenas a ferramentas externas, e o mais alto, relacionado diretamente às regras de negócio.}
+  \paragrafo{Martin menciona que toda arquitetura limpa tem a Separação de Preocupações (\emph{Separation of Concerns}). Esta consiste em segregar todo o código em módulos de acordo com suas preocupações, ou seja, quais classes ou outros detalhes da aplicação este teria acesso. O conceito da arquitetura limpa reune esses módulos em diferentes níveis de acordo com sua proximidade das regras de negócio de uma empresa, sendo o software de nível mais baixo relacionado apenas a ferramentas externas, e o mais alto, relacionado diretamente às regras de negócio.}
   \paragrafo{O importante sobre essa divisão em níveis é garantir que mudanças nas camadas inferiores não afetem as camadas superiores. Enquanto uma mudança a nível de regra de negócio pode interferir na forma que um dado é manipulado ou é exibido, o contrário não deveria ser verdade. Esse seria o conceito de Regra da Dependência, que consiste em garantir que as dependências do código partam apenas do nível inferior para o superior.}
   \paragrafo{Esses níveis podem ser representados como circulos concêntricos, de forma que as camadas de nível mais alto do código estejam mais ao centro do círculo, tal como a Figura \ref{fig:carch}.}
   \begin{figure}[h!]
@@ -32,6 +32,26 @@
   \paragrafo{Por fim, os Frameworks e Drivers são geralmente, no contexto de desenvolvimento web, as ferramentas usadas para acesso a banco de dados e web. Por serem ferramentas já prontas, geralmente só é desenvolvido nessa camada a comunicação com os níveis mais internos.}
   \paragrafo{Em resumo, um sistema que separa suas preocupações e que segue a Regra da Dependência tendem ter uma arquitetura limpa, com módulos de lógica de negócios testáveis, independentes de frameworks, UI, banco de dados ou qualquer agência externa.}
   \end{subsecao}
+  \end{secao}
+
+  \begin{secao}{SOLID} \label{sec:solid}
+    \paragrafo{Os princípios SOLID, em resumo, se tratam de regras de organização de funções e estruturas de dados em agrupamentos. O principal objetivo de sua aplicação está em criar software que seja de fácil entendimento, manutenção e reaproveitamento.}
+    \paragrafo{Também proposto por Robert C. Martin, SOLID é um acrônimo para siglas que representam princípios a serem seguidos no desenvolvimento de um bom software orientado a objetos. Para exemplificar cada um desses princípios, consideremos um sistema de pagamentos.}
+    \begin{subsecao}{\emph{Single Responsiblity Principle}} \label{subsec:SRP}
+      \paragrafo{De acordo com o \acs{SRP}, ou o Princípio da Responsabilidade Única, uma classe deveria ter uma, e somente uma razão para ser alterada \cite{ood_principles}. Esse princípio é relevante, pois ao dividir as responsabilidades corretamente em cada módulo, evita-se consequências não planejadas durante o processo de manutenção do software.} 
+      \paragrafo{Exemplificando essa situação, ao desenvolver uma classe que é responsável tanto por gerenciar usuários quando efetuar pagamentos, estamos quebrando esse príncipio. Imagine que é realizada uma validação do usuário destinatário antes de se executar um pagamento. Se houver alguma mudança nessa rotina de validação, é possível que isso afete a rotina de pagamentos de formas imprevistas. A forma que seguiria o \acs{SRP} seria desenvolver uma classe que fosse responsável pela gerência dos usuários e outra que fosse responsável pelos pagamentos.}
+    \end{subsecao}
+    \begin{subsecao}{\emph{Open-Closed Principle}} \label{subsec:OCP}
+      \paragrafo{O Princípio Aberto-Fechado consiste em garantir que o comportamento de uma classe deveria estar aberto para a extensão, mas fechado para modificações \cite{ood_principles}. A importância desse princípio se deve ao fato de que ao modificar uma classe, essa modificação provavelmente vai influenciar algum ponto não previsto do sistema que utilize esse mesmo componente.}
+      \paragrafo{No sistema exemplificado, ao acrescentar suporte à pessoas jurídicas ao algoritmo de validação de usuários, se simplesmente acrescentarmos ao código existente uma condição (ou um \emph{if}) para verificar o tipo da pessoa (Física ou Jurídica) a fim de escolher o método de validação, estaríamos quebrando o \acs{OCP}.O correto seria termos uma classe abstrata Pessoa e estender esse comportamento através de duas classes filhas PessoaFisica e PessoaJuridica, cada uma com seu método de validação.}
+    \end{subsecao}
+    \begin{subsecao}{\emph{Liskov Substitution Principle}} \label{subsec:LSP}
+    \end{subsecao}
+    \begin{subsecao}{\emph{Interface Segregation Principle}} \label{subsec:ISP}
+    \end{subsecao}
+    \begin{subsecao}{\emph{Dependency Inversion Principle}} \label{subsec:DIP}
+    \end{subsecao}
+    \paragrafo{Os exemplos da implementação desses princípios serão fornecidos posteriormente neste mesmo trabalho, no Capítulo 4.}
   \end{secao}
 
 \begin{secao}{Design Patterns} \label{sec:patterns}
@@ -75,29 +95,6 @@
   \end{lista}
   
   \paragrafo{Não faz parte da proposta desse trabalho usar cada um dos padrões supracitados. A proposta está em identificar as oportunidades de aplicação durante as etapas de desenvolvimento. Como o sistema, até o atual momento, não está pronto, será necessário revisitar esse capítulo posteriormente listando e explicando cada padrão usado na aplicação web.}
-\end{secao}
-
-\begin{secao}{SOLID} \label{sec:solid}
-  \paragrafo{Os princípios SOLID, em resumo, se tratam de regras de organização de funções e estruturas de dados em agrupamentos. O principal objetivo de sua aplicação está em criar software que seja de fácil entendimento, manutenção e reaproveitamento.}
-  \paragrafo{Também proposto por Robert C. Martin, SOLID é um acrônimo para outras siglas:}
-  \begin{lista}
-   \itemlista{Princípio da Responsabilidade Única (\emph{Single Responsiblity Principle})}
-   \itemlista{Princípio do Aberto/Fechado (\emph{Open-Closed Principle})}
-   \itemlista{Princípio de Substituição de Liskov (\emph{Liskov Substitution Principle})}
-   \itemlista{Princípio da Segregação de Interface (\emph{Interface Segregation Principle})}
-   \itemlista{Princípio da Inversão de Dependência (\emph{Dependency Inversion Principle})}
-    \vspace{0.6cm}
-  \end{lista}
-  \paragrafo{Definindo os príncipios, bem resumidamente, teríamos:}
-  \begin{lista}
-   \itemlista{\acs{SRP} - Cada módulo de software deve ser estruturado de forma que haja uma, e apenas uma, razão para mudar.}
-   \itemlista{\acs{OCP} - Para que o software seja fácil de mudar, deve ser projetado para garantir que o mesmo está aberto à adição, mas fechado para alteração.}
-   \itemlista{\acs{LSP} - Criando um sistema a partir de partes trocáveis entre si, estas partes devem firmar um contrato que permita que uma seja substituída pela outra.}
-   \itemlista{\acs{ISP} - Deve-se evitar que o software dependa de métodos que não usa.}
-   \itemlista{\acs{DIP} - Código de nível mais alto (Próximo às regras de negócio) não deve depender de código de nível mais baixo (detalhes de implementação, \emph{frameworks}, banco de dados).}
-    \vspace{0.6cm}
-  \end{lista}
-  \paragrafo{Os exemplos da implementação desses princípios serão fornecidos posteriormente neste mesmo trabalho, no Capítulo 4.}
 \end{secao}
 
 \end{capitulo}

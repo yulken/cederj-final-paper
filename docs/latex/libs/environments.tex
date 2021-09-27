@@ -21,6 +21,7 @@
 % \renewcommand{\chapter}[1]{\oldchapter{\thechapter \hspace{3mm} \MakeUppercase{#1}}}
 \newenvironment{capitulo}[1]{
     \addtocounter{chapter}{1}
+    \setcounter{subsecao}{0}
     \setcounter{secao}{0}
     \clearpage
     \phantomsection
@@ -39,6 +40,7 @@
 }{}
 
 \newenvironment{secao}[1]{
+    \setcounter{subsecao}{0}
     \addtocounter{secao}{1}
     \phantomsection
     \addcontentsline{toc}{subsection}{\thechapter.\thesecao \hspace{5mm}#1}
