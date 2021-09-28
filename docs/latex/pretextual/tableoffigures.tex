@@ -1,6 +1,8 @@
 \makeatletter
 \renewcommand{\listoffigures}{%
     \clearpage
+    \phantomsection
+    \addcontentsline{toc}{subsection}{Lista de Ilustrações}
     \covertitle{\MakeUppercase{\listfigurename}}
     \thispagestyle{empty}
     \vspace{1cm}
