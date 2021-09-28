@@ -20,7 +20,7 @@
 % \let\oldchapter\chapter
 % \renewcommand{\chapter}[1]{\oldchapter{\thechapter \hspace{3mm} \MakeUppercase{#1}}}
 \newenvironment{capitulo}[1]{
-    \addtocounter{chapter}{1}
+    \refstepcounter{chapter}%
     \setcounter{subsecao}{0}
     \setcounter{secao}{0}
     \clearpage
@@ -40,8 +40,8 @@
 }{}
 
 \newenvironment{secao}[1]{
+    \refstepcounter{secao}%
     \setcounter{subsecao}{0}
-    \addtocounter{secao}{1}
     \phantomsection
     \addcontentsline{toc}{subsection}{\thechapter.\thesecao \hspace{5mm}#1}
     % \chapter
@@ -57,8 +57,10 @@
     \normalfont\normalsize
 }{}
 
+\makeatletter
 \newenvironment{subsecao}[1]{
-    \addtocounter{subsecao}{1}
+    \refstepcounter{subsecao}%
+    \protected@edef\@currentlabel{\thechapter.\thesecao.\thesubsecao}
     \phantomsection
     \addcontentsline{toc}{subsection}{\thechapter.\thesecao.\thesubsecao \hspace{5mm}#1}
     % \chapter
@@ -73,7 +75,7 @@
     \thispagestyle{chapter}
     \normalfont\normalsize
 }{}
-
+\makeatother
 \newenvironment{lista}{
     \begin{itemize}[label=\raisebox{0.25ex}{\normalsize$\bullet$}]
         \vspace{-0.3cm}
