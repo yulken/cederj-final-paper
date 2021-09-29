@@ -1,15 +1,40 @@
 \begin{capitulo}{Introdução} \label{cap:introduction}
 
 
-\paragrafo{Para se desenvolver uma aplicação empresarial de forma ágil, atualmente, é necessário que haja pelo menos mais de um desenvolvedor atuando no projeto e, muito provavelmente, equipes de desenvolvimento totalmente focadas em características únicas do software a ser desenvolvido. Durante esse processo de desenvolvimento, a tendência é que o próprio software sofra alterações a nível conceitual (por exemplo, um fluxo alternativo a fim de atender uma parceria nova ou a implementação do Pix como uma nova forma de pagamento) ou alterações a nível de infraestrutura (por exemplo, a migração de um servidor local para computação em nuvem ou a troca de um framework \acs{HTTP}).}
+\paragrafo{Para se desenvolver uma aplicação empresarial de forma ágil, atualmente, é 
+necessário que haja pelo menos mais de um desenvolvedor atuando no projeto e, muito 
+provavelmente, equipes de desenvolvimento totalmente focadas em características únicas do 
+software a ser desenvolvido. Durante esse processo de desenvolvimento, a tendência é que 
+o próprio software sofra alterações a nível conceitual (por exemplo, um fluxo alternativo 
+a fim de atender uma parceria nova ou a implementação do Pix como uma nova forma de 
+pagamento) ou alterações a nível de infraestrutura (por exemplo, a migração de um 
+servidor local para computação em nuvem ou a troca de um framework \acs{HTTP}).}
 
-\paragrafo{Em sistemas que já estão em produção e que, consequentemente, possuem uma base robusta de clientes, alterações estruturais desse tipo podem acarretar riscos para toda a aplicação. Por exemplo, o prazo requerido para a implementação de um fluxo alternativo pode ser muito menor que o tempo necessário, o que pode fazer com que a qualidade do código entregado seja reduzida ou que novos bugs sejam introduzidos à aplicação. Ou talvez, caso um framework deixe de atender as necessidades da aplicação, será necessário reconstruir boa parte do software praticamente do zero.}
+\paragrafo{Em sistemas que já estão em produção e que, consequentemente, possuem uma base 
+robusta de clientes, alterações estruturais desse tipo podem acarretar riscos para toda a 
+aplicação. Por exemplo, o prazo requerido para a implementação de um fluxo alternativo 
+pode ser muito menor que o tempo necessário, o que pode fazer com que a qualidade do 
+código entregado seja reduzida ou que novos bugs sejam introduzidos à aplicação. Ou 
+talvez, caso um framework deixe de atender as necessidades da aplicação, será necessário 
+reconstruir boa parte do software praticamente do zero.}
 
-\paragrafo{Ou seja, mais do que entregar um programa, hoje em dia também é importante que este seja de fácil manutenção. Por conta disso, diferentes princípios de arquitetura e padrões de design foram criados ao longo do tempo para suprir a demanda por agilidade do processo de desenvo lvimento (por exemplo, \emph{Clean} Architecture, \emph{Design Patterns}, \acs{DRY}, \acs{DDD}, \acs{TDD}, entre outros).}
+\paragrafo{Ou seja, mais do que entregar um programa, hoje em dia também é importante que 
+este seja de fácil manutenção. Por conta disso, diferentes princípios de arquitetura e 
+padrões de design foram criados ao longo do tempo para suprir a demanda por agilidade do 
+processo de desenvo lvimento (por exemplo, \emph{Clean} Architecture, \emph{Design Patterns}, \acs{DRY}, \acs{DDD}, \acs{TDD}, entre outros).}
 
-\paragrafo{Por outro lado, a adoção de algumas práticas sem moderação pode ocasionar em um nível de esforço e complexidade de código adicional. Sendo assim apesar de ajudar na manutenção, pode atrapalhar a legibilidade e requisitar um conhecimento técnico mais avançado para compreender estruturas de código que, embora estejam preparadas para tal evento, talvez nunca sofram as drásticas alterações que motivaram a dita complexidade em primeiro lugar. Apoiando essa perspectiva, temos os principios \acs{KISS} e \acs{YAGNI}.}
+\paragrafo{Por outro lado, a adoção de algumas práticas sem moderação pode ocasionar em 
+um nível de esforço e complexidade de código adicional. Sendo assim apesar de ajudar na 
+manutenção, pode atrapalhar a legibilidade e requisitar um conhecimento técnico mais 
+avançado para compreender estruturas de código que, embora estejam preparadas para tal 
+evento, talvez nunca sofram as drásticas alterações que motivaram a dita complexidade em 
+primeiro lugar. Apoiando essa perspectiva, temos os principios \acs{KISS} e \acs{YAGNI}.}
 
-\paragrafo{Por isso, este projeto tem como objetivo aplicar e explicitar, na prática, implementações de \emph{Clean Architecture} e \emph{Design Patterns} em uma aplicação web. Ao longo deste trabalho serão expostos os desafios e benefícios de aplicar tais técnicas no desenvolvimento de uma loja virtual de jogos eletrônicos, como a Steam ou a Epic Games.}
+\paragrafo{Por isso, este projeto tem como objetivo aplicar e explicitar, na prática, 
+implementações de \emph{Clean Architecture} e \emph{Design Patterns} em uma aplicação 
+web. Ao longo deste trabalho serão expostos os desafios e benefícios de aplicar tais 
+técnicas no desenvolvimento de uma loja virtual de jogos eletrônicos, como a Steam ou a 
+Epic Games.}
 
 \paragrafo{A loja será desenvolvida usando as seguintes tecnologias:}
 
@@ -19,12 +44,25 @@
    \itemlista{Banco de dados: \emph{PostgreSQL}}
 \end{lista}
 
-\paragrafo{O segundo capítulo é dedicado a apresentar os conceitos de \emph{Clean Architecture} e \emph{Design Patterns} e exemplificar como essas técnicas podem ajudar a mitigar os riscos apontados no início dessa introdução. Para isso será utilizado como referência as obras nas quais essas ideias foram publicadas pela primeira vez \cite{clean_arch,design_patterns}.}
+\paragrafo{O segundo capítulo é dedicado a apresentar os conceitos de \emph{Clean 
+Architecture} e \emph{Design Patterns} e exemplificar como essas técnicas podem ajudar a 
+mitigar os riscos apontados no início dessa introdução. Para isso será utilizado como 
+referência as obras nas quais essas ideias foram publicadas pela primeira vez \cite{clean_arch,design_patterns}.}
 
-\paragrafo{O terceiro capítulo terá como foco descrever com mais profundidade as tecnologias que serão implementadas no desenvolvimento do software e o que motivou a escolha das mesmas. Além disso, também será introduzida a proposta da loja de jogos eletrônicos, assim como seus requisitos, regras de negócio, diagramas \acs{UML} e toda a documentação produzida para o propósito desse trabalho.}
+\paragrafo{O terceiro capítulo terá como foco descrever com mais profundidade as 
+tecnologias que serão implementadas no desenvolvimento do software e o que motivou a 
+escolha das mesmas. Além disso, também será introduzida a proposta da loja de jogos 
+eletrônicos, assim como seus requisitos, regras de negócio, diagramas \acs{UML} e toda a 
+documentação produzida para o propósito desse trabalho.}
 
-\paragrafo{O capítulo 4 relacionará o conteúdo dos capítulos anteriores, expondo, no código-fonte, todas as práticas que foram possíveis de implementar dentro do escopo da loja virtual com as tecnologias apresentadas. Além disso, também será simulado alguns dos problemas exemplificados no início desse capítulo e como a adoção das práticas do tema deste trabalho ajudaram a superar os ditos problemas.}
+\paragrafo{O capítulo 4 relacionará o conteúdo dos capítulos anteriores, expondo, no 
+código-fonte, todas as práticas que foram possíveis de implementar dentro do escopo da 
+loja virtual com as tecnologias apresentadas. Além disso, também será simulado alguns dos 
+problemas exemplificados no início desse capítulo e como a adoção das práticas do tema 
+deste trabalho ajudaram a superar os ditos problemas.}
 
-\paragrafo{Por fim, o quinto capítulo trará as conclusões obtidas ao longo do processo de desenvolvimento do trabalho assim como descreverá possíveis trabalhos futuros de acordo com a conclusão obtida.}
+\paragrafo{Por fim, o quinto capítulo trará as conclusões obtidas ao longo do processo de 
+desenvolvimento do trabalho assim como descreverá possíveis trabalhos futuros de acordo 
+com a conclusão obtida.}
 
 \end{capitulo}
