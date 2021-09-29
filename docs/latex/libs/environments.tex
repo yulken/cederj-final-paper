@@ -19,11 +19,13 @@
 
 % \let\oldchapter\chapter
 % \renewcommand{\chapter}[1]{\oldchapter{\thechapter \hspace{3mm} \MakeUppercase{#1}}}
+\makeatletter
 \newenvironment{capitulo}[1]{
     \refstepcounter{chapter}%
     \setcounter{subsecao}{0}
     \setcounter{secao}{0}
     \clearpage
+    \protected@edef\@currentlabel{\thechapter}
     \phantomsection
     \addcontentsline{toc}{subsection}{\thechapter \hspace{5mm}#1}
     % \chapter
@@ -31,13 +33,14 @@
     
     \begin{flushleft}
         \vspace*{1cm}
-        \large\bf{\MakeUppercase{{\thechapter \hspace{5mm}#1}}}
-        \vspace{2cm}
+        \Large\bf{\MakeUppercase{{\thechapter \hspace{5mm}#1}}}
+        \vspace{1cm}
     \end{flushleft}
 
     \thispagestyle{chapter}
     \normalfont\normalsize
 }{}
+\makeatother
 
 \newenvironment{secao}[1]{
     \refstepcounter{secao}%
@@ -50,7 +53,7 @@
     \begin{flushleft}
         \vspace*{1cm}
         \large\bf{\MakeUppercase{{\thechapter.\thesecao \hspace{5mm}#1}}}
-        \vspace{2cm}
+        \vspace{1cm}
     \end{flushleft}
 
     \thispagestyle{chapter}

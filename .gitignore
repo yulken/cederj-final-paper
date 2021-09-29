@@ -1,4 +1,5 @@
 .vscode
+*.aux
 /docs/latex/**/*.*
 !/docs/latex/**/*.txt
 !/docs/latex/**/*.tex
