@@ -31,15 +31,15 @@ export const Container = styled.div<ContainerProps>`
   ${props =>
     props.isFocused &&
     css`
-      color: #ff9000;
-      border-color: #ff9000;
+      color: #e74c3c;
+      border-color: #e74c3c;
       transition: color 0.3s;
       transition: border-color 0.3s;
     `}
   ${props =>
     props.isFilled &&
     css`
-      color: #ff9000;
+      color: #e74c3c;
       transition: color 0.3s;
     `}
 

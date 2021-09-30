@@ -34,7 +34,7 @@ export const AnimationContainer = styled.div`
   align-items: center;
   place-content: center;
 
-  animation: ${appearFromTop} 2s;
+  animation: ${appearFromTop} 1s;
 
   form {
     margin: 80px 0;
@@ -57,7 +57,7 @@ export const AnimationContainer = styled.div`
     }
   }
   > a {
-    color: #e74c3c;
+    color: #f4ede8;
     display: block;
     margin-top: 24px;
     text-decoration: none;
@@ -72,7 +72,7 @@ export const AnimationContainer = styled.div`
     }
 
     &:hover {
-      color: ${shade(0.2, '#e74c3c')};
+      color: ${shade(0.2, '#f4ede8')};
     }
   }
 `;
