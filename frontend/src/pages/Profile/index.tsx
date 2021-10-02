@@ -4,20 +4,27 @@ import { GiCrossedSwords } from 'react-icons/gi';
 import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
 import { Link, useHistory } from 'react-router-dom';
-import Joi, { ValidationError } from 'joi';
+import Joi from 'joi';
 
 import { useAuth } from '../../hooks/auth';
+import ValidationError from '../../errors/ValidationError';
+import { useToast } from '../../hooks/toast';
 import api from '../../services/apiClient';
-import { getValidationErrors } from '../../utils/getValidationErrors';
+import {
+  getValidationErrors,
+  validateInput,
+} from '../../utils/getValidationErrors';
+import { validateResponse } from '../../utils/AxiosValidator';
 import { Container, Content, AnimationContainer } from './styles';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
+import AxiosError from '../../errors/AxiosError';
 
 interface ProfileFormData {
   name: string;
   nickname: string;
   email: string;
-  oldPassword: string;
+  old_password: string;
   password: string;
   passwordConfirmation: string;
 }
@@ -25,7 +32,7 @@ interface ProfileFormData {
 const Profile: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const history = useHistory();
-
+  const { addToast } = useToast();
   const { user, updateUser, signOut } = useAuth();
 
   const handleSubmit = useCallback(
@@ -36,40 +43,46 @@ const Profile: React.FC = () => {
         const schema = Joi.object({
           name: Joi.string(),
           nickname: Joi.string(),
-          email: Joi.string().email().messages({
-            'string.email': 'Digite um e-mail válido',
-          }),
-          oldPassword: Joi.string(),
-          password: Joi.when('oldPassword', {
-            is: (val: string | undefined) => !!val?.length,
-            then: Joi.string().min(6).required().messages({
-              'any.min': 'No mínimo 6 dígitos',
-              'any.required': 'Campo obrigatório',
+          email: Joi.string()
+            .email({ tlds: { allow: false } })
+            .messages({
+              'string.email': 'Digite um e-mail válido',
             }),
-            otherwise: Joi.string(),
+          old_password: Joi.optional(),
+          password: Joi.when('old_password', {
+            is: Joi.string(),
+            then: Joi.string()
+              .disallow(Joi.ref('old_password'))
+              .min(6)
+              .messages({
+                'any.min': 'No mínimo 6 dígitos',
+                'any.empty': 'Campo obrigatório',
+                'any.invalid': 'Nova senha não deve ser igual a senha antiga.',
+              }),
+            otherwise: Joi.optional(),
           }),
-          passwordConfirmation: Joi.string().when('oldPassword', {
-            is: (val: string | undefined) => !!val?.length,
-            then: Joi.required().valid(Joi.ref('password')).messages({
+          passwordConfirmation: Joi.when('old_password', {
+            is: Joi.string(),
+            then: Joi.valid(Joi.ref('password')).messages({
               'any.ref': 'Confirmação incorreta',
-              'any.required': 'Campo obrigatório',
+              'any.empty': 'Campo obrigatório',
+              'any.only': 'Senha e confirmação não correspondem',
             }),
-            otherwise: Joi.string(),
+            otherwise: Joi.optional(),
           }),
         });
 
-        schema.validate(data, { abortEarly: false });
+        validateInput(schema.validate(data, { abortEarly: false }));
 
-        const a = Object.entries(data)
-          .filter(([key, value]) => user[key] !== value)
-          .reduce((obj, [key, value]) => ({ ...obj, [key]: value }), {});
+        // const a = Object.entries(data)
+        //   .filter(([key, value]) => user[key] !== value)
+        //   .reduce((obj, [key, value]) => ({ ...obj, [key]: value }), {});
 
-        console.log(a);
         const {
           name,
           email,
           nickname,
-          oldPassword,
+          old_password,
           password,
           passwordConfirmation,
         } = data;
@@ -78,30 +91,48 @@ const Profile: React.FC = () => {
           name,
           email,
           nickname,
-          ...(oldPassword
+          ...(old_password
             ? {
-                oldPassword,
+                old_password,
                 password,
                 passwordConfirmation,
               }
             : {}),
         };
-
-        const response = await api.put('/profile', formData);
+        const response = await validateResponse(api.put('/profile', formData));
 
         updateUser(response.data);
 
         history.push('/');
       } catch (err) {
         if (err instanceof ValidationError) {
-          err.isJoi = true;
-          // const errors = getValidationErrors(err);
-
-          // formRef.current?.setErrors(errors);
+          const errors = getValidationErrors(err);
+          formRef.current?.setErrors(errors);
+          return;
         }
+
+        if (err instanceof AxiosError) {
+          const message =
+            err.message === 'Old password is incorrect'
+              ? 'Senha antiga está incorreta'
+              : 'Ocorreu um erro interno';
+
+          addToast({
+            type: 'error',
+            title: 'Erro na atualização',
+            description: message,
+          });
+          return;
+        }
+
+        addToast({
+          type: 'error',
+          title: 'Erro na atualização',
+          description: 'Ocorreu um erro interno',
+        });
       }
     },
-    [user, history, updateUser],
+    [addToast, history, updateUser],
   );
 
   return (
@@ -130,7 +161,7 @@ const Profile: React.FC = () => {
             />
             <h2>Alterar Senha</h2>
             <Input
-              name="oldPassword"
+              name="old_password"
               icon={FiLock}
               type="password"
               placeholder="Senha antiga"
