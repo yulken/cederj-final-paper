@@ -8,7 +8,7 @@ export default createGlobalStyle`
     outline: 0;
   }
   body{
-    background-color: #312e38;
+    background-color: #1F1B24;
     color: #FFF;
   }
   body,input, button{

@@ -2,14 +2,22 @@ import React, { useCallback, useRef } from 'react';
 import { FiMail, FiLock, FiUser, FiArrowLeft } from 'react-icons/fi';
 import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
-import * as Yup from 'yup';
+import Joi from 'joi';
 import { Link, useHistory } from 'react-router-dom';
-import getValidationErrors from '../../utils/getValidationErrors';
+
+import {
+  getValidationErrors,
+  validateInput,
+} from '../../utils/getValidationErrors';
+import { validateResponse } from '../../utils/AxiosValidator';
+import ValidationError from '../../errors/ValidationError';
 import { Container, Content, AnimationContainer } from './styles';
 import api from '../../services/apiClient';
+import { useToast } from '../../hooks/toast';
 
 import Input from '../../components/Input';
 import Button from '../../components/Button';
+import AxiosError from '../../errors/AxiosError';
 
 interface SignUpFormData {
   name: string;
@@ -20,32 +28,76 @@ interface SignUpFormData {
 const SignUp: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
   const history = useHistory();
+  const { addToast } = useToast();
 
   const handleSubmit = useCallback(
     async (data: SignUpFormData) => {
       formRef.current?.setErrors({});
       try {
-        const schema = Yup.object().shape({
-          name: Yup.string().required('Nome obrigatório'),
-          email: Yup.string().required('E-mail obrigatório').email(),
-          password: Yup.string().min(6, 'No mínimo 6 dígitos'),
+        const schema = Joi.object({
+          name: Joi.string().messages({
+            'string.empty': 'Nome obrigatório',
+          }),
+          email: Joi.string()
+            .email({ tlds: { allow: false } })
+            .messages({
+              'string.empty': 'E-mail obrigatório',
+              'string.email': 'Email deve ser válido',
+            }),
+          password: Joi.string().min(6).messages({
+            'string.min': 'No mínimo 6 dígitos',
+            'string.empty': 'Senha Obrigatória',
+          }),
+          passwordConfirmation: Joi.string()
+            .valid(Joi.ref('password'))
+            .messages({
+              'any.only': 'Senha e confirmação não correspondem',
+              'string.empty': 'Confirmação Obrigatória',
+            }),
         });
 
-        await schema.validate(data, {
-          abortEarly: false,
-        });
+        validateInput(
+          schema.validate(data, {
+            abortEarly: false,
+          }),
+        );
 
-        await api.post('/users', data);
+        await validateResponse(api.post('/users', data));
 
         history.push('/');
+
+        addToast({
+          type: 'success',
+          title: 'Cadastro Realizado!',
+          description: 'Você pode logar na GameStore',
+        });
       } catch (err) {
-        if (err instanceof Yup.ValidationError) {
+        if (err instanceof ValidationError) {
           const errors = getValidationErrors(err);
           formRef.current?.setErrors(errors);
+          return;
         }
+        if (err instanceof AxiosError) {
+          const message =
+            err.message === 'Email Address already used.'
+              ? 'Email já utilizado por outro usuário'
+              : 'Ocorreu um erro interno';
+
+          addToast({
+            type: 'error',
+            title: 'Erro na criação de conta',
+            description: message,
+          });
+          return;
+        }
+        addToast({
+          type: 'error',
+          title: 'Erro Interno',
+          description: 'Ocorreu um erro interno.',
+        });
       }
     },
-    [history],
+    [addToast, history],
   );
 
   return (
@@ -61,6 +113,12 @@ const SignUp: React.FC = () => {
               icon={FiLock}
               type="password"
               placeholder="Senha"
+            />
+            <Input
+              name="passwordConfirmation"
+              icon={FiLock}
+              type="password"
+              placeholder="Confirme sua Senha"
             />
             <Button type="submit">Cadastrar</Button>
           </Form>

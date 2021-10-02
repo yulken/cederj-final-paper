@@ -15,6 +15,20 @@ export const Content = styled.div`
   place-content: center;
 
   width: 100%;
+  a {
+    color: #bb86fc;
+    display: block;
+    margin-top: 24px;
+    text-decoration: none;
+    transition: color 0.2s;
+
+    display: flex;
+    align-items: center;
+
+    svg {
+      margin-right: 16px;
+      transition: color 0.2s;
+    }
 `;
 
 const appearFromTop = keyframes`
