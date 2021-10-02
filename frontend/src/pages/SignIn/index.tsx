@@ -15,6 +15,9 @@ import { Container, Content, AnimationContainer } from './styles';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import ValidationError from '../../errors/ValidationError';
+import AxiosError from '../../errors/AxiosError';
+import { validateResponse } from '../../utils/AxiosValidator';
+import api from '../../services/apiClient';
 
 interface SignInFormData {
   email: string;
@@ -49,10 +52,14 @@ const SignIn: React.FC = () => {
           }),
         );
 
-        await signIn({
-          email: data.email,
-          password: data.password,
-        });
+        const response = await validateResponse(
+          api.post('sessions', {
+            email: data.email,
+            password: data.password,
+          }),
+        );
+
+        signIn(response);
 
         history.push('/profile');
       } catch (err) {
@@ -61,14 +68,27 @@ const SignIn: React.FC = () => {
           formRef.current?.setErrors(errors);
           return;
         }
+        if (err instanceof AxiosError) {
+          const message =
+            err.message === 'Incorrect email/password combination.'
+              ? 'Email e/ou Senha inválido(s)'
+              : 'Ocorreu um erro interno';
+
+          addToast({
+            type: 'error',
+            title: 'Erro na autenticação',
+            description: message,
+          });
+          return;
+        }
         addToast({
           type: 'error',
-          title: 'Erro na autenticação',
-          description: 'Ocorreu um erro ao fazer login, cheque as credenciais.',
+          title: 'Erro Interno',
+          description: 'Ocorreu um erro interno.',
         });
       }
     },
-    [signIn, addToast, history],
+    [addToast, history, signIn],
   );
 
   return (

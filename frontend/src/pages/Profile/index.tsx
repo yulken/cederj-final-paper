@@ -127,8 +127,8 @@ const Profile: React.FC = () => {
 
         addToast({
           type: 'error',
-          title: 'Erro na atualização',
-          description: 'Ocorreu um erro interno',
+          title: 'Erro Interno',
+          description: 'Ocorreu um erro interno.',
         });
       }
     },

@@ -4,10 +4,12 @@ import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
 import Joi from 'joi';
 import { Link, useHistory } from 'react-router-dom';
+
 import {
   getValidationErrors,
   validateInput,
 } from '../../utils/getValidationErrors';
+import { validateResponse } from '../../utils/AxiosValidator';
 import ValidationError from '../../errors/ValidationError';
 import { Container, Content, AnimationContainer } from './styles';
 import api from '../../services/apiClient';
@@ -15,6 +17,7 @@ import { useToast } from '../../hooks/toast';
 
 import Input from '../../components/Input';
 import Button from '../../components/Button';
+import AxiosError from '../../errors/AxiosError';
 
 interface SignUpFormData {
   name: string;
@@ -59,19 +62,38 @@ const SignUp: React.FC = () => {
           }),
         );
 
-        await api.post('/users', data);
+        await validateResponse(api.post('/users', data));
 
         history.push('/');
+
+        addToast({
+          type: 'success',
+          title: 'Cadastro Realizado!',
+          description: 'Você pode logar na GameStore',
+        });
       } catch (err) {
         if (err instanceof ValidationError) {
           const errors = getValidationErrors(err);
           formRef.current?.setErrors(errors);
           return;
         }
+        if (err instanceof AxiosError) {
+          const message =
+            err.message === 'Email Address already used.'
+              ? 'Email já utilizado por outro usuário'
+              : 'Ocorreu um erro interno';
+
+          addToast({
+            type: 'error',
+            title: 'Erro na criação de conta',
+            description: message,
+          });
+          return;
+        }
         addToast({
           type: 'error',
-          title: 'Erro na autenticação',
-          description: 'Ocorreu um erro ao fazer login, cheque as credenciais.',
+          title: 'Erro Interno',
+          description: 'Ocorreu um erro interno.',
         });
       }
     },

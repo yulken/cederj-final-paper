@@ -1,4 +1,5 @@
 import React, { createContext, useCallback, useState, useContext } from 'react';
+import { AxiosResponse } from 'axios';
 
 import api from '../services/apiClient';
 
@@ -14,14 +15,9 @@ interface AuthState {
   user: User;
 }
 
-interface SignInCredentials {
-  email: string;
-  password: string;
-}
-
 interface AuthContextData {
   user: User;
-  signIn(credentials: SignInCredentials): Promise<void>;
+  signIn(response: AxiosResponse): void;
   signOut(): void;
   updateUser(user: User): void;
 }
@@ -41,10 +37,8 @@ const AuthProvider: React.FC = ({ children }) => {
     return {} as AuthState;
   });
 
-  const signIn = useCallback(async ({ email, password }) => {
-    const reseponse = await api.post('sessions', { email, password });
-
-    const { token, user } = reseponse.data;
+  const signIn = useCallback(response => {
+    const { token, user } = response.data;
 
     localStorage.setItem('@GoBarber:token', token);
     localStorage.setItem('@GoBarber:user', JSON.stringify(user));
