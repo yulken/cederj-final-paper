@@ -27,6 +27,6 @@ app.use((err: Error, request: Request, response: Response, _next: NextFunction) 
 });
 
 const port = 3333;
-app.listen(port, () => {
+app.listen(port, '127.0.0.1', () => {
   log.info(`Server started on port ${port}!`);
 });
