@@ -1,4 +1,5 @@
 import AppError from '@shared/errors/AppError';
+import log from '@shared/utils/log';
 import { injectable, inject } from 'tsyringe';
 import Game from '../infra/typeorm/entities/Game';
 
@@ -16,6 +17,7 @@ export default class ShowGameService {
   ) {}
 
   public async execute({ game_id }: IRequest): Promise<Game> {
+    log.debug(`Show Game :: id: ${game_id}`);
     const game = await this.gamesRepository.findById(game_id);
     if (!game) {
       throw new AppError('Game not found', 404);

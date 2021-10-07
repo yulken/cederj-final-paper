@@ -1,3 +1,4 @@
+import log from '@shared/utils/log';
 import { injectable, inject } from 'tsyringe';
 import Game from '../infra/typeorm/entities/Game';
 
@@ -11,6 +12,7 @@ export default class IndexGameService {
   ) {}
 
   public async execute(): Promise<Game[]> {
+    log.debug('Index Game :: ');
     const games = await this.gamesRepository.index();
     return games;
   }

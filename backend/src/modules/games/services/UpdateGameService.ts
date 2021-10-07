@@ -1,4 +1,5 @@
 import AppError from '@shared/errors/AppError';
+import log from '@shared/utils/log';
 import { injectable, inject } from 'tsyringe';
 import Game from '../infra/typeorm/entities/Game';
 
@@ -11,7 +12,7 @@ interface IRequest {
 }
 
 @injectable()
-export default class UpdateProfileService {
+export default class UpdateGameService {
   constructor(
     @inject('GamesRepository')
     private gamesRepository: IGamesRepository,
@@ -22,6 +23,7 @@ export default class UpdateProfileService {
     price,
     release_date,
   }: IRequest): Promise<Game> {
+    log.debug('Update Game', JSON.stringify({ game_id, price, release_date }));
     const game = await this.gamesRepository.findById(game_id);
     if (!game) {
       throw new AppError('Game not found', 404);
