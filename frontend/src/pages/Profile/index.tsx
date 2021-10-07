@@ -151,7 +151,7 @@ const Profile: React.FC = () => {
               name="nickname"
               icon={GiCrossedSwords}
               placeholder="Nickname"
-              defaultValue={user.nickname}
+              defaultValue={user.nickname !== user.name ? user.nickname : ''}
             />
             <Input
               name="email"
