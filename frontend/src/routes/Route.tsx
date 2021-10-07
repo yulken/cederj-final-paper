@@ -22,11 +22,10 @@ const Route: React.FC<RouteProps> = ({
     <ReactDOMRoute
       {...rest}
       render={() => {
-        return isPrivate === !!user ? (
-          <Component />
-        ) : (
-          <Redirect to={{ pathname: isPrivate ? '/signin' : '/' }} />
-        );
+        if (isPrivate && !user) {
+          return <Redirect to={{ pathname: '/signin' }} />;
+        }
+        return <Component />;
       }}
     />
   );
