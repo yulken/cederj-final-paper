@@ -12,14 +12,14 @@ descrever o próprio conceito de arquitetura de software.}
 \begin{subsecao}{A arquitetura de Software}\label{subsec:arquitetura}
   \paragrafo{A Arquitetura de software de um sistema se refere às decisões de design 
   relacionadas a estrutura e comportamento geral do sistema. A arquitetura ajuda 
-  stakeholders a entenderem e analisarem como o sistema irá alcançar características 
+  \emph{stakeholders} a entenderem e analisarem como o sistema irá alcançar características 
   essenciais como manuseabilidade, disponibilidade e segurança \cite{soft_arch}.}
   \paragrafo{Ao desenvolver continuamente sem se preocupar com essas decisões, as 
   características acima se tornam mais difíceis de serem alcançadas, ocasionando 
   problemas no longo prazo que decorrem justamente da ausência dessas características. Um 
   software com pouca manuseabilidade irá requerir mais esforço e mais mão de obra para se 
   dar manutenção, enquanto um sistema com pouca segurança terá um comportamento 
-  inconsistente e alta incidência de bugs. A combinação dos dois fatores anteriores 
+  inconsistente e alta incidência de \emph{bugs}. A combinação dos dois fatores anteriores 
   acarretam em custos desnecessários e tempo perdido testando e retestando fluxos já 
   desenvolvidos previamente.}
   \paragrafo{Dito isso, de acordo com Robert C. Martin, o objetivo de uma boa arquitetura 
@@ -70,15 +70,15 @@ descrever o próprio conceito de arquitetura de software.}
   \paragrafo{Os Adaptadores de Interface (\emph{Interface Adapters}) tem como propósito 
   converter os dados entre os níveis vizinhos de uma forma que seja conveniente para 
   todos os envolvidos. Um exemplo de adaptador no sistema pode ser uma classe responsável 
-  por tratar as requisições recebidas pelos frameworks a fim de executar os casos de uso 
+  por tratar as requisições recebidas pelos \emph{Frameworks} a fim de executar os casos de uso 
   para gerenciar os usuários.}
-  \paragrafo{Por fim, os Frameworks e Drivers são geralmente, no contexto de 
+  \paragrafo{Por fim, os \emph{Frameworks} e \emph{Drivers} são geralmente, no contexto de 
   desenvolvimento web, as ferramentas usadas para acesso a banco de dados e web. Por 
   serem ferramentas já prontas, geralmente só é desenvolvido nessa camada a comunicação 
   com os níveis mais internos.}
   \paragrafo{Em resumo, um sistema que separa suas preocupações e que segue a Regra da 
   Dependência tendem ter uma arquitetura limpa, com módulos de lógica de negócios 
-  testáveis, independentes de frameworks, UI, banco de dados ou qualquer agência externa.}
+  testáveis, independentes de \emph{frameworks}, \emph{\acs{UI}}, banco de dados ou qualquer agência externa.}
   \end{subsecao}
   \end{secao}
 
@@ -119,7 +119,7 @@ descrever o próprio conceito de arquitetura de software.}
       de validação.}
     \end{subsecao}
     \begin{subsecao}{\emph{Liskov Substitution Principle}} \label{subsec:LSP}
-      \paragrafo{Segundo o Princípio da Subsituição de Liskov, as classes devem ser capazes 
+      \paragrafo{Segundo o Princípio da Subsituição de \emph{Liskov}, as classes devem ser capazes 
       de serem substituídas por suas classes derivadas sem afetar a execução do programa (e 
       vice versa). Este princípio, aliado ao \acs{OCP}, garante uma maior facilidade de 
       manutenção do código.}
@@ -155,7 +155,7 @@ descrever o próprio conceito de arquitetura de software.}
 
 \begin{secao}{Design Patterns} \label{sec:patterns}
 
-  \paragrafo{Como alguns princípios vistos na seção de Clean Architecture, os Design Patterns tem como principal função garantir a reusabilidade do código com baixo 
+  \paragrafo{Como alguns princípios vistos na seção de \emph{Clean Architecture}, os \emph{Design Patterns} tem como principal função garantir a reusabilidade do código com baixo 
   acoplamento. De fato, a proposta principal do livro está em ser um catálogo de soluções 
   para problemas de sistemas orientados a objetos.}
   \paragrafo{No total, são 23 padrões de projetos diferentes, subdividos em 3 tipos: 
@@ -163,37 +163,37 @@ descrever o próprio conceito de arquitetura de software.}
   
   \paragrafo{Padrões de Criação}
   \begin{lista}
-   \itemlista{Abstract Factory}
-   \itemlista{Builder}
-   \itemlista{Factory Method}
-   \itemlista{Prototype}
-   \itemlista{Singleton}
+   \itemlista{\emph{Abstract Factory}}
+   \itemlista{\emph{Builder}}
+   \itemlista{\emph{Factory Method}}
+   \itemlista{\emph{Prototype}}
+   \itemlista{\emph{Singleton}}
   \end{lista}
 
   \paragrafo{Padrões Estruturais}
   \begin{lista}
-    \itemlista{Adapter}
-    \itemlista{Bridge}
-    \itemlista{Composite}
-    \itemlista{Decorator}
-    \itemlista{Facade}
-    \itemlista{Flyweight}
-    \itemlista{Proxy}
+    \itemlista{\emph{Adapter}}
+    \itemlista{\emph{Bridge}}
+    \itemlista{\emph{Composite}}
+    \itemlista{\emph{Decorator}}
+    \itemlista{\emph{Facade}}
+    \itemlista{\emph{Flyweight}}
+    \itemlista{\emph{Proxy}}
   \end{lista}
   
   \paragrafo{Padrões Comportamentais}
   \begin{lista}
-    \itemlista{Chain of Responsiblity}
-    \itemlista{Command}
-    \itemlista{Interpreter}
-    \itemlista{Iterator}
-    \itemlista{Mediator}
-    \itemlista{Memento}
-    \itemlista{Observer}
-    \itemlista{State}
-    \itemlista{Strategy}
-    \itemlista{Template Method}
-    \itemlista{Visitor}
+    \itemlista{\emph{Chain of Responsiblity}}
+    \itemlista{\emph{Command}}
+    \itemlista{\emph{Interpreter}}
+    \itemlista{\emph{Iterator}}
+    \itemlista{\emph{Mediator}}
+    \itemlista{\emph{Memento}}
+    \itemlista{\emph{Observer}}
+    \itemlista{\emph{State}}
+    \itemlista{\emph{Strategy}}
+    \itemlista{\emph{Template Method}}
+    \itemlista{\emph{Visitor}}
   \end{lista}
   
   \paragrafo{Não faz parte da proposta desse trabalho usar cada um dos padrões 
