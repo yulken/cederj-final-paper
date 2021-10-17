@@ -1,0 +1,39 @@
+\definecolor{gray}{RGB}{149, 165, 166}
+\definecolor{lightblue}{RGB}{52, 152, 219}
+\definecolor{lightgreen}{RGB}{46, 204, 113}
+\definecolor{bluegreen}{RGB}{26, 188, 156}
+\definecolor{magenta}{RGB}{214, 0, 110}
+\definecolor{orange}{RGB}{230, 126, 34}
+\definecolor{purple}{RGB}{142, 68, 173}
+\definecolor{green}{RGB}{39, 174, 96}
+\definecolor{red}{RGB}{231, 76, 60}
+
+\lstdefinelanguage{JavaScript}{
+    keywords=[1]{typeof, true, false, catch, function, 
+        switch, do, else, case, break, AppError, Error,
+        string, number, Date, Promise},
+    morekeywords={[2]{@Entity, @Column, @CreateDateColumn, 
+        @UpdateDateColumn, @PrimaryGeneratedColumn, @inject,
+        @injectable}},
+    morekeywords={[3]{import, from, class, export, default, public, async, 
+        await, return, null, catch, new, throw, if, in, while, private, const,
+        constructor, implements}},
+    morekeywords= {[4]{this, JSON}}, %Classnames Only
+    morekeywords= {[5]{}}, %Classnames Only
+    morekeywords= {[6]{}}, %Classnames Only
+    keywordstyle=[1]\color{blue}\bfseries,
+    keywordstyle={[2]\color{green}\bfseries},
+    keywordstyle={[3]\color{magenta}\bfseries},
+    keywordstyle={[4]\color{purple}\bfseries},
+    identifierstyle=\color{black},
+    sensitive=false,
+    comment=[l]{//},
+    morecomment=[s]{/*}{*/},
+    commentstyle=\color{purple}\ttfamily,
+    stringstyle=\color{orange}\ttfamily,
+    morestring=[b]',
+    morestring=[b]",
+    breaklines=true,
+    basicstyle=\footnotesize\ttfamily,
+    frame=single,
+}

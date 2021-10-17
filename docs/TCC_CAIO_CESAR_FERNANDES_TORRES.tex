@@ -11,6 +11,7 @@
 \usepackage{epsf}
 \usepackage{graphicx}
 \usepackage{subfigure}
+\usepackage{listings}
 \usepackage[subfigure]{tocloft}
 \usepackage{setspace}
 \usepackage[hidelinks]{hyperref}
@@ -50,6 +51,7 @@
 \usepackage{enumitem}
 \usepackage[lmargin=3cm,rmargin=2cm,top=3.5cm,bottom=2.5cm]{geometry}
 
+\input{latex/libs/languages}
 \hyphenation{
 a-de-qua-da-men-te 
 di-men-sio-na-men-to 
@@ -66,6 +68,10 @@ di-men-sio-na-men-to
     \fancyhf{}
     \fancyhead[R]{\thepage}
     \renewcommand{\headrulewidth}{0pt}
+}
+
+\AtBeginDocument{% the counter is defined later
+  \counterwithout{lstlisting}{chapter}%
 }
 
 % --- -----------------------------------------------------------------
@@ -89,6 +95,7 @@ di-men-sio-na-men-to
 \input{latex/pretextual/abstracts}
 \input{latex/pretextual/acronym}
 \input{latex/pretextual/tableoffigures}
+\input{latex/pretextual/tableoflistings}
 \input{latex/pretextual/tableofcontents}
 
 % % --- -----------------------------------------------------------------
@@ -98,6 +105,7 @@ di-men-sio-na-men-to
 \input{latex/chapters/introduction}
 \input{latex/chapters/concepts}
 \input{latex/chapters/technologies}
+\input{latex/chapters/main}
 
 % --- -----------------------------------------------------------------
 % --- Referencias Bibliograficas. (Obrigatorio)

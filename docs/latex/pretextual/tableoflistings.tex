@@ -1,0 +1,19 @@
+\makeatletter
+% \renewcommand{\lstlistoflistings}{%
+%     \clearpage
+%     \phantomsection
+%     \addcontentsline{toc}{subsection}{Lista de Códigos}
+%     \covertitle{\MakeUppercase{Lista de Códigos}}
+%     \thispagestyle{empty}
+%     \vspace{1cm}
+%     \def\lstlistingautorefname{Alg.}
+
+% }%
+% \renewcommand\@dotsep{0.5} %default: 4.5
+
+\renewcommand*{\lstlistlistingname}{\covertitle{\MakeUppercase{Lista de Códigos}}}
+\renewcommand{\lstlistingname}{Código}
+\makeatother
+\clearpage
+\thispagestyle{empty}
+\lstlistoflistings
