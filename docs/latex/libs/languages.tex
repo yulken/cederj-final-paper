@@ -1,4 +1,3 @@
-\definecolor{gray}{RGB}{149, 165, 166}
 \definecolor{lightblue}{RGB}{52, 152, 219}
 \definecolor{lightgreen}{RGB}{46, 204, 113}
 \definecolor{bluegreen}{RGB}{26, 188, 156}
@@ -7,15 +6,16 @@
 \definecolor{purple}{RGB}{142, 68, 173}
 \definecolor{green}{RGB}{39, 174, 96}
 \definecolor{red}{RGB}{231, 76, 60}
+\definecolor{theme}{RGB}{255, 255, 240}
 
 \lstdefinelanguage{JavaScript}{
-    keywords=[1]{typeof, true, false, catch, function, 
+    keywords=[1]{typeof, true, false, function, 
         switch, do, else, case, break, AppError, Error,
         string, number, Date, Promise},
     morekeywords={[2]{@Entity, @Column, @CreateDateColumn, 
         @UpdateDateColumn, @PrimaryGeneratedColumn, @inject,
         @injectable}},
-    morekeywords={[3]{import, from, class, export, default, public, async, 
+    morekeywords={[3]{try, catch, import, interface, from, class, export, default, public, async, 
         await, return, null, catch, new, throw, if, in, while, private, const,
         constructor, implements}},
     morekeywords= {[4]{this, JSON}}, %Classnames Only
@@ -29,6 +29,7 @@
     sensitive=false,
     comment=[l]{//},
     morecomment=[s]{/*}{*/},
+    showstringspaces=false,
     commentstyle=\color{purple}\ttfamily,
     stringstyle=\color{orange}\ttfamily,
     morestring=[b]',
@@ -36,4 +37,5 @@
     breaklines=true,
     basicstyle=\footnotesize\ttfamily,
     frame=single,
+    backgroundcolor=\color{theme}
 }
