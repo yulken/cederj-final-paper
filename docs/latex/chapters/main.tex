@@ -47,7 +47,7 @@ O mesmo será feito para a dependência da camada web.}
 \paragrafo{A classe GamesController tem uma dependência explícita do módulo CreateGameService. Além disso, também 
 depende de outros casos de uso da aplicação, como a atualização de dados de jogos (UpdateGameService) e a listagem
 ou exibição de detalhes dos mesmos (IndexGameService e ShowGameService).}
-\vspace{5mm}
+
 \input{latex/codes/clean_arch/GamesController.ts.tex}
 \vspace{5mm}
 
@@ -68,7 +68,7 @@ GamesCreateBatch, que processa um arquivo csv e invoca o serviço de criação d
 nenhuma linha de código das classes responsáveis por conhecer as regras de negócios da aplicação e das responsáveis 
 por interagir com o banco de dados.}
 \paragrafo{Outro ponto é que se em algum momento for necessário trocar o \emph{Express JS}, somente a classe 
-GamesControllerBatch deverá sofrer uma manutenção, o restante, pelo menos referente a esse fluxo, continuará 
+GamesController deverá sofrer uma manutenção, o restante, pelo menos referente a esse fluxo, continuará 
 intacto.}
 \paragrafo{Outro ganho da adoção desse método está na facilidade em testar os componentes dessa aplicação. Por 
 exemplo, o módulo CreateGameService.spec.ts testa, com simplicidade, 100\% das linhas do Caso de Uso abordado.}
@@ -89,7 +89,8 @@ acesso ao banco de dados. Como essa classe é uma implementação da interface I
 \begin{secao}{Desenvolvendo uma aplicação SOLID} \label{sec:dev_solid}
 
 \paragrafo{No fluxo descrito na seção anterior já é possível encontrar alguns conceitos SOLID sendo implementados
-na aplicação web. Mesmo assim, o SOLID na loja de jogos será apresentado em um fluxo diferente: a exibição de detalhes de um jogo.}
+na aplicação web. Porém, será necessário ver outros fluxos para obter exemplos de implementação que sigam todos os 
+princípios.}
 
 \begin{subsecao}{A implementação}\label{subsec:dev_solid_implementation}
 
@@ -97,7 +98,83 @@ na aplicação web. Mesmo assim, o SOLID na loja de jogos será apresentado em u
 \input{latex/codes/solid/ShowGameService.ts.tex}
 \vspace{5mm}
   
-\paragrafo{}
+\paragrafo{O Princípio da Responsabilidade Única (\acs{SRP}) está sendo seguido na classe ShowGameService. 
+Isso ocorre pois a classe tem apenas um propósito, que é a exibição dos detalhes do jogo. Sendo assim, a mesma tem 
+um escopo mais definido em razões para necessitar de alteração: Adicionar validações, passar a buscar os jogos pelo 
+nome em vez do id, entre outros.}
+\paragrafo{Uma forma fácil de imaginar a classe acima ferindo este princípio seria se a mesma além de exibir jogos, 
+também criasse ou atualizasse os mesmos. Com isso, a manutenção dessa classe pode ser mais difícil de se realizar 
+do que a da primeira:}
+
+\vspace{5mm}
+\input{latex/codes/solid/GameService.ts.tex}
+\vspace{5mm}
+
+\paragrafo{Desta forma, o leitor pode se questionar porque a classe GamesController não viola o \acs{SRP}, visto
+ que a mesma realiza todas essas operações. Isso não se caracteriza como uma violação pois a responsabilidade da 
+classe é apenas comunicar as chamadas recebidas via HTTP para a aplicação. O \emph{Controller} desconhece os fluxos 
+de exibição, criação ou atualização, mas conhece as classes que contêm esses fluxos.}
+
+\paragrafo{Para exemplificar o Princípio Aberto Fechado (\acs{OCP}), existe um fluxo na aplicação responsável pela 
+reinvidicação de cartões pré-pagos. Para usar esse serviço, o usuário insere o código do cartão e resgata jogos ou 
+dinheiro para a compra de jogos na loja.}
+\paragrafo{Porém, ao cadastrar esses códigos no sistema, a validação para esses dois tipos de items a ser 
+reinvidicados é diferente. Os cartões de dinheiro devem resgatar somente os valores de R\$30, R\$50 ou R\$100. Para 
+validar um jogo, somente é necessário que este exista.}
+\paragrafo{Com os requisitos acima, pode-se pensar em criar a seguinte classe:}
+
+\vspace{5mm}
+\input{latex/codes/solid/CreateCodeService.ts.tex}
+\vspace{5mm}
+
+\paragrafo{Porém, essa estratégia fere o \acs{OCP}. Note que, se em algum momento no futuro for necessário 
+reinvidicar um terceiro item, teremos que adicionar mais um if ao método principal dessa classe, o que deixará o 
+código ainda mais acoplado.}
+\paragrafo{Para ilustrar isso, suponhamos que será necessário reinvidicar códigos que resgatem Pacotes de Expansão 
+para jogos já cadastrados em nossa plataforma. Essa funcionalidade extrapola o escopo desse trabalho, mas sua 
+implementação nessa classe seria algo como o exemplo a seguir:}
+
+\vspace{5mm}
+\input{latex/codes/solid/OCPviolationExample.tex}
+\vspace{5mm}
+
+\paragrafo{Para não ferir este princípio, basta estendermos a funcionalidade de uma classe base e realizar as 
+validações nas classes herdeiras.}
+\paragrafo{A seguir, temos a mesma funcionalidade, mas respeitando o \acs{OCP}:}
+
+\vspace{5mm}
+\input{latex/codes/solid/OCPExample.tex}
+\vspace{5mm}
+
+\paragrafo{Um exemplo muito recorrente dos dois pŕoximos princípios, isto é, o Princípio da Substituição de Liskov 
+(\acs{LSP}) e o Princípio da Segregação de Interfaces (\acs{ISP}), está no funcionamento das classes \emph{Repository} 
+da aplicação.}
+\paragrafo{Tomando por exemplo o \emph{Repository} de Usuários, temos a interface IUsersRepository e suas 
+implementações UsersRepository e FakeUsersRepository.}
+
+\vspace{5mm}
+\input{latex/codes/solid/IUsersRepository.ts.tex}
+\vspace{5mm}
+
+\vspace{5mm}
+\input{latex/codes/solid/UsersRepository.ts.tex}
+\vspace{5mm}
+
+\vspace{5mm}
+\input{latex/codes/solid/FakeUsersRepository.ts.tex}
+\vspace{5mm}
+
+\paragrafo{Podemos dizer que o \acs{LSP} é respeitado na relação entre esses três módulos pois qualquer uma das 
+implementações da interface IUsersRepository é válida de ser importada no módulo CreateUserService, visto que nenhuma delas quebraria a aplicação.}
+\paragrafo{O mesmo não seria verdade se, por exemplo, a interface não especificasse um método de criação de usuário.
+Na hora que esse método fosse invocado no Caso de Uso, a aplicação retornaria um erro.}
+
+\vspace{5mm}
+\input{latex/codes/solid/LSPViolation.tex}
+\vspace{5mm}
+
+\notaeditor{Nota: Completar a seção com o ISP e DIP}
+
 \end{subsecao}
 \end{secao}
 \end{capitulo}

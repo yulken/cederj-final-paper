@@ -1,0 +1,84 @@
+\begin{lstlisting}[language=JavaScript, caption={Implementação que viola o OCP},captionpos=b, label=alg:ocpviolation]
+  import { injectable, inject } from 'tsyringe';
+  import { v4 as uuidv4 } from 'uuid';
+  
+  import AppError from '@shared/errors/AppError';
+  import IGamesRepository from '@modules/games/repositories/IGamesRepository';
+  import IDlcsRepository from '@modules/games/repositories/IDlcsRepository';
+  import IGamestoreCodesRepository from '../repositories/IGamestoreCodeRepository';
+  import GamestoreCode from '../infra/typeorm/entities/GamestoreCode';
+  
+  interface IRequest {
+    cash?: number;
+    game_id?: string;
+    dlc_id?: string;
+  }
+  
+  @injectable()
+  export default class CreateCodeService {
+    constructor(
+      @inject('GamestoreCodesRepository')
+      private gamestoreCodesRepository: IGamestoreCodesRepository,
+  
+      @inject('GamesRepository')
+      private gamesRepository: IGamesRepository,
+  
+      @inject('DlcsRepository')
+      private dlcsRepository: IDlcsRepository,
+    ) {}
+  
+    public async execute(request: IRequest): Promise<GamestoreCode | undefined> {
+      let code;
+      const { cash, game_id, dlc_id } = request;
+  
+      if (!cash && !game_id && !dlc_id) {
+        throw new AppError('Internal Server Error', 500);
+      }
+  
+      if (cash) {
+        if (cash !== 30 && cash !== 50 && cash !== 100) {
+          throw new AppError('Invalid cash quantity');
+        }
+  
+        code = await this.gamestoreCodesRepository.create({
+          code: uuidv4(),
+          is_redeemed: false,
+          product: {
+            cash,
+          },
+        } as GamestoreCode);
+      }
+  
+      if (game_id) {
+        if (!(await this.gamesRepository.findById(game_id))) {
+          throw new AppError('Game does not exist');
+        }
+  
+        code = await this.gamestoreCodesRepository.create({
+          code: uuidv4(),
+          is_redeemed: false,
+          product: {
+            game: game_id,
+          },
+        } as GamestoreCode);
+      }
+
+      if (dlc_id) {
+        if (!(await this.dlcsRepository.findById(dlc_id))) {
+          throw new AppError('DLC does not exist');
+        }
+  
+        code = await this.gamestoreCodesRepository.create({
+          code: uuidv4(),
+          is_redeemed: false,
+          product: {
+            dlc: dlc_id,
+          },
+        } as GamestoreCode);
+      }
+
+      return code;
+    }
+  }
+  
+  \end{lstlisting}
