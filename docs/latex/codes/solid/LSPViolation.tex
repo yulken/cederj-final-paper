@@ -71,8 +71,8 @@ export default class CreateUserService {
     }
 
     const hashedPassword = await this.hashProvider.generateHash(password);
-    // IUsersRepository nao tem metodo create
-    // Linha a seguir com erro
+    // IUSERSREPOSITORY NAO TEM METODO CREATE
+    // LINHA A SEGUIR COM ERRO
     const user = await this.usersRepository.create({ 
       name,
       email,

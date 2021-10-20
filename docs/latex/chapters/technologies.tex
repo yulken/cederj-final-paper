@@ -1,6 +1,8 @@
 \begin{capitulo}{Tecnologias} \label{cap:technologies}
 
-\paragrafo{Neste capítulo serão abordadas as tecnologias usadas no desenvolvimento da aplicação web. A linguagem que permeará tanto o \emph{frontend} quanto o \emph{backend} será o \emph{JavaScript}.}
+\paragrafo{Neste capítulo serão abordadas as tecnologias usadas no desenvolvimento da aplicação web. A linguagem que permeará tanto 
+o \emph{frontend} quanto o \emph{backend} será o \emph{JavaScript}, porém, como as práticas abordadas neste trabalho são mais 
+direcionadas ao \emph{backend}, não será descrito com detalhes as tecnologias do \emph{frontend}.}
  
 \begin{secao}{JavaScript e TypeScript} \label{sec:pl}
 \paragrafo{O JavaScript, também conhecido como ECMAScript ou JS, é uma linguagem leve e 
@@ -11,7 +13,7 @@ linguagem de scripts para navegadores, apenas para usos pontuais em páginas web
  Porém, com o tempo, a linguagem se tornou mais popular ao longo de que desenvolvedores 
  começaram a usá-la com mais frequência para aprimorar a interacionabilidade de páginas 
  web e hoje a mesma extrapola o ambiente dos navegadores e roda também nos servidores 
- através do Node.js (Seção \ref{subsec:nodejs}).}
+ através do Node.js (Seção \ref{sec:nodejs}).}
 \paragrafo{Porém, seu design original não previa o uso em aplicações muito complexas, e 
 mesmo com as atualizações mais recentes do ECMAScript, a linguagem pode acabar sendo uma 
 opção insegura para algumas aplicações empresariais por, dentre alguns motivos, sua fraca 
@@ -23,8 +25,7 @@ permitam uma maior previsibilidade em relação ao resultado do código desenvol
 alterar o comportamento de execução do JavaScript.}
 
 \end{secao}
-\begin{secao}{Backend} \label{sec:backend}
-  \begin{subsecao}{Node.js}\label{subsec:nodejs}
+\begin{secao}{Node.js} \label{sec:nodejs}
     \paragrafo{O \emph{Node.js} é um ambiente de execução \emph{JavaScript} assíncrono e 
     orientado a eventos. Apesar de ser \emph{single threaded}, o \emph{Node.js} possui o 
     \emph{event loop}, que permite o mesmo a executar operações E/S de forma não 
@@ -40,7 +41,11 @@ alterar o comportamento de execução do JavaScript.}
     \emph{Node.js} serem escritas em \emph{JavaScript}, parte do aprendizado necessário 
     para desenvolver para o \emph{frontend} acaba sendo reutilizado no \emph{backend} sem 
     a necessidade de aprender uma nova linguagem de programação para o uso no servidor.} 
-  \end{subsecao}
+  \end{secao}
+\vspace{15mm}
+\begin{secao}{Bibliotecas e Frameworks} \label{sec:frameworks}
+  \paragrafo{Nesta seção serão descritos os \emph{frameworks} ou bibliotecas mais relevantes para o backend desta aplicação.
+  No caso, apenas aqueles que são cruciais para o funcionamento da mesma.}
   \begin{subsecao}{TypeORM e PostgreSQL}\label{subsec:typeorm}
     \paragrafo{O Sistema de Gerenciamento de Banco de Dados escolhido para este trabalho 
     foi o PostgreSQL. Dentre as razões que motivam essa escolha \cite{postgresql}:}
@@ -72,9 +77,13 @@ alterar o comportamento de execução do JavaScript.}
     acoplamento e maior qualidade de código.\cite{typeorm_data_mapper}\cite{typeorm_home}}
 
   \end{subsecao}
-\end{secao}
-\begin{secao}{Front-end}
-  \begin{subsecao}{React.js}
+  \begin{subsecao}{Express}\label{subsec:express}
+    \notaeditor{Nota: A preencher}
   \end{subsecao}
+
+  \begin{subsecao}{Tsyringe}\label{subsec:tsyringe}
+    \notaeditor{Nota: A preencher}
+  \end{subsecao}
+
 \end{secao}
 \end{capitulo}
