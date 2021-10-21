@@ -19,7 +19,7 @@ class GamesRepository implements IGamesRepository {
   }: ICreateGameDTO): Promise<Game | undefined> {
     log.debug('Games :: findByNameAndPublisherAndReleaseDate');
     return this.ormRepository.findOne({
-      where: { name, publisher, release_date },
+      where: { name, publisher, release_date: new Date(release_date) },
     });
   }
 

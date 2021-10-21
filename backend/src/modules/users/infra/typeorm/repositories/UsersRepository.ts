@@ -25,14 +25,6 @@ class UsersRepository implements IUsersRepository {
     return user;
   }
 
-  public async findByDate(date: Date): Promise<User | undefined> {
-    log.debug('Users :: findByDate');
-    const findUser = await this.ormRepository.findOne({
-      where: { date },
-    });
-    return findUser || undefined;
-  }
-
   public async create(userData: ICreateUserDTO): Promise<User> {
     log.debug('Users :: create');
     const user = this.ormRepository.create(userData);

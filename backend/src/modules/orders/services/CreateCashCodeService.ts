@@ -1,6 +1,7 @@
 import { injectable, inject } from 'tsyringe';
 import { v4 as uuidv4 } from 'uuid';
 
+import AppError from '@shared/errors/AppError';
 import IGamestoreCodesRepository from '../repositories/IGamestoreCodeRepository';
 import GamestoreCode from '../infra/typeorm/entities/GamestoreCode';
 import AbstractCodeTemplate, { IRequest } from './AbstractCodeTemplate';
@@ -25,7 +26,9 @@ export default class CreateCashCodeService extends AbstractCodeTemplate {
     return code;
   }
 
-  protected async validateData(_request: IRequest): Promise<void> {
-    return;
+  protected async validateData({ cash }: IRequest): Promise<void> {
+    if (cash !== 30 && cash !== 50 && cash !== 100) {
+      throw new AppError('Invalid cash quantity');
+    }
   }
 }
