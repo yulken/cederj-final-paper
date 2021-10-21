@@ -80,14 +80,27 @@ e invoca o serviço de criação de games para cada linha.}
 \paragrafo{Como os níveis desse fluxo foram muito bem segregados ao longo dos
 módulos, não foi necessário alterar nenhuma linha de código das classes
 responsáveis por conhecer as regras de negócios da aplicação e das responsáveis
-por interagir com o banco de dados.} \paragrafo{Outro ponto é que se em algum
-momento for necessário trocar o \emph{Express JS}, somente a classe
-GamesController deverá sofrer uma manutenção, o restante, pelo menos referente a
-esse fluxo, continuará intacto.} \paragrafo{Outro ganho da adoção desse método
-está na facilidade em testar os componentes dessa aplicação. Por exemplo, o
-módulo CreateGameService.spec.ts testa, com simplicidade, 100\% das linhas do
-Caso de Uso abordado.}
+por interagir com o banco de dados.} 
 
+\paragrafo{Outro ponto é que se em algum momento for necessário trocar o
+\emph{Express JS}, somente a classe GamesController deverá sofrer uma
+manutenção, o restante, pelo menos referente a esse fluxo, continuará intacto.} 
+
+\paragrafo{Outro ganho da adoção desse método está na facilidade em testar os
+componentes dessa aplicação. Para isso, foi criado a classe FakeGamesRepository,
+cujo propósito está em simular o acesso ao banco de dados. Como essa classe é
+uma implementação da interface IGamesRepository, também não há necessidade de
+realizar nenhuma alteração no Caso de Uso nem para a realização dos testes e nem
+será preciso caso haja a necessidade de trocar o \emph{TypeORM} por algum outro
+framework de acesso a banco de dados.}
+
+\vspace{5mm}
+\input{latex/codes/clean_arch/FakeGamesRepository.ts.tex}
+\vspace{5mm}
+
+
+\paragrafo{Com isso, o módulo CreateGameService.spec.ts testa, com
+simplicidade, 100\% das linhas do Caso de Uso abordado.}
 \vspace{5mm}
 \input{latex/codes/clean_arch/CreateGameService.spec.ts.tex}
 \vspace{5mm}
@@ -99,9 +112,6 @@ há necessidade de realizar nenhuma alteração no Caso de Uso nem para a
 realização dos testes e nem caso haja a necessidade de trocar o \emph{TypeORM}
 por algum outro framework de acesso a banco de dados.}
 
-\vspace{5mm}
-\input{latex/codes/clean_arch/FakeGamesRepository.ts.tex}
-\vspace{5mm}
 
 \end{subsecao}
 \end{secao}
