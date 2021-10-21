@@ -1,7 +1,4 @@
-\begin{lstlisting}[language=JavaScript, caption={IGamesRepository.ts},captionpos=b, label=alg:igamerepository]
-import ICreateGameDTO from '../dtos/ICreateGameDTO';
-import Game from '../infra/typeorm/entities/Game';
-
+\begin{lstlisting}[language=JavaScript, caption={A interface IGamesRepository},captionpos=b, label=alg:igamerepository]
 export default interface IGamesRepository {
   findByNameAndPublisherAndReleaseDate(
     data: ICreateGameDTO,

@@ -1,4 +1,4 @@
-\begin{lstlisting}[language=JavaScript, caption={CreateGameService.ts},captionpos=b, label=alg:creategameservice]
+\begin{lstlisting}[language=JavaScript, caption={O Caso de Uso},captionpos=b, label=alg:usecase]
   @injectable()
   export default class CreateGameService {
     constructor(
@@ -12,10 +12,6 @@
       publisher,
       release_date,
     }: ICreateGameDTO): Promise<Game> {
-      log.debug(
-        'Create Game :: ',
-        JSON.stringify({ name, price, publisher, release_date }),
-      );
       const checkGame =
         await this.gamesRepository.findByNameAndPublisherAndReleaseDate({
           name,
@@ -36,4 +32,3 @@
     }
   }
 \end{lstlisting}
-  

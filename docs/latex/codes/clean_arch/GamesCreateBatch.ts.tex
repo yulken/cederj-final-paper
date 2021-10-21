@@ -1,12 +1,4 @@
-\begin{lstlisting}[language=JavaScript, caption={GamesCreateBatch.ts},captionpos=b, label=alg:gamescreatebatch]
-import fs from 'fs';
-import { container } from 'tsyringe';
-
-import Game from '@modules/games/infra/typeorm/entities/Game';
-import CreateGameService from '@modules/games/services/CreateGameService';
-import log from '@shared/utils/log';
-import { IBatchOperation } from '@shared/infra/batch/BatchStrategy';
-
+\begin{lstlisting}[language=JavaScript, caption={Caso de Uso reaproveitado para processamento de arquivos},captionpos=b, label=alg:gamescreatebatch]
 export default class GamesCreateBatch implements IBatchOperation {
   public async exec(): Promise<void> {
     if (!process.argv[3]) {
@@ -26,7 +18,7 @@ export default class GamesCreateBatch implements IBatchOperation {
 
     const createGame = container.resolve(CreateGameService);
 
-    const promises = lines
+    await Promise.all(lines
       .filter(line => line.length !== 0)
       .map(async (line: string): Promise<Game | boolean> => {
         const [name, price, publisher, raw_release_date] = line.split(',');
@@ -46,9 +38,7 @@ export default class GamesCreateBatch implements IBatchOperation {
         } catch (error) {
           return log.error(error);
         }
-      });
-
-    await Promise.all(promises);
+      }));
   }
 }
 \end{lstlisting}

@@ -1,15 +1,9 @@
-\begin{lstlisting}[language=JavaScript, caption={CreateGameService.spec.ts},captionpos=b, label=alg:creategametest]
-
-import CreateGameService from '@modules/games/services/CreateGameService';
-import AppError from '@shared/errors/AppError';
-import FakeGamesRepository from '../fakes/repositories/FakeGamesRepository';
-
-let fakeGamesRepository: FakeGamesRepository;
-let createGame: CreateGameService;
-
+\begin{lstlisting}[language=JavaScript, caption={Módulo de teste },captionpos=b, label=alg:creategametest]
 describe('CreateGame', () => {
   beforeEach(() => {
     fakeGamesRepository = new FakeGamesRepository();
+    //FakeRepository passado como dependencia \/ na instanciacao 
+    //do Caso de Uso
     createGame = new CreateGameService(fakeGamesRepository);
   });
   it('should be able to create a new game', async () => {
