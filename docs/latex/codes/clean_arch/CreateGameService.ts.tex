@@ -1,12 +1,4 @@
 \begin{lstlisting}[language=JavaScript, caption={CreateGameService.ts},captionpos=b, label=alg:creategameservice]
-  import { injectable, inject } from 'tsyringe';
-
-  import AppError from '@shared/errors/AppError';
-  import log from '@shared/utils/log';
-  import Game from '../infra/typeorm/entities/Game';
-  import IGamesRepository from '../repositories/IGamesRepository';
-  import ICreateGameDTO from '../dtos/ICreateGameDTO';
-  
   @injectable()
   export default class CreateGameService {
     constructor(
@@ -43,6 +35,5 @@
       return game;
     }
   }
-  
-  \end{lstlisting}
+\end{lstlisting}
   

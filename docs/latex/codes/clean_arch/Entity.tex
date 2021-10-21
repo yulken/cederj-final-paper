@@ -1,12 +1,4 @@
-\begin{lstlisting}[language=JavaScript, caption={Game.ts},captionpos=b, label=alg:game]
-import {
-    Entity,
-    Column,
-    PrimaryGeneratedColumn,
-    CreateDateColumn,
-    UpdateDateColumn,
-    } from 'typeorm';
-    
+\begin{lstlisting}[language=JavaScript, caption={A Entidade Game},captionpos=b, label=alg:entity]
     @Entity('games')
     export default class Game {
     @PrimaryGeneratedColumn('uuid')
