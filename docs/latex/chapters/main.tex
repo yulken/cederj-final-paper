@@ -1,84 +1,103 @@
 \begin{capitulo}{Usando os conceitos em uma aplicação Web} \label{cap:main}
 
-\paragrafo{O propósito desse capítulo é demonstrar como os conceitos explicitados 
-no Capítulo \ref{cap:concepts} podem ser utilizados na construção de uma aplicação web.}
+\paragrafo{O propósito desse capítulo é demonstrar como os conceitos
+explicitados no Capítulo \ref{cap:concepts} podem ser utilizados na construção
+de uma aplicação web.}
 \begin{secao}{Desenvolvendo a Arquitetura Limpa} \label{sec:dev_carch}
 
-\paragrafo{Na Seção \ref{subsec:clean-architecture} foi explicado a Regra da 
-Dependência e o diagrama da Arquitetura Limpa (Figura \ref{fig:carch}). Esses 
-príncipios foram mantidos na aplicação desenvolvida para este trabalho e, para 
-exemplificar o uso desses conceitos, tomamos como exemplo o fluxo de inserção de novos jogos na plataforma.}
+\paragrafo{Na Seção \ref{subsec:clean-architecture} foi explicado a Regra da
+Dependência e o diagrama da Arquitetura Limpa (Figura \ref{fig:carch}). Esses
+príncipios foram mantidos na aplicação desenvolvida para este trabalho e, para
+exemplificar o uso desses conceitos, tomamos como exemplo o fluxo de inserção de
+novos jogos na plataforma}
+
 \begin{subsecao}{A implementação}\label{subsec:dev_carch_implementation}
-\paragrafo{Primeiramente, temos as Regras de Negócio de Empresa, ou, como implementado na aplicação, as 
-Entidades. No contexto delineado, a Entidade abordada é a classe Game.
-Assim como descrito na Seção \ref{subsec:clean-architecture}, a Entidade Game, como um 
-componente de alto nível, não deve depende de nenhum outro ponto da apĺicação web.}
+\paragrafo{Primeiramente, temos as Regras de Negócio de Empresa, ou, como
+implementado na aplicação, as Entidades. No contexto delineado, a Entidade
+abordada é a classe Game. Assim como descrito na Seção
+\ref{subsec:clean-architecture}, a Entidade Game, como um componente de alto
+nível, não deve depender de nenhum outro ponto da aplicação web.}
 
 \vspace{10mm}
 \input{latex/codes/clean_arch/Entity.tex}
 \vspace{5mm}
 
-\paragrafo{Já a classe que será o Caso de Uso, ou a Regra de Negócio da Aplicação, é a CreateGameService. 
-Nota-se que essa classe possui como dependência a entidade Game, assim como previsto na Regra da Dependência.}
+\paragrafo{Já a classe que será o Caso de Uso, ou a Regra de Negócio da
+Aplicação, é a CreateGameService. Nota-se que essa classe possui como
+dependência a entidade Game, assim como previsto na Regra da Dependência.}
 
 \vspace{10mm}
 \input{latex/codes/clean_arch/CreateGameService.ts.tex}
 \vspace{5mm}
 
-\paragrafo{A princípio,é plausível assumir que esta classe estaria violando a Regra da Dependência ao importar o 
-módulo IGamesRepository, visto que \emph{Repositories} são módulos de nível inferior aos Casos de Uso. Porém, ao 
-inspencionar o conteúdo deste módulo, verifica-se que o mesmo se trata de uma interface.}
+\paragrafo{A princípio, é plausível assumir que esta classe estaria violando a
+Regra da Dependência ao importar o módulo IGamesRepository, visto que
+\emph{Repositories} são módulos de nível inferior aos Casos de Uso. Porém, ao
+inspencionar o conteúdo deste módulo, verifica-se que o mesmo se trata de uma
+interface.}
 
 \vspace{10mm}
 \input{latex/codes/clean_arch/IGamesRepository.ts.tex}
 \vspace{5mm}
 
-\paragrafo{Por fim, temos uma classe que implementa a interface acima. O módulo GamesRepository será uma das 
-classes responsáveis por se conectar com o \emph{TypeORM}, um dos Frameworks ou Drivers de nossa applicação. Por isso, 
-essa classe se encaixa no arquétipo de Adaptadores de Interface.}
+\paragrafo{Por fim, temos uma classe que implementa a interface acima. O módulo
+GamesRepository será uma das classes responsáveis por se conectar com o
+\emph{TypeORM}, um dos Frameworks ou Drivers de nossa aplicação. Por isso, essa
+classe se encaixa no arquétipo de Adaptadores de Interface.}
 
 \vspace{10mm}
 \input{latex/codes/clean_arch/GamesRepository.ts.tex}
 \vspace{5mm}
 
-\paragrafo{Até aqui, todos os níveis apresentados na Figura \ref{fig:carch} já foram representados através das 
-classes mencionadas nesta seção, do nível mais alto da aplicação até a dependência da camada de banco de dados. 
-O mesmo será feito para a dependência da camada web.}
-\paragrafo{A classe GamesController tem uma dependência explícita do módulo CreateGameService. Além disso, também 
-depende de outros casos de uso da aplicação, como a atualização de dados de jogos (UpdateGameService) e a listagem
-ou exibição de detalhes dos mesmos (IndexGameService e ShowGameService).}
+\paragrafo{Até aqui, todos os níveis apresentados na Figura \ref{fig:carch} já
+foram representados através das classes mencionadas nesta seção, do nível mais
+alto da aplicação até a dependência da camada de banco de dados. O mesmo será
+feito para a dependência da camada web.} \paragrafo{A classe GamesController tem
+uma dependência explícita do módulo CreateGameService. Além disso, também
+depende de outros casos de uso da aplicação, como a atualização de dados de
+jogos (UpdateGameService) e a listagem ou exibição de detalhes dos mesmos
+(IndexGameService e ShowGameService).}
 
 \input{latex/codes/clean_arch/GamesController.ts.tex}
 \vspace{5mm}
 
-\paragrafo{Assim como a classe GamesRepository, a GamesController é um tipo de Adaptador de Interface que se 
-comunica diretamente com o \emph{Express JS}, nosso framework que lida com as requisições HTTP.}
+\paragrafo{Assim como a classe GamesRepository, a GamesController é um tipo de
+Adaptador de Interface que se comunica diretamente com o \emph{Express JS},
+nosso framework que lida com as requisições HTTP.}
 \end{subsecao}
-\begin{subsecao}{Os benefícios}\label{subsec:dev_carch_benefits}
-\paragrafo{Os benefícios de adotar esse método de desenvolvimento se torna óbvio ao necessitar reutilizar o caso 
-de uso em algum outro fluxo da aplicação. Neste caso, supondo que haja a necessidade de cadastrar grandes volumes 
-de jogos na nossa plataforma, seria mais conveniente passar toda essa informação através de um arquivo do que 
-inseri-la manualmente através de requisições Web. Por conta disso, foi criado uma nova classe, 
-GamesCreateBatch, que processa um arquivo csv e invoca o serviço de criação de games para cada linha.}
+\begin{subsecao}{Os benefícios}\label{subsec:dev_carch_benefits} \paragrafo{O
+benefício de adotar esse método de desenvolvimento se torna óbvio ao necessitar
+reutilizar o caso de uso em algum outro fluxo da aplicação. Neste caso, supondo
+que haja a necessidade de cadastrar grandes volumes de jogos na nossa
+plataforma, seria mais conveniente passar toda essa informação através de um
+arquivo do que inseri-la manualmente através de requisições Web. Por conta
+disso, foi criado uma nova classe, GamesCreateBatch, que processa um arquivo csv
+e invoca o serviço de criação de games para cada linha.}
 \vspace{5mm}
 \input{latex/codes/clean_arch/GamesCreateBatch.ts.tex}
 \vspace{5mm}
 
-\paragrafo{Como os níveis desse fluxo foram muito bem segregados ao longo dos módulos, não foi necessário alterar 
-nenhuma linha de código das classes responsáveis por conhecer as regras de negócios da aplicação e das responsáveis 
-por interagir com o banco de dados.}
-\paragrafo{Outro ponto é que se em algum momento for necessário trocar o \emph{Express JS}, somente a classe 
-GamesController deverá sofrer uma manutenção, o restante, pelo menos referente a esse fluxo, continuará 
-intacto.}
-\paragrafo{Outro ganho da adoção desse método está na facilidade em testar os componentes dessa aplicação. Por 
-exemplo, o módulo CreateGameService.spec.ts testa, com simplicidade, 100\% das linhas do Caso de Uso abordado.}
+\paragrafo{Como os níveis desse fluxo foram muito bem segregados ao longo dos
+módulos, não foi necessário alterar nenhuma linha de código das classes
+responsáveis por conhecer as regras de negócios da aplicação e das responsáveis
+por interagir com o banco de dados.} \paragrafo{Outro ponto é que se em algum
+momento for necessário trocar o \emph{Express JS}, somente a classe
+GamesController deverá sofrer uma manutenção, o restante, pelo menos referente a
+esse fluxo, continuará intacto.} \paragrafo{Outro ganho da adoção desse método
+está na facilidade em testar os componentes dessa aplicação. Por exemplo, o
+módulo CreateGameService.spec.ts testa, com simplicidade, 100\% das linhas do
+Caso de Uso abordado.}
 
 \vspace{5mm}
 \input{latex/codes/clean_arch/CreateGameService.spec.ts.tex}
 \vspace{5mm}
 
-\paragrafo{Para auxiliar nesse propósito, foi criado a classe FakeGamesRepository, cujo propósito está em simular o 
-acesso ao banco de dados. Como essa classe é uma implementação da interface IGamesRepository, também não há necessidade de realizar nenhuma alteração no Caso de Uso nem para a realização dos testes e nem caso haja a necessidade de trocar o \emph{TypeORM} por algum outro framework de acesso a banco de dados.}
+\paragrafo{Para auxiliar nesse propósito, foi criado a classe
+FakeGamesRepository, cujo propósito está em simular o acesso ao banco de dados.
+Como essa classe é uma implementação da interface IGamesRepository, também não
+há necessidade de realizar nenhuma alteração no Caso de Uso nem para a
+realização dos testes e nem caso haja a necessidade de trocar o \emph{TypeORM}
+por algum outro framework de acesso a banco de dados.}
 
 \vspace{5mm}
 \input{latex/codes/clean_arch/FakeGamesRepository.ts.tex}
@@ -88,8 +107,9 @@ acesso ao banco de dados. Como essa classe é uma implementação da interface I
 \end{secao}
 \begin{secao}{Desenvolvendo uma aplicação SOLID} \label{sec:dev_solid}
 
-\paragrafo{No fluxo descrito na seção anterior já é possível encontrar alguns conceitos SOLID sendo implementados
-na aplicação web. Porém, será necessário ver outros fluxos para obter exemplos de implementação que sigam todos os 
+\paragrafo{No fluxo descrito na seção anterior já é possível encontrar alguns
+conceitos SOLID sendo implementados na aplicação web. Porém, será necessário ver
+outros fluxos para obter exemplos de implementação que sigam todos os
 princípios.}
 
 \begin{subsecao}{A implementação}\label{subsec:dev_solid_implementation}
@@ -98,59 +118,67 @@ princípios.}
 \input{latex/codes/solid/ShowGameService.ts.tex}
 \vspace{5mm}
   
-\paragrafo{O Princípio da Responsabilidade Única (\acs{SRP}) está sendo seguido na classe ShowGameService. 
-Isso ocorre pois a classe tem apenas um propósito, que é a exibição dos detalhes do jogo. Sendo assim, a mesma tem 
-um escopo mais definido em razões para necessitar de alteração: Adicionar validações, passar a buscar os jogos pelo 
-nome em vez do id, entre outros.}
-\paragrafo{Uma forma fácil de imaginar a classe acima ferindo este princípio seria se a mesma além de exibir jogos, 
-também criasse ou atualizasse os mesmos. Com isso, a manutenção dessa classe pode ser mais difícil de se realizar 
-do que a da primeira:}
+\paragrafo{O Princípio da Responsabilidade Única (\acs{SRP}) está sendo seguido
+na classe ShowGameService. Isso ocorre pois a classe tem apenas um propósito,
+que é a exibição dos detalhes do jogo. Sendo assim, a mesma tem um escopo mais
+definido em razões para necessitar de alteração: Adicionar validações, passar a
+buscar os jogos pelo nome em vez do id, entre outros.} \paragrafo{Uma forma
+fácil de imaginar a classe acima ferindo este princípio seria se a mesma além de
+exibir jogos, também criasse ou atualizasse os mesmos. Com isso, a manutenção
+dessa classe pode ser mais difícil de se realizar do que a da primeira:}
 
 \vspace{5mm}
 \input{latex/codes/solid/GameService.ts.tex}
 \vspace{5mm}
 
-\paragrafo{Desta forma, o leitor pode se questionar porque a classe GamesController não viola o \acs{SRP}, visto
- que a mesma realiza todas essas operações. Isso não se caracteriza como uma violação pois a responsabilidade da 
-classe é apenas comunicar as chamadas recebidas via HTTP para a aplicação. O \emph{Controller} desconhece os fluxos 
-de exibição, criação ou atualização, mas conhece as classes que contêm esses fluxos.}
+\paragrafo{Desta forma, o leitor pode se questionar porque a classe
+ GamesController não viola o \acs{SRP}, visto que a mesma realiza todas essas
+ operações. Isso não se caracteriza como uma violação pois a responsabilidade da
+ classe é apenas comunicar as chamadas recebidas via HTTP para a aplicação. O
+ \emph{Controller} desconhece os fluxos de exibição, criação ou atualização, mas
+ conhece as classes que contêm esses fluxos.}
 
-\paragrafo{Para exemplificar o Princípio Aberto Fechado (\acs{OCP}), existe um fluxo na aplicação responsável pela 
-reinvidicação de cartões pré-pagos. Para usar esse serviço, o usuário insere o código do cartão e resgata jogos ou 
-dinheiro para a compra de jogos na loja.}
-\paragrafo{Porém, ao cadastrar esses códigos no sistema, a validação para esses dois tipos de items a ser 
-reinvidicados é diferente. Os cartões de dinheiro devem resgatar somente os valores de R\$30, R\$50 ou R\$100. Para 
-validar um jogo, somente é necessário que este exista.}
+\paragrafo{Para exemplificar o Princípio Aberto Fechado (\acs{OCP}), existe um
+fluxo na aplicação responsável pela reinvidicação de cartões pré-pagos. Para
+usar esse serviço, o usuário insere o código do cartão e resgata jogos ou
+dinheiro para a compra de jogos na loja.} \paragrafo{Porém, ao cadastrar esses
+códigos no sistema, a validação para esses dois tipos de items a ser
+reinvidicados é diferente. Os cartões de dinheiro devem resgatar somente os
+valores de R\$30, R\$50 ou R\$100. Para validar um jogo, somente é necessário
+que este exista.}
 \paragrafo{Com os requisitos acima, pode-se pensar em criar a seguinte classe:}
 
 \vspace{5mm}
 \input{latex/codes/solid/CreateCodeService.ts.tex}
 \vspace{5mm}
 
-\paragrafo{Porém, essa estratégia fere o \acs{OCP}. Note que, se em algum momento no futuro for necessário 
-reinvidicar um terceiro item, teremos que adicionar mais um if ao método principal dessa classe, o que deixará o 
-código ainda mais acoplado.}
-\paragrafo{Para ilustrar isso, suponhamos que será necessário reinvidicar códigos que resgatem Pacotes de Expansão 
-para jogos já cadastrados em nossa plataforma. Essa funcionalidade extrapola o escopo desse trabalho, mas sua 
-implementação nessa classe seria algo como o exemplo a seguir:}
+\paragrafo{Porém, essa estratégia fere o \acs{OCP}. Note que, se em algum
+momento no futuro for necessário reinvidicar um terceiro item, teremos que
+adicionar mais um if ao método principal dessa classe, o que deixará o código
+ainda mais acoplado.} \paragrafo{Para ilustrar isso, suponhamos que será
+necessário reinvidicar códigos que resgatem Pacotes de Expansão para jogos já
+cadastrados em nossa plataforma. Essa funcionalidade extrapola o escopo desse
+trabalho, mas sua implementação nessa classe seria algo como o exemplo a
+seguir:}
 
 \vspace{5mm}
 \input{latex/codes/solid/OCPviolationExample.tex}
 \vspace{5mm}
 
-\paragrafo{Para não ferir este princípio, basta estendermos a funcionalidade de uma classe base e realizar as 
-validações nas classes herdeiras.}
-\paragrafo{A seguir, temos a mesma funcionalidade, mas respeitando o \acs{OCP}:}
+\paragrafo{Para não ferir este princípio, basta estendermos a funcionalidade de
+uma classe base e realizar as validações nas classes herdeiras.} \paragrafo{A
+seguir, temos a mesma funcionalidade, mas respeitando o \acs{OCP}:}
 
 \vspace{5mm}
 \input{latex/codes/solid/OCPExample.tex}
 \vspace{5mm}
 
-\paragrafo{Um exemplo muito recorrente dos dois pŕoximos princípios, isto é, o Princípio da Substituição de Liskov 
-(\acs{LSP}) e o Princípio da Segregação de Interfaces (\acs{ISP}), está no funcionamento das classes \emph{Repository} 
-da aplicação.}
-\paragrafo{Tomando por exemplo o \emph{Repository} de Usuários, temos a interface IUsersRepository e suas 
-implementações UsersRepository e FakeUsersRepository.}
+\paragrafo{Um exemplo muito recorrente dos dois pŕoximos princípios, isto é, o
+Princípio da Substituição de Liskov (\acs{LSP}) e o Princípio da Segregação de
+Interfaces (\acs{ISP}), está no funcionamento das classes \emph{Repository} da
+aplicação.} \paragrafo{Tomando por exemplo o \emph{Repository} de Usuários,
+temos a interface IUsersRepository e suas implementações UsersRepository e
+FakeUsersRepository.}
 
 \vspace{5mm}
 \input{latex/codes/solid/IUsersRepository.ts.tex}
@@ -164,10 +192,12 @@ implementações UsersRepository e FakeUsersRepository.}
 \input{latex/codes/solid/FakeUsersRepository.ts.tex}
 \vspace{5mm}
 
-\paragrafo{Podemos dizer que o \acs{LSP} é respeitado na relação entre esses três módulos pois qualquer uma das 
-implementações da interface IUsersRepository é válida de ser importada no módulo CreateUserService, visto que nenhuma delas quebraria a aplicação.}
-\paragrafo{O mesmo não seria verdade se, por exemplo, a interface não especificasse um método de criação de usuário.
-Na hora que esse método fosse invocado no Caso de Uso, a aplicação retornaria um erro.}
+\paragrafo{Podemos dizer que o \acs{LSP} é respeitado na relação entre esses
+três módulos pois qualquer uma das implementações da interface IUsersRepository
+é válida de ser importada no módulo CreateUserService, visto que nenhuma delas
+quebraria a aplicação.} \paragrafo{O mesmo não seria verdade se, por exemplo, a
+interface não especificasse um método de criação de usuário. Na hora que esse
+método fosse invocado no Caso de Uso, a aplicação retornaria um erro.}
 
 \vspace{5mm}
 \input{latex/codes/solid/LSPViolation.tex}

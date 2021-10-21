@@ -1,80 +1,88 @@
 \begin{capitulo}{Tecnologias} \label{cap:technologies}
 
-\paragrafo{Neste capítulo serão abordadas as tecnologias usadas no desenvolvimento da aplicação web. A linguagem que permeará tanto 
-o \emph{frontend} quanto o \emph{backend} será o \emph{JavaScript}, porém, como as práticas abordadas neste trabalho são mais 
-direcionadas ao \emph{backend}, não será descrito com detalhes as tecnologias do \emph{frontend}.}
+\paragrafo{Neste capítulo serão abordadas as tecnologias usadas no
+desenvolvimento da aplicação web. A linguagem que permeará tanto o
+\emph{frontend} quanto o \emph{backend} será o \emph{JavaScript}, porém, como as
+práticas abordadas neste trabalho são mais direcionadas ao \emph{backend}, não
+será descrito com detalhes as tecnologias do \emph{frontend}.}
  
-\begin{secao}{JavaScript e TypeScript} \label{sec:pl}
-\paragrafo{O JavaScript, também conhecido como ECMAScript ou JS, é uma linguagem leve e 
-interpretada que pode ser executada tanto \emph{client-side}, como nos navegadores, 
-quanto \emph{server-side}, como em servidores remotos.}
-\paragrafo{Na época de sua padronização, era esperado que fosse apenas uma simples 
-linguagem de scripts para navegadores, apenas para usos pontuais em páginas web\cite{typescript}.
- Porém, com o tempo, a linguagem se tornou mais popular ao longo de que desenvolvedores 
- começaram a usá-la com mais frequência para aprimorar a interacionabilidade de páginas 
- web e hoje a mesma extrapola o ambiente dos navegadores e roda também nos servidores 
- através do Node.js (Seção \ref{sec:nodejs}).}
-\paragrafo{Porém, seu design original não previa o uso em aplicações muito complexas, e 
-mesmo com as atualizações mais recentes do ECMAScript, a linguagem pode acabar sendo uma 
-opção insegura para algumas aplicações empresariais por, dentre alguns motivos, sua fraca 
-tipagem.}
-\paragrafo{Por essa desvantagem característica do JavaScript, o \emph{TypeScript} surge 
-como uma proposta de ser uma camada sobre o JavaScript que permita checagem estática de 
-tipos. Desta forma, a linguagem garante, durante o desenvolvimento, alguns recursos que 
-permitam uma maior previsibilidade em relação ao resultado do código desenvolvido sem 
-alterar o comportamento de execução do JavaScript.}
+\begin{secao}{JavaScript e TypeScript} \label{sec:pl} \paragrafo{O JavaScript,
+também conhecido como ECMAScript ou JS, é uma linguagem leve e interpretada que
+pode ser executada tanto \emph{client-side}, como nos navegadores, quanto
+\emph{server-side}, como em servidores remotos.} \paragrafo{Na época de sua
+padronização, era esperado que fosse apenas uma simples linguagem de scripts
+para navegadores, apenas para usos pontuais em páginas web\cite{typescript}.
+Porém, com o tempo, a linguagem se tornou mais popular ao longo de que
+desenvolvedores começaram a usá-la com mais frequência para aprimorar a
+interacionabilidade de páginas web e hoje a mesma extrapola o ambiente dos
+navegadores e roda também nos servidores através do Node.js (Seção
+\ref{sec:nodejs}).} \paragrafo{Porém, seu design original não previa o uso em
+aplicações muito complexas, e mesmo com as atualizações mais recentes do
+ECMAScript, a linguagem pode acabar sendo uma opção insegura para algumas
+aplicações empresariais por, dentre alguns motivos, sua fraca tipagem.}
+\paragrafo{Por essa desvantagem característica do JavaScript, o
+\emph{TypeScript} surge como uma proposta de ser uma camada sobre o JavaScript
+que permita checagem estática de tipos. Desta forma, a linguagem garante,
+durante o desenvolvimento, alguns recursos que permitam uma maior
+previsibilidade em relação ao resultado do código desenvolvido sem alterar o
+comportamento de execução do JavaScript.}
 
 \end{secao}
-\begin{secao}{Node.js} \label{sec:nodejs}
-    \paragrafo{O \emph{Node.js} é um ambiente de execução \emph{JavaScript} assíncrono e 
-    orientado a eventos. Apesar de ser \emph{single threaded}, o \emph{Node.js} possui o 
-    \emph{event loop}, que permite o mesmo a executar operações E/S de forma não 
-    bloqueante ao delegar as mesmas para o kernel do sistema sempre que possível. Ou 
-    seja, o \emph{event loop} garante que não haja a necessidade de que o código \emph{JavaScript} 
-    espere o término da execução de algum processo não-\emph{JavaScript} para executar a 
-    próxima instrução\cite{nodejs}.}
-    \paragrafo{Devido à esse diferencial, o \emph{Node.js} pode lidar com um número 
-    elevado de requisições simultâneas em um único servidor sem a necessidade de engessar 
-    o projeto com a gerência de threads simultâneas, o que simplifica o trabalho do 
-    desenvolvedor.}
-    \paragrafo{Uma outra vantagem em relação a outros ambientes é que, por aplicações 
-    \emph{Node.js} serem escritas em \emph{JavaScript}, parte do aprendizado necessário 
-    para desenvolver para o \emph{frontend} acaba sendo reutilizado no \emph{backend} sem 
-    a necessidade de aprender uma nova linguagem de programação para o uso no servidor.} 
+\begin{secao}{Node.js} \label{sec:nodejs} \paragrafo{O \emph{Node.js} é um
+    ambiente de execução \emph{JavaScript} assíncrono e orientado a eventos.
+    Apesar de ser \emph{single threaded}, o \emph{Node.js} possui o \emph{event
+    loop}, que permite o mesmo a executar operações E/S de forma não bloqueante
+    ao delegar as mesmas para o kernel do sistema sempre que possível. Ou seja,
+    o \emph{event loop} garante que não haja a necessidade de que o código
+    \emph{JavaScript} espere o término da execução de algum processo
+    não-\emph{JavaScript} para executar a próxima instrução\cite{nodejs}.}
+    \paragrafo{Devido à esse diferencial, o \emph{Node.js} pode lidar com um
+    número elevado de requisições simultâneas em um único servidor sem a
+    necessidade de engessar o projeto com a gerência de threads simultâneas, o
+    que simplifica o trabalho do desenvolvedor.} \paragrafo{Uma outra vantagem
+    em relação a outros ambientes é que, por aplicações \emph{Node.js} serem
+    escritas em \emph{JavaScript}, parte do aprendizado necessário para
+    desenvolver para o \emph{frontend} acaba sendo reutilizado no \emph{backend}
+    sem a necessidade de aprender uma nova linguagem de programação para o uso
+    no servidor.} 
   \end{secao}
 \vspace{15mm}
-\begin{secao}{Bibliotecas e Frameworks} \label{sec:frameworks}
-  \paragrafo{Nesta seção serão descritos os \emph{frameworks} ou bibliotecas mais relevantes para o backend desta aplicação.
-  No caso, apenas aqueles que são cruciais para o funcionamento da mesma.}
-  \begin{subsecao}{TypeORM e PostgreSQL}\label{subsec:typeorm}
-    \paragrafo{O Sistema de Gerenciamento de Banco de Dados escolhido para este trabalho 
-    foi o PostgreSQL. Dentre as razões que motivam essa escolha \cite{postgresql}:}
+\begin{secao}{Bibliotecas e Frameworks} \label{sec:frameworks} \paragrafo{Nesta
+  seção serão descritos os \emph{frameworks} ou bibliotecas mais relevantes para
+  o backend desta aplicação. No caso, apenas aqueles que são cruciais para o
+  funcionamento da mesma.}
+  \begin{subsecao}{TypeORM e PostgreSQL}\label{subsec:typeorm} \paragrafo{O
+    Sistema de Gerenciamento de Banco de Dados escolhido para este trabalho foi
+    o PostgreSQL. Dentre as razões que motivam essa escolha \cite{postgresql}:}
     \begin{lista}
       \itemlista{Seu uso é gratuito}
       \itemlista{É popular}
       \itemlista{\emph{Open Source} com uma comunidade ativa} 
       \itemlista{É um projeto sólido com mais de 30 anos de desenvolvimento}
-      \itemlista{Bastante compatibilidade com \acs{ORM}s das tecnologias apresentadas}
+      \itemlista{Bastante compatibilidade com \acs{ORM}s das tecnologias
+      apresentadas}
      \end{lista}
-    \paragrafo{Para manipularmos o acesso ao banco de dados PostgreSQL, iremos um 
-    utilizar uma ferramenta \emph{Object-Relational Mapping}, ou \acs{ORM}. O que motiva 
-    esse uso é a facilidade que as ferramentas \acs{ORM}s pode trazer ao processo de 
-    desenvolvimento ao abstrair completamente a camada de comunicação com o Banco de 
-    Dados.}
-    \paragrafo{Isto é, o desenvolvedor não precisa conhecer muitos detalhes de 
-    implementação ou sintaxe de algum Sistema de Banco de Dados específico, além de não 
-    precisar se preocupar com a sanitização das \emph{queries} ou com outros aspectos 
-    relacionados às chamadas ao banco de dados.}
-    \paragrafo{O \acs{ORM} utilizado nesse trabalho será o TypeORM, um \emph{framework} voltado 
-    principalmente para o TypeScript. A preferência por esse \acs{ORM} se dá por vários 
-    motivos. Primeiramente, a compatibilidade com os principais bancos de dados 
-    relacionais, com o MongoDB (em estado experimental) e com as principais plataformas 
-    onde o JavaScript é suportado (Node.js, Navegador, React Native, entre outros).\cite{typeorm_home}}
-    \paragrafo{Mas o motivo principal para a escolha desse \acs{ORM} está na sua adoção 
-    pelo padrão Data Mapper. Este padrão de \acs{ORM} está bastante relacionado com as 
-    ideias de facilidade de manutenção já abordadas no Capítulo \ref{cap:concepts}, visto 
-    que o uso do mesmo promove a separação de preocupações e, por consequência, baixo 
-    acoplamento e maior qualidade de código.\cite{typeorm_data_mapper}\cite{typeorm_home}}
+    \paragrafo{Para manipularmos o acesso ao banco de dados PostgreSQL, iremos
+    um utilizar uma ferramenta \emph{Object-Relational Mapping}, ou \acs{ORM}. O
+    que motiva esse uso é a facilidade que as ferramentas \acs{ORM}s pode trazer
+    ao processo de desenvolvimento ao abstrair completamente a camada de
+    comunicação com o Banco de Dados.} \paragrafo{Isto é, o desenvolvedor não
+    precisa conhecer muitos detalhes de implementação ou sintaxe de algum
+    Sistema de Banco de Dados específico, além de não precisar se preocupar com
+    a sanitização das \emph{queries} ou com outros aspectos relacionados às
+    chamadas ao banco de dados.} \paragrafo{O \acs{ORM} utilizado nesse trabalho
+    será o TypeORM, um \emph{framework} voltado principalmente para o
+    TypeScript. A preferência por esse \acs{ORM} se dá por vários motivos.
+    Primeiramente, a compatibilidade com os principais bancos de dados
+    relacionais, com o MongoDB (em estado experimental) e com as principais
+    plataformas onde o JavaScript é suportado (Node.js, Navegador, React Native,
+    entre outros).\cite{typeorm_home}} \paragrafo{Mas o motivo principal para a
+    escolha desse \acs{ORM} está na sua adoção pelo padrão Data Mapper. Este
+    padrão de \acs{ORM} está bastante relacionado com as ideias de facilidade de
+    manutenção já abordadas no Capítulo \ref{cap:concepts}, visto que o uso do
+    mesmo promove a separação de preocupações e, por consequência, baixo
+    acoplamento e maior qualidade de
+    código.\cite{typeorm_data_mapper}\cite{typeorm_home}}
 
   \end{subsecao}
   \begin{subsecao}{Express}\label{subsec:express}
