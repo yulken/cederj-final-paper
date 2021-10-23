@@ -1,0 +1,107 @@
+
+\paragrafo{Na Seção \ref{subsec:clean-architecture} foi explicado a Regra da
+Dependência e o diagrama da Arquitetura Limpa (Figura \ref{fig:carch}). Esses
+príncipios foram mantidos na aplicação desenvolvida para este trabalho e, para
+exemplificar o uso desses conceitos, tomamos como exemplo o fluxo de inserção de
+novos jogos na plataforma}
+
+\begin{subsecao}{A implementação}\label{subsec:dev_carch_implementation}
+\paragrafo{Primeiramente, temos as Regras de Negócio de Empresa, ou, como
+implementado na aplicação, as Entidades. No contexto delineado, a Entidade
+abordada é a classe Game. Assim como descrito na Seção
+\ref{subsec:clean-architecture}, a Entidade Game, como um componente de alto
+nível, não deve depender de nenhum outro ponto da aplicação web e é,
+basicamente, uma estrutura de dados que pode ser utilizada por mais de uma
+aplicação da empresa.}
+
+\vspace{10mm}
+\input{latex/codes/clean_arch/Entity.tex}
+\vspace{5mm}
+
+\paragrafo{Já a classe que será o Caso de Uso, ou a Regra de Negócio da
+Aplicação, é a CreateGameService. Nota-se que essa classe possui como
+dependência a entidade Game, assim como previsto na Regra da Dependência, mas não deve depender de nenhum módulo de nível inferior.}
+
+\vspace{10mm}
+\input{latex/codes/clean_arch/CreateGameService.ts.tex}
+\vspace{5mm}
+
+\paragrafo{A princípio, é plausível assumir que esta classe estaria violando a
+Regra da Dependência ao importar o módulo IGamesRepository, visto que
+\emph{Repositories} são módulos de nível inferior aos Casos de Uso. Porém, ao
+inspencionar o conteúdo deste módulo, verifica-se que o mesmo se trata de uma
+interface. Isso é a inversão de dependência, que será discutida em detalhes em outra seção.}
+
+\vspace{10mm}
+\input{latex/codes/clean_arch/IGamesRepository.ts.tex}
+\vspace{5mm}
+
+\paragrafo{Por fim, temos uma classe que implementa a interface acima. O módulo
+GamesRepository será uma das classes responsáveis por se conectar com o
+\emph{TypeORM}, um dos Frameworks ou Drivers de nossa aplicação. Por isso, essa
+classe se encaixa no arquétipo de Adaptadores de Interface.}
+
+\vspace{10mm}
+\input{latex/codes/clean_arch/GamesRepository.ts.tex}
+\vspace{5mm}
+
+\paragrafo{Até aqui, todos os níveis apresentados na Figura \ref{fig:carch} já
+foram representados através das classes mencionadas nesta seção, do nível mais
+alto da aplicação até a dependência da camada de banco de dados. Para completar
+este fluxo, resta apenas exibir a camada web.} 
+
+\paragrafo{A classe GamesController tem uma dependência explícita do módulo
+CreateGameService. Além disso, também depende de outros casos de uso da
+aplicação, como a atualização de dados de jogos (UpdateGameService) e a listagem
+ou exibição de detalhes dos mesmos (IndexGameService e ShowGameService).}
+
+\input{latex/codes/clean_arch/GamesController.ts.tex}
+\vspace{5mm}
+
+\paragrafo{Assim como a classe GamesRepository, a GamesController é um tipo de
+Adaptador de Interface que se comunica diretamente com o \emph{Express JS},
+nosso framework que lida com as requisições HTTP.}
+\end{subsecao}
+\begin{subsecao}{Os benefícios}\label{subsec:dev_carch_benefits} 
+  
+\paragrafo{O benefício de adotar esse método de desenvolvimento se torna óbvio
+ao necessitar reutilizar o caso de uso em algum outro fluxo da aplicação. Neste
+caso, supondo que haja a necessidade de cadastrar grandes volumes de jogos na
+nossa plataforma, seria mais conveniente passar toda essa informação através de
+um arquivo do que inseri-la manualmente através de requisições Web. Por conta
+disso, foi criado uma nova classe, GamesCreateBatch, que processa um arquivo csv
+e invoca o serviço de criação de games para cada linha.}
+\vspace{5mm}
+\input{latex/codes/clean_arch/GamesCreateBatch.ts.tex}
+\vspace{5mm}
+
+\paragrafo{Como os níveis desse fluxo foram muito bem segregados ao longo dos
+módulos, não foi necessário alterar nenhuma linha de código das classes
+responsáveis por conhecer as regras de negócios da aplicação e das responsáveis
+por interagir com o banco de dados.} 
+
+\paragrafo{Outro ponto é que se em algum momento for necessário trocar o
+\emph{Express JS}, somente a classe GamesController deverá sofrer uma
+manutenção, o restante, pelo menos referente a esse fluxo, continuará intacto.} 
+
+\paragrafo{Outro ganho da adoção desse método está na facilidade em testar os
+componentes dessa aplicação. Para isso, foi criado a classe FakeGamesRepository,
+cujo propósito está em simular o acesso ao banco de dados. Como essa classe é
+uma implementação da interface IGamesRepository, não haverá a necessidade de
+realizar nenhuma alteração no Caso de Uso para se realizar dos testes ou, caso
+seja necessário, para trocar o \emph{TypeORM} por algum outro framework de
+acesso a banco de dados.}
+
+\vspace{5mm}
+\input{latex/codes/clean_arch/FakeGamesRepository.ts.tex}
+\vspace{5mm}
+
+
+\paragrafo{Com essa infraestrutura, o módulo CreateGameService.spec.ts testa, com
+simplicidade, 100\% das linhas do Caso de Uso abordado.}
+
+\vspace{5mm}
+\input{latex/codes/clean_arch/CreateGameService.spec.ts.tex}
+\vspace{5mm}
+
+\end{subsecao}
