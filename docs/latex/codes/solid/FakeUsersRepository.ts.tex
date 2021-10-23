@@ -1,10 +1,4 @@
 \begin{lstlisting}[language=JavaScript, caption={FakeUsersRepository.ts},captionpos=b, label=alg:fakeusersrepository]
-import IUsersRepository from '@modules/users/repositories/IUsersRepository';
-import ICreateUserDTO from '@modules/users/dtos/ICreateUserDTO';
-
-import { v4 as uuidv4 } from 'uuid';
-import User from '../../../../modules/users/infra/typeorm/entities/User';
-
 export default class FakeUsersRepository implements IUsersRepository {
   private users: User[] = [];
 
