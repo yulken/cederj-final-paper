@@ -5,28 +5,13 @@ export default class GameService {
     @inject('GamesRepository')
     private gamesRepository: IGamesRepository,
   ) {}
-
-  public async showGame({ game_id }: IShowGameDTO): Promise<Game> {
+  public async showGame(data: IShowGameDTO): Promise<Game> {
     //validacoes e processos para exibir detalhes de um jogo
   }
-
-  public async createGame({
-      name,
-      price,
-      publisher,
-      release_date,
-    }: ICreateGameDTO): Promise<Game> {
-
+  public async createGame(data: ICreateGameDTO): Promise<Game> {
     //validacoes e processos para criar um jogo
   }
-
-  public async updateGame({
-    game_id,
-    price,
-    release_date,
-  }: IUpdateGameDTO): Promise<Game> {
-    const game = await this.gamesRepository.findById(game_id);
-
+  public async updateGame(data : IUpdateGameDTO): Promise<Game> {
     //validacoes e processos para atualizar um jogo
   }
 }

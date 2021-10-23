@@ -4,10 +4,9 @@
   export default interface IUsersRepository {
     findById(id: string): Promise<User | undefined>;
     findByEmail(email: string): Promise<User | undefined>;
-    //create(data: ICreateUserDTO): Promise<User>;
     save(user: User): Promise<User>;
+    // metodo create removido
   }
-
 
   // Modulo UsersRepository
   class UsersRepository implements IUsersRepository {
@@ -17,32 +16,14 @@
     this.ormRepository = getRepository(User);
   }
 
-  public async findById(id: string): Promise<User | undefined> {
-    log.debug('Users :: findById');
-    return this.ormRepository.findOne(id);
-  }
-
-  public async findByEmail(email: string): Promise<User | undefined> {
-    log.debug('Users :: findByEmail');
-    const user = await this.ormRepository.findOne({
-      where: { email },
-    });
-    return user;
-  }
-
   public async create(userData: ICreateUserDTO): Promise<User> {
-    log.debug('Users :: create');
     const user = this.ormRepository.create(userData);
     await this.ormRepository.save(user);
     return user;
   }
 
-  public async save(user: User): Promise<User> {
-    log.debug('Users :: save');
-    return this.ormRepository.save(user);
-  }
+  //implementacao dos outros metodos da interface
 }
-
 
 //Modulo CreateUserService
 export default class CreateUserService {
@@ -54,31 +35,11 @@ export default class CreateUserService {
     private hashProvider: IHashProvider,
   ) {}
 
-  public async execute({
-    name,
-    email,
-    password,
-    passwordConfirmation,
-  }: IRequest): Promise<User> {
-    if (password !== passwordConfirmation) {
-      throw new AppError("Password and Password Confirmation won't match");
-    }
+  public async execute(data: IRequest): Promise<User> {
+    // validacao dos dados
 
-    const checkUserExists = await this.usersRepository.findByEmail(email);
-
-    if (checkUserExists) {
-      throw new AppError('Email Address already used.');
-    }
-
-    const hashedPassword = await this.hashProvider.generateHash(password);
-    // IUSERSREPOSITORY NAO TEM METODO CREATE
-    // LINHA A SEGUIR COM ERRO
-    const user = await this.usersRepository.create({ 
-      name,
-      email,
-      nickname: name,
-      password: hashedPassword,
-    });
+    // linha abaixo tem erro
+    const user = await this.usersRepository.create(/* dados para criacao do usuario */);
 
     await this.usersRepository.save(user);
 

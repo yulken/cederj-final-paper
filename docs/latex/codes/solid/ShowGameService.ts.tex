@@ -1,21 +1,12 @@
 \begin{lstlisting}[language=JavaScript, caption={Implementação correta do SRP},captionpos=b, label=alg:showgameservice]
-interface IRequest {
-  game_id: string;
-}
-
 @injectable()
 export default class ShowGameService {
   constructor(
     @inject('GamesRepository')
     private gamesRepository: IGamesRepository,
   ) {}
-
   public async execute({ game_id }: IRequest): Promise<Game> {
-    const game = await this.gamesRepository.findById(game_id);
-    if (!game) {
-      throw new AppError('Game not found', 404);
-    }
-    return game;
+    //validacao e retorno do jogo
   }
 }
 \end{lstlisting}

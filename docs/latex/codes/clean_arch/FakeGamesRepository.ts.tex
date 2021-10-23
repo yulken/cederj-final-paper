@@ -2,13 +2,11 @@
 export default class FakeGamesRepository implements IGamesRepository {
   private games: Game[] = [];
 
-  public async findByNameAndPublisherAndReleaseDate({
-    name,
-    publisher,
-    release_date,
-  }: ICreateGameDTO): Promise<Game | undefined> {
-    return this.games.find(
-      game => game.name === name && game.publisher === publisher,
+  public async findByNameAndPublisherAndReleaseDate(data: ICreateGameDTO): Promise<Game | undefined> {
+    return this.games.find(game => 
+      game.name === data.name && 
+      game.publisher === data.publisher
+      game.release_date === data.release_date
     );
   }
 

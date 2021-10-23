@@ -1,10 +1,4 @@
 \begin{lstlisting}[language=JavaScript, caption={Implementação que viola o OCP},captionpos=b, label=alg:ocpviolation]
-interface IRequest {
-  cash?: number;
-  game_id?: string;
-  dlc_id?: string;
-}
-
 @injectable()
 export default class CreateCodeService {
   constructor(
@@ -22,17 +16,14 @@ export default class CreateCodeService {
     if (!request.cash && !request.game_id && !request.dlc_id) {
       throw new AppError('Internal Server Error', 500);
     }
-
     if (request.cash) {
       //validacao de cash (R$30, R$50 ou R$100)
       //cadastro do cartao pre pago de cash
     }
-
     if (request.game_id) {
       //validacao de game (se o game existe)
       //cadastro do cartao pre pago de gane
     }
-
     if (request.dlc_id) {
       //validacao de dlc (se a dlc existe)
       //cadastro do cartao pre pago de gane

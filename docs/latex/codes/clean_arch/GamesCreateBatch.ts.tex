@@ -1,40 +1,17 @@
 \begin{lstlisting}[language=JavaScript, caption={Caso de Uso reaproveitado para processamento de arquivos},captionpos=b, label=alg:gamescreatebatch]
 export default class GamesCreateBatch implements IBatchOperation {
   public async exec(): Promise<void> {
-    if (!process.argv[3]) {
-      log.error('Filename not provided');
-      return;
-    }
-    const csvPath = process.argv[3];
-    let fileContent;
-
-    try {
-      fileContent = fs.readFileSync(csvPath);
-    } catch (error) {
-      log.error('File Not Found');
-      return;
-    }
-    const lines = fileContent.toString().split('\n');
+    //valida o nome do arquivo passado via linha de comando
+    //cria lista de linhas
 
     const createGame = container.resolve(CreateGameService);
 
-    await Promise.all(lines
-      .filter(line => line.length !== 0)
+    await Promise.all(lines //percorre cada linha da lista criada
       .map(async (line: string): Promise<Game | boolean> => {
-        const [name, price, publisher, raw_release_date] = line.split(',');
         try {
-          const release_date = new Date(raw_release_date);
+          //validacao da linha
 
-          if (!release_date) {
-            throw Error('Invalid Line');
-          }
-
-          return await createGame.execute({
-            name,
-            price: Number(price),
-            publisher,
-            release_date,
-          });
+          return await createGame.execute(/* conteudo da linha */));
         } catch (error) {
           return log.error(error);
         }

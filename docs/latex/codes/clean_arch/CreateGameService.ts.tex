@@ -6,29 +6,9 @@
       private gamesRepository: IGamesRepository,
     ) {}
   
-    public async execute({
-      name,
-      price,
-      publisher,
-      release_date,
-    }: ICreateGameDTO): Promise<Game> {
-      const checkGame =
-        await this.gamesRepository.findByNameAndPublisherAndReleaseDate({
-          name,
-          publisher,
-          release_date,
-        });
-      if (checkGame) {
-        throw new AppError('Game Already registered');
-      }
-      const game = await this.gamesRepository.create({
-        name,
-        price,
-        publisher,
-        release_date,
-      });
-  
-      return game;
+    public async execute(data: ICreateGameDTO): Promise<Game> {
+      //validacoes
+      return await this.gamesRepository.create(/* dados do jogo */);
     }
   }
 \end{lstlisting}

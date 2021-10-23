@@ -1,4 +1,4 @@
-\begin{lstlisting}[language=JavaScript, caption={Cadastro de Códigos para Dinheiro Virtual},captionpos=b, label=alg:ocpexample]
+\begin{lstlisting}[language=JavaScript, caption={Cadastro de Códigos para Dinheiro Virtual},captionpos=b, label=alg:cashcodeservice]
 @injectable()
 export default class CreateCashCodeService extends AbstractCodeTemplate {
   constructor(
@@ -8,14 +8,15 @@ export default class CreateCashCodeService extends AbstractCodeTemplate {
     super();
   }
 
-  protected async createCode({ cash }: IRequest): Promise<GamestoreCode> {
-    //cria codigo para dinheiro virtual
+  protected async createCode(data: IRequest): Promise<GamestoreCode> {
+    const code = await this.gamestoreCodesRepository.create(/*
+      dados do dinheiro virtual
+    */);
+    return code;
   }
 
-  protected async validateData({ cash }: IRequest): Promise<void> {
-    if (cash !== 30 && cash !== 50 && cash !== 100) {
-      throw new AppError('Invalid cash quantity');
-    }
+  protected async validateData(data: IRequest): Promise<void> {
+    //algoritmo de validacao do dinheiro virtual
   }
 }
 \end{lstlisting}

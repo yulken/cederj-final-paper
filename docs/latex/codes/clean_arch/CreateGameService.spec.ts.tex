@@ -7,31 +7,14 @@ describe('CreateGame', () => {
     createGame = new CreateGameService(fakeGamesRepository);
   });
   it('should be able to create a new game', async () => {
-    const game = await createGame.execute({
-      name: 'Cyberpunk',
-      price: 80.0,
-      publisher: 'CD Projekt Red',
-      release_date: new Date(2021, 1, 1),
-    });
-
-    expect(game).toHaveProperty('id');
+    const game = await createGame.execute(/* dados para teste */);
+    expect(game).toHaveProperty('id'); //validacao do objeto criado
   });
   it('should not be able to create a duplicated game', async () => {
-    const releaseDate = new Date(2021, 1, 1);
-    await fakeGamesRepository.create({
-      name: 'Cyberpunk',
-      price: 80.0,
-      publisher: 'CD Projekt Red',
-      release_date: releaseDate,
-    });
+    await fakeGamesRepository.create(/* dados para teste */);
     await expect(
-      createGame.execute({
-        name: 'Cyberpunk',
-        price: 80.0,
-        publisher: 'CD Projekt Red',
-        release_date: releaseDate,
-      }),
-    ).rejects.toBeInstanceOf(AppError);
+      createGame.execute(/* dados repetidos */),
+    ).rejects.toBeInstanceOf(AppError); //validacao de erro retornado
   });
 });
 \end{lstlisting}

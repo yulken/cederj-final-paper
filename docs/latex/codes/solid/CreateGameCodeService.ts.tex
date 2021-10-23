@@ -1,8 +1,4 @@
-\begin{lstlisting}[language=JavaScript, caption={Cadastro de Códigos para Jogos},captionpos=b, label=alg:ocpexample]
-interface IRequest {
-  game_id: string;
-}
-
+\begin{lstlisting}[language=JavaScript, caption={Cadastro de Códigos para Jogos},captionpos=b, label=alg:gamecodeservice]
 @injectable()
 export default class CreateGameCodeService extends AbstractCodeTemplate {
   constructor(
@@ -16,13 +12,11 @@ export default class CreateGameCodeService extends AbstractCodeTemplate {
   }
 
   protected async createCode({ game_id }: IRequest): Promise<GamestoreCode> {
-    //cria codigo para o jogo
+    const code = await this.gamestoreCodesRepository.create(/* dados do jogo */)
   }
 
   protected async validateData({ game_id }: IRequest): Promise<void> {
-    if (!validateUuid(game_id) || !(await this.gamesRepository.findById(game_id))) {
-      throw new AppError('Game does not exist');
-    }
+    //algoritmo de validacao de jogo
   }
 }
 \end{lstlisting}

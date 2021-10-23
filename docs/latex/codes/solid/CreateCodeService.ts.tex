@@ -1,8 +1,4 @@
 \begin{lstlisting}[language=JavaScript, caption={Implementação de cadastro de códigos},captionpos=b, label=alg:createcodeservice]
-interface IRequest {
-  cash?: number;
-  game_id?: string;
-}
 @injectable()
 export default class CreateCodeService {
   constructor(
@@ -14,17 +10,16 @@ export default class CreateCodeService {
   ) {}
 
   public async execute(request: IRequest): Promise<GamestoreCode | undefined> {
-    const { cash, game_id } = request;
-    if (!cash && !game_id) {
+    if (!request.cash && !request.game_id) {
       throw new AppError('Internal Server Error', 500);
     }
 
-    if (cash) {
+    if (request.cash) {
       //validacao de cash (R$30, R$50 ou R$100)
       //cadastro do cartao pre pago de cash
     }
 
-    if (game_id) {
+    if (request.game_id) {
       //validacao de game (se o game existe)
       //cadastro do cartao pre pago de gane
     }

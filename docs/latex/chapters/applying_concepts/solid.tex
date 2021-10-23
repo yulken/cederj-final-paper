@@ -17,12 +17,12 @@ validações, passar a buscar os jogos pelo nome em vez do id, entre outros.}
 \vspace{5mm}
   
 \paragrafo{Uma forma fácil de imaginar a classe acima ferindo este princípio
-seria se a mesma além de exibir jogos, também criasse ou atualizasse os mesmos.
+seria se a mesma além de exibir jogos, também criasse ou atualizasse os mesdemos.
 Com isso, a manutenção dessa classe pode ser mais difícil de se realizar do que
 a da primeira:}
 
 \vspace{5mm}
-\input{latex/codes/solid/GameService.ts.tex}
+\input{latex/codes/solid/SRPViolation.tex}
 \vspace{5mm}
 
 \paragrafo{Ao absorver muitas responsabilidades, a classe GameService passa a
@@ -97,10 +97,9 @@ jogos e outra para dinheiro virtual.}
 \end{subsecao}
 \begin{subsecao}{Implementação e Benefícios do \acs{LSP}}\label{subsec:dev_lsp}
 
-\paragrafo{Um exemplo muito recorrente dos dois pŕoximos princípios, isto é, o
-Princípio da Substituição de Liskov (\acs{LSP}) e o Princípio da Segregação de
-Interfaces (\acs{ISP}), está no funcionamento das classes \emph{Repository} da
-aplicação.} 
+\paragrafo{Um exemplo muito recorrente do próximo princípio, isto é, o
+Princípio da Substituição de Liskov (\acs{LSP}), está no funcionamento 
+das classes \emph{Repository} da aplicação.} 
 
 \paragrafo{Tomando por exemplo o \emph{Repository} de Usuários,
 temos a interface IUsersRepository e suas implementações UsersRepository e
@@ -123,13 +122,14 @@ três módulos pois qualquer uma das implementações da interface IUsersReposit
 é válida de ser importada no módulo CreateUserService, visto que nenhuma delas
 quebraria a aplicação.} 
 
-\paragrafo{O mesmo não seria verdade se, por exemplo, a
-interface não especificasse um método de criação de usuário. Na hora que esse
-método fosse invocado no Caso de Uso, a aplicação retornaria um erro.}
+\vspace{5mm}
+\input{latex/codes/solid/CreateUserService.ts.tex}
+\vspace{5mm}
 
-\vspace{5mm}
-\input{latex/codes/solid/LSPViolation.tex}
-\vspace{5mm}
+\paragrafo{O mesmo não seria verdade se, por exemplo, a
+interface não especificasse um método requerido na criação de usuário. Na hora
+que esse método fosse invocado no Caso de Uso, haveria um erro na execução da
+aplicação.}
 
 \notaeditor{Nota: Completar a seção com o ISP e DIP}
 
