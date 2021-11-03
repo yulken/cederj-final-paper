@@ -119,7 +119,7 @@ importante descrever o próprio conceito de arquitetura de software.}
       utilize esse mesmo componente.} \paragrafo{No sistema exemplificado, ao
       acrescentar suporte à pessoas jurídicas ao algoritmo de validação de
       usuários, se simplesmente acrescentarmos ao código existente uma condição
-      (ou um \emph{if}) para verificar o tipo da pessoa (Física ou Jurídica) a
+      para verificar o tipo da pessoa (Física ou Jurídica) a
       fim de escolher o método de validação, estaríamos quebrando o \acs{OCP}. O
       correto seria termos uma classe abstrata Pessoa e estender esse
       comportamento através de duas classes filhas PessoaFisica e
@@ -148,11 +148,15 @@ importante descrever o próprio conceito de arquitetura de software.}
       classes usassem todos os seus métodos.}
     \end{subsecao}
     \begin{subsecao}{\emph{Dependency Inversion Principle}} \label{subsec:DIP}
-      \paragrafo{Por fim, o Princípio da Inversão de Dependências indica que uma
-      classe deveria depender apenas de abstrações, e não de implementações.
+      \paragrafo{Por fim, o Princípio da Inversão de Dependências indica que 
+      módulos de níveis superiores deveriam depender apenas de abstrações de
+      módulos de níveis inferiores, e não de implementações.
       Este princípio está fortemente ligado ao modelo de Arquitetura Limpa
-      descrito na Seção \ref {subsec:clean-architecture}, principalmente na
-      camada de Adaptadores e Interfaces.} \paragrafo{Suponha-se que o
+      descrito na Seção \ref{subsec:clean-architecture}, principalmente na
+      relação entre a camada de Casos de Uso e a camada de Adaptadores de 
+      Interfaces.} 
+      
+      \paragrafo{Suponha-se que o
       exemplificado sistema de pagamentos consuma algum serviço externo para
       realizar alguma consulta ou validação. A estratégia de implementação da
       chamada à esse serviço externo, seguindo o \acs{DIP}, seria criar uma
@@ -160,49 +164,6 @@ importante descrever o próprio conceito de arquitetura de software.}
       sistema de pagamentos toda vez que o mesmo fosse necessário.}
       
     \end{subsecao}
-    \notaeditor{Nota: Posteriormente pretendo colocar alguns trechos de código ilustrando melhor os casos exemplificados}
   \end{secao}
-
-\begin{secao}{Design Patterns} \label{sec:patterns}
-
-  \paragrafo{Como alguns princípios vistos na seção de \emph{Clean
-  Architecture}, os \emph{Design Patterns} tem como principal função garantir a
-  reusabilidade do código com baixo acoplamento. De fato, a proposta principal
-  do livro está em ser um catálogo de soluções para problemas de sistemas
-  orientados a objetos.} \paragrafo{No total, são 23 padrões de projetos
-  diferentes, subdividos em 3 tipos: Padrões de Criação, Padrões Comportamentais
-  e Padrões Estruturais:}
-  
-  \paragrafo{Padrões de Criação}
-  \begin{lista}
-   \itemlista{\emph{Abstract Factory}} \itemlista{\emph{Builder}}
-   \itemlista{\emph{Factory Method}} \itemlista{\emph{Prototype}}
-   \itemlista{\emph{Singleton}}
-  \end{lista}
-
-  \paragrafo{Padrões Estruturais}
-  \begin{lista}
-    \itemlista{\emph{Adapter}} \itemlista{\emph{Bridge}}
-    \itemlista{\emph{Composite}} \itemlista{\emph{Decorator}}
-    \itemlista{\emph{Facade}} \itemlista{\emph{Flyweight}}
-    \itemlista{\emph{Proxy}}
-  \end{lista}
-  
-  \paragrafo{Padrões Comportamentais}
-  \begin{lista}
-    \itemlista{\emph{Chain of Responsiblity}} \itemlista{\emph{Command}}
-    \itemlista{\emph{Interpreter}} \itemlista{\emph{Iterator}}
-    \itemlista{\emph{Mediator}} \itemlista{\emph{Memento}}
-    \itemlista{\emph{Observer}} \itemlista{\emph{State}}
-    \itemlista{\emph{Strategy}} \itemlista{\emph{Template Method}}
-    \itemlista{\emph{Visitor}}
-  \end{lista}
-  
-  \paragrafo{Não faz parte da proposta desse trabalho usar cada um dos padrões
-  supracitados. A proposta está em identificar as oportunidades de aplicação
-  durante as etapas de desenvolvimento e expor como a adoção dos padrões
-  solucionou o problema de uma forma melhor que a não-adoção.}
-  \notaeditor{}{Nota: Como o sistema, até o atual momento, não está pronto, será necessário revisitar esse capítulo posteriormente listando e explicando cada padrão usado na aplicação web.}
-\end{secao}
 
 \end{capitulo}

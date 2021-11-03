@@ -1,11 +1,12 @@
 .vscode
 *.aux
 /docs/latex/**/*.*
+/docs/**/*.*
 !/docs/latex/**/*.txt
 !/docs/latex/**/*.tex
 !/docs/latex/**/*.bib
 !/docs/latex/**/*.bst
-/docs/**/*.*
+!/docs/latex/resources/*
 !/docs/**/*.txt
 !/docs/**/*.jpg
 !/docs/**/*.tex

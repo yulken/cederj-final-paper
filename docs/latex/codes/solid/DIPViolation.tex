@@ -1,0 +1,12 @@
+\begin{lstlisting}[language=JavaScript, caption={O Caso de Uso},captionpos=b, label=alg:dip_violation]
+  export default class CreateGameService {
+    constructor(
+      private gamesRepository: new GamesRepository(),
+    ) {}
+  
+    public async execute(data: ICreateGameDTO): Promise<Game> {
+      //validacoes
+      return await this.gamesRepository.create(/* dados do jogo */);
+    }
+  }
+\end{lstlisting}

@@ -7,10 +7,11 @@ princípios.}
 \begin{subsecao}{Implementação e Benefícios do \acs{SRP}}\label{subsec:dev_srp}
 
 \paragrafo{O Princípio da Responsabilidade Única (\acs{SRP}) está sendo seguido
-na classe ShowGameService. Isso ocorre pois a classe tem apenas um propósito,
-que é a exibição dos detalhes do jogo. Sendo assim, a mesma tem um escopo mais
-restrito em razões para se necessitar de alteração, por exemplo, adicionar
-validações, passar a buscar os jogos pelo nome em vez do id, entre outros.}
+na classe ShowGameService (Código \ref{alg:showgameservice}). Isso ocorre 
+pois a classe tem apenas um propósito, que é a exibição dos detalhes do jogo. 
+Sendo assim, a mesma tem um escopo mais restrito em razões para se necessitar 
+de alteração, por exemplo, adicionar validações, passar a buscar os jogos pelo 
+nome em vez do id, entre outros.}
 
 \vspace{5mm}
 \input{latex/codes/solid/ShowGameService.ts.tex}
@@ -25,9 +26,9 @@ a da primeira:}
 \input{latex/codes/solid/SRPViolation.tex}
 \vspace{5mm}
 
-\paragrafo{Ao absorver muitas responsabilidades, a classe GameService passa a
-englobar diversos comportamentos e, com isso, passa a exigir mais esforço para
-se manusear.}
+\paragrafo{Ao absorver muitas responsabilidades, a classe GameService (Código 
+\ref{alg:gameservice}) passa a englobar diversos comportamentos e, com 
+isso, passa a exigir mais esforço para se manusear.}
 
 \paragrafo{Desta forma, o leitor pode se questionar porque a classe
  GamesController não viola o \acs{SRP}, visto que a mesma realiza todas essas
@@ -49,7 +50,7 @@ devem resgatar somente os valores de R\$30, R\$50 ou R\$100. Para validar um
 jogo, somente é necessário que este exista.}
 
 \paragrafo{Com os requisitos acima, um desenvolvedor pode pensar em criar a 
-seguinte classe:}
+seguinte classe descrita no Código \ref{alg:createcodeservice}:}
 
 \vspace{5mm}
 \input{latex/codes/solid/CreateCodeService.ts.tex}
@@ -63,7 +64,7 @@ o código ainda mais acoplado.}
 \paragrafo{Para ilustrar isso, suponhamos que será necessário reinvidicar
 códigos que resgatem Pacotes de Expansão para jogos já cadastrados em nossa
 plataforma. Essa funcionalidade extrapola o escopo desse trabalho, mas sua
-implementação nessa classe seria algo como o exemplo a seguir:}
+implementação pode ser descrita no código \ref{alg:ocpviolation}.}
 
 \vspace{5mm}
 \input{latex/codes/solid/OCPviolationExample.tex}
@@ -73,10 +74,11 @@ implementação nessa classe seria algo como o exemplo a seguir:}
 uma classe base e realizar as validações nas classes herdeiras. A seguir temos
 os passos para realizar esse procedimento:} 
 
-\paragrafo{Primeiramente, definimos uma classe abstrata que concentrará os
-métodos que serão realizados pelas classes filhas desta. Como os fluxos de
-cadastro de códigos para jogo e dinheiro virtual passam por processos diferentes
-de validação e cadastro, este serão métodos abstratos desta classe.}
+\paragrafo{Primeiramente, definimos uma classe abstrata (Código 
+\ref{alg:abstractcode}) que concentrará os métodos que serão realizados pelas
+classes filhas desta. Como os fluxos de cadastro de códigos para jogo e dinheiro
+virtual passam por processos diferentes de validação e cadastro, este serão 
+métodos abstratos desta classe.}
 
 \vspace{5mm}
 \input{latex/codes/solid/AbstractCodeTemplate.ts.tex}
@@ -84,7 +86,8 @@ de validação e cadastro, este serão métodos abstratos desta classe.}
 
 \paragrafo{Em seguida, estendemos, a partir da classe abstrata, uma classe para
 cada comportamento diferente. Sendo assim, uma classe para validar e registrar
-jogos e outra para dinheiro virtual.}
+jogos (Código \ref{alg:gamecodeservice}) e outra para dinheiro virtual 
+(Código \ref{alg:cashcodeservice}).}
 
 \vspace{5mm}
 \input{latex/codes/solid/CreateGameCodeService.ts.tex}
@@ -101,36 +104,91 @@ jogos e outra para dinheiro virtual.}
 Princípio da Substituição de Liskov (\acs{LSP}), está no funcionamento 
 das classes \emph{Repository} da aplicação.} 
 
-\paragrafo{Tomando por exemplo o \emph{Repository} de Usuários,
-temos a interface IUsersRepository e suas implementações UsersRepository e
-FakeUsersRepository.}
 
 \vspace{5mm}
 \input{latex/codes/solid/IUsersRepository.ts.tex}
 \vspace{5mm}
 
+\paragrafo{Tomando por exemplo o \emph{Repository} de Usuários,
+temos a interface IUsersRepository (Código \ref{alg:iusersrepository})
+e suas implementações UsersRepository (Código \ref{alg:usersrepository})
+e FakeUsersRepository (Código \ref{alg:fakeusersrepository}).}
+
 \vspace{5mm}
 \input{latex/codes/solid/UsersRepository.ts.tex}
 \vspace{5mm}
+
+\paragrafo{Podemos dizer que o \acs{LSP} é respeitado na relação entre esses
+três módulos pois qualquer uma das implementações da interface IUsersRepository
+é válida de ser importada nos Casos de Uso da aplicação, visto todas elas são 
+intercambiáveis, ou seja, tem métodos de mesmo nome e com mesmos parâmetros, 
+mudando apenas os detalhes de implementação dos mesmos.} 
 
 \vspace{5mm}
 \input{latex/codes/solid/FakeUsersRepository.ts.tex}
 \vspace{5mm}
 
-\paragrafo{Podemos dizer que o \acs{LSP} é respeitado na relação entre esses
-três módulos pois qualquer uma das implementações da interface IUsersRepository
-é válida de ser importada no módulo CreateUserService, visto que nenhuma delas
-quebraria a aplicação.} 
+\begin{figure}[!h]
+  \centering
+  \includegraphics[scale=0.5]{lsp_example}
+  \caption{Representação do LSP}
+  \label{fig:lsp_example}
+\end{figure}
+
+\paragrafo{Na figura \ref{fig:lsp_example}, temos a representação gráfica de como 
+os módulos citados se relacionam e como eles constituem o Princípio da Substituição
+de Liskov. As setas tracejadas representam a implementação da interface
+IUsersRepository.}
+
+\paragrafo{Esse princípio pode ser quebrado se, por exemplo, a interface não 
+especificar um método requerido em algum dos casos de uso e terceirizar essa 
+responsabilidade diretamente para as subclasses. A intercambiabilidade é perdida,
+e assim, a possibilidade de reuso do código também.}
+
+\paragrafo{O benefício de se usar esse príncipio está na desacoplação do código.
+Sem esse princípio aplicado, por exemplo, seria necessário especificar o subtipo
+UsersRepository, que, como demonstrado previamente, por se tratar de um 
+Adaptador de Interfaces, é um módulo de nível inferior aos Casos de Uso.}
+
+\end{subsecao}
+
+\begin{subsecao}{Implementação e Benefícios do \acs{ISP}}\label{subsec:dev_isp}
+
+\paragrafo{A aplicação do princípio de segregação de interfaces está em } 
+\notaeditor{Nota: Completar a seção com o DIP}
+
+
+\end{subsecao}
+
+\begin{subsecao}{Implementação e Benefícios do \acs{DIP}}\label{subsec:dev_dip}
+
+\paragrafo{A aplicação do Princípio da Inversão de Dependência pode ser encontrada
+em todos os Casos de Uso da aplicação que interajam com o banco de dados, visto
+que todos eles importam a dependência a partir de uma abstração. A Figura 
+\ref{fig:dip_example} ilustra essa situação com classes que já foram apresentadas
+previamente.}
+
+\begin{figure}[!h]
+  \centering
+  \includegraphics[scale=0.5]{dip_example}
+  \caption{Representação do DIP}
+  \label{fig:dip_example}
+\end{figure}
+
+\paragrafo{Para visualizar um modelo que viole a implementação do \acs{DIP}, basta
+fazer que o Caso de Uso CreateGameService importe diretamente a dependência
+GamesRepository, como exemplificado através do Código \ref{alg:dip_violation} 
+e da Figura \ref{fig:dip_violation}.} 
 
 \vspace{5mm}
-\input{latex/codes/solid/CreateUserService.ts.tex}
+\input{latex/codes/solid/DIPViolation.tex}
 \vspace{5mm}
 
-\paragrafo{O mesmo não seria verdade se, por exemplo, a
-interface não especificasse um método requerido na criação de usuário. Na hora
-que esse método fosse invocado no Caso de Uso, haveria um erro na execução da
-aplicação.}
-
-\notaeditor{Nota: Completar a seção com o ISP e DIP}
+\begin{figure}[!h]
+  \centering
+  \includegraphics[scale=0.75]{dip_violation}
+  \caption{Violação do DIP}
+  \label{fig:dip_violation}
+\end{figure}
 
 \end{subsecao}
