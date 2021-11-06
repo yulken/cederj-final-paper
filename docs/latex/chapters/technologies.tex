@@ -5,6 +5,10 @@ desenvolvimento da aplicação web. A linguagem que permeará tanto o
 \emph{frontend} quanto o \emph{backend} será o \emph{JavaScript}, porém, como as
 práticas abordadas neste trabalho são mais direcionadas ao \emph{backend}, não
 será descrito com detalhes as tecnologias do \emph{frontend}.}
+\paragrafo{Além disso, como um dos temas principais desse trabalho está em como 
+o código se comporta em relação a suas dependências, será abordado também os frameworks
+web e de banco de dados, assim como uma ferramenta ajudar a deixar a arquitetura 
+desse código mais limpa.}
  
 \begin{secao}{JavaScript e TypeScript} \label{sec:pl} \paragrafo{O JavaScript,
 também conhecido como ECMAScript ou JS, é uma linguagem leve e interpretada que
@@ -85,12 +89,35 @@ comportamento de execução do JavaScript.}
     código.\cite{typeorm_data_mapper}\cite{typeorm_home}}
 
   \end{subsecao}
-  \begin{subsecao}{Express}\label{subsec:express}
-    \notaeditor{Nota: A preencher}
+  \begin{subsecao}{Express e React}\label{subsec:express}
+    \paragrafo{O \emph{Express Js} é um dos \emph{framework} \emph{web} mais populares para o 
+    ambiente \emph{Node} \cite{survey}. Sua utilização neste trabalho será como um intermediador 
+    entre as requisições enviadas pela página \emph{web} e as informações necessárias 
+    para a nossa aplicação.}
+    \paragrafo{Note que para o desenvolvimento desse trabalho ou de qualquer 
+    aplicação \emph{web}, usar o \emph{Express} ou qualquer outro \emph{framework} \emph{web} não é
+    estritamente necessário. Porém, essas ferramentas agilizam bastante o 
+    processo de desenvolvimento, logo o uso destas é recomendado.}
+    \paragrafo{O \emph{React} é um \emph{framework} \emph{web} voltado para o front-end, ou seja,
+    a \emph{User Interface} disponibilizada através da página \emph{web}. Como o 
+    conceito de dependência predomina neste trabalho, é importante apresentá-lo 
+    como o único resposável pela \acs{UI} e por toda \acs{UI}.}
+    \paragrafo{Desta forma, estamos garantido que nenhum código responśavel
+    por lógicas de negócio complexas também esteja responsável pela disposição dos 
+    elementos na página \emph{web}, o que acaba sendo uma decisão que respeita os princípios
+    do SOLID e da Arquitetura Limpa ao separar essas preocupações.}
+    \paragrafo{Novamente, para o desenvolvimento de uma boa \acs{UI}, não é estritamente  ocorrerão
+    necessário o uso de \emph{React}, mas devido a facilidade de componentização de objetos 
+    típicos de interfaces \emph{web} (botões e formulários, por exemplo) e sua popularidade 
+    \cite{survey}, o mesmo foi escolhido para este trabalho.}
   \end{subsecao}
 
   \begin{subsecao}{Tsyringe}\label{subsec:tsyringe}
-    \notaeditor{Nota: A preencher}
+    \paragrafo{Por fim, o \emph{Tsyringe} será a ferramenta que utilizaremos para 
+    injetar as dependências que serão explicitadas posteriormente nesse trabalho.}
+    \paragrafo{Desenvolvida pela Microsoft, o \emph{Tsyringe} permite o uso de anotações como
+     \emph{@Injectable} e \emph{@Inject}, que, através da Inversão de Controle, garantem 
+     uma manuseabilidade maior com um sintaxe elegante para o \emph{Typescript}.} 
   \end{subsecao}
 
 \end{secao}

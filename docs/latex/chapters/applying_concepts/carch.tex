@@ -64,7 +64,7 @@ ou exibição de detalhes dos mesmos (IndexGameService e ShowGameService).}
 Adaptador de Interface que se comunica diretamente com o \emph{Express JS},
 nosso framework que lida com as requisições HTTP.}
 
-\paragrafo{Na figura \ref{fig:insert_game}, temos a representação gráfica de como 
+\paragrafo{Na Figura \ref{fig:insert_game}, temos a representação gráfica de como 
 os módulos citados se situam no modelo clássico de arquitetura limpa e como eles 
 dependem um dos outros. As setas representam as dependências, e elas partem das
 classes de nível inferior até as classes de nível superior. Nota-se que o 
@@ -113,14 +113,4 @@ de Uso para se realizar dos testes ou, caso seja necessário, para trocar o
 \vspace{5mm}
 \input{latex/codes/clean_arch/FakeGamesRepository.ts.tex}
 \vspace{5mm}
-
-
-\paragrafo{Com essa infraestrutura, o módulo CreateGameService.spec.ts (Código 
-\ref{alg:creategametest}) testa, com simplicidade, 100\% das linhas do
-Caso de Uso abordado.}
-
-\vspace{5mm}
-\input{latex/codes/clean_arch/CreateGameService.spec.ts.tex}
-\vspace{5mm}
-
 \end{subsecao}

@@ -123,7 +123,14 @@ importante descrever o próprio conceito de arquitetura de software.}
       fim de escolher o método de validação, estaríamos quebrando o \acs{OCP}. O
       correto seria termos uma classe abstrata Pessoa e estender esse
       comportamento através de duas classes filhas PessoaFisica e
-      PessoaJuridica, cada uma com seu método de validação.}
+      PessoaJuridica, cada uma com seu método de validação, conforme a Figura 
+      \ref{fig:ocp_concept}.}
+      \begin{figure}[h!]
+        \centering
+        \includegraphics[scale=0.7]{ocp_concept}
+        \caption{Relação entre PessoaFisica e PessoaJuridica}
+        \label{fig:ocp_concept}
+      \end{figure}
     \end{subsecao}
     \begin{subsecao}{\emph{Liskov Substitution Principle}} \label{subsec:LSP}
       \paragrafo{Segundo o Princípio da Subsituição de \emph{Liskov}, as classes
@@ -134,18 +141,37 @@ importante descrever o próprio conceito de arquitetura de software.}
       aplicando o \acs{LSP} se o mesmo passar o método de validação de uma
       classe Pessoa ao tentar validar a PessoaFisica ou PessoaJuridica antes de
       realizar um pagamento.}
+      \begin{figure}[h!]
+        \centering
+        \includegraphics[scale=0.7]{lsp_concept}
+        \caption{Renomeando métodos para adequação ao LSP}
+        \label{fig:lsp_concept}
+      \end{figure}
+      \paragrafo{Conforme descrito na Figura \ref{fig:lsp_concept}, ao garantir que a 
+      classe Pessoa e suas classes herdeiras tenham o método de mesmo nome, podemos 
+      garantir um nível de intercambiabilidade entre elas. Ou seja, em fluxos onde 
+      o tipo de pessoa não é uma informação relevante, podemos usar uma classe 
+      genérica (neste caso, Pessoa) para reaproveitar melhor o código.}
     \end{subsecao}
     \begin{subsecao}{\emph{Interface Segregation Principle}} \label{subsec:ISP}
       \paragrafo{No Princípio de Segregação de Interfaces define que as
       interfaces devem ser criadas de forma granular e específica para seus
       clientes. Isso quer dizer que não é interessante um cliente (ou classe)
       depender de uma interface que possui métodos que o mesmo não tenha
-      conhecimento.} \paragrafo{Por exemplo, havendo uma interface IPagamento e
+      conhecimento, ou, de forma simplificada, que interfaces não deveriam 
+      ter métodos que não serão usados por suas implementações.} 
+      \paragrafo{Por exemplo, havendo uma interface IPagamento e
       duas classes PagamentoBoleto e PagamentoTed, o \acs{ISP} estaria sendo
       violado se houver um método getLinhaDigitavel na IPagamento, visto que
       pagamentos via TED não usam linhas digitáveis. O ideal seria que essa
       interface fosse melhor subdividida (ou granularizada) a fim de que as
-      classes usassem todos os seus métodos.}
+      classes usassem todos os seus métodos, como na Figura \ref{fig:isp_concept}.}
+      \begin{figure}[h!]
+        \centering
+        \includegraphics[scale=0.7]{isp_concept}
+        \caption{Exemplo do ISP}
+        \label{fig:isp_concept}
+      \end{figure}
     \end{subsecao}
     \begin{subsecao}{\emph{Dependency Inversion Principle}} \label{subsec:DIP}
       \paragrafo{Por fim, o Princípio da Inversão de Dependências indica que 

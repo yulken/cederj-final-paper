@@ -4,7 +4,7 @@ conceitos SOLID sendo implementados na aplicação web. Porém, será necessári
 outros fluxos para obter exemplos de implementação que sigam todos os
 princípios.}
 
-\begin{subsecao}{Implementação e Benefícios do \acs{SRP}}\label{subsec:dev_srp}
+\begin{subsecao}{Implementação do \acs{SRP}}\label{subsec:dev_srp}
 
 \paragrafo{O Princípio da Responsabilidade Única (\acs{SRP}) está sendo seguido
 na classe ShowGameService (Código \ref{alg:showgameservice}). Isso ocorre 
@@ -18,7 +18,7 @@ nome em vez do id, entre outros.}
 \vspace{5mm}
   
 \paragrafo{Uma forma fácil de imaginar a classe acima ferindo este princípio
-seria se a mesma além de exibir jogos, também criasse ou atualizasse os mesdemos.
+seria se a mesma além de exibir jogos, também criasse ou atualizasse os mesmos.
 Com isso, a manutenção dessa classe pode ser mais difícil de se realizar do que
 a da primeira:}
 
@@ -30,14 +30,27 @@ a da primeira:}
 \ref{alg:gameservice}) passa a englobar diversos comportamentos e, com 
 isso, passa a exigir mais esforço para se manusear.}
 
+\paragrafo{Uma forma que respeite o \acs{SRP} e implemente as funcionalidades 
+da classe GameService pode ser descrita na Figura \ref{fig:srp_example}: Três classes, cada uma 
+com suas regras de negócio e suas responsabilidades.}
+
+\begin{figure}[!h]
+  \centering
+  \includegraphics[scale=0.8]{srp_example}
+  \caption{Representação do SRP}
+  \label{fig:srp_example}
+\end{figure}
+
 \paragrafo{Desta forma, o leitor pode se questionar porque a classe
- GamesController não viola o \acs{SRP}, visto que a mesma realiza todas essas
- operações. Isso não se caracteriza como uma violação pois a responsabilidade da
- classe é apenas comunicar as chamadas recebidas via HTTP para a aplicação. O
- \emph{Controller} desconhece os fluxos de exibição, criação ou atualização, mas
- conhece as classes que contêm esses fluxos.}
+GamesController (Código \ref{alg:gamescontroller}) não viola o \acs{SRP}, visto que 
+a mesma realiza todas essas operações. Isso não se caracteriza como uma 
+violação pois a responsabilidade da classe é apenas comunicar as chamadas 
+recebidas via HTTP para a aplicação. O \emph{Controller} desconhece os 
+fluxos de exibição, criação ou atualização, mas conhece as classes 
+que contêm esses fluxos.}
 \end{subsecao}
-\begin{subsecao}{Implementação e Benefícios do \acs{OCP}}\label{subsec:dev_ocp}
+
+\begin{subsecao}{Implementação do \acs{OCP}}\label{subsec:dev_ocp}
 
 \paragrafo{Para exemplificar o Princípio Aberto Fechado (\acs{OCP}), usaremos o
 fluxo responsável pela reinvidicação de cartões pré-pagos. Para usar esse
@@ -47,10 +60,10 @@ ou dinheiro para a compra de jogos na loja.}
 \paragrafo{Porém, ao cadastrar esses códigos no sistema, a validação para esses
 dois tipos de items a ser reinvidicados é diferente. Os cartões de dinheiro
 devem resgatar somente os valores de R\$30, R\$50 ou R\$100. Para validar um
-jogo, somente é necessário que este exista.}
+jogo, somente é necessário que este exista na base de dados.}
 
 \paragrafo{Com os requisitos acima, um desenvolvedor pode pensar em criar a 
-seguinte classe descrita no Código \ref{alg:createcodeservice}:}
+classe descrita no Código \ref{alg:createcodeservice}:}
 
 \vspace{5mm}
 \input{latex/codes/solid/CreateCodeService.ts.tex}
@@ -89,6 +102,17 @@ cada comportamento diferente. Sendo assim, uma classe para validar e registrar
 jogos (Código \ref{alg:gamecodeservice}) e outra para dinheiro virtual 
 (Código \ref{alg:cashcodeservice}).}
 
+\begin{figure}[!h]
+  \centering
+  \includegraphics[scale=0.75]{ocp_example}
+  \caption{Representação do OCP}
+  \label{fig:ocp_example}
+\end{figure}
+
+\paragrafo{Na Figura \ref{fig:ocp_example},
+temos uma representação de como essas classes se relacionam. As setas 
+partem em direção a classe abstrata, indicando a classe que estende a mesma.}
+
 \vspace{5mm}
 \input{latex/codes/solid/CreateGameCodeService.ts.tex}
 \vspace{5mm}
@@ -98,12 +122,28 @@ jogos (Código \ref{alg:gamecodeservice}) e outra para dinheiro virtual
 \vspace{5mm}
 
 \end{subsecao}
-\begin{subsecao}{Implementação e Benefícios do \acs{LSP}}\label{subsec:dev_lsp}
+\begin{subsecao}{Implementação do \acs{LSP}}\label{subsec:dev_lsp}
+
+\paragrafo{Um bom exemplo de implementação que respeita o LSP já foi apresentado na subseção 
+anterior. }
+
+\paragrafo{Esse princípio pode ser quebrado se, por exemplo, a interface não 
+especificar um método requerido em algum dos casos de uso e terceirizar essa 
+responsabilidade diretamente para as subclasses. A intercambiabilidade é perdida,
+e assim, a possibilidade de reuso do código também.}
+
+\paragrafo{O benefício de se usar esse príncipio está na desacoplação do código.
+Sem esse princípio aplicado, por exemplo, seria necessário especificar o subtipo
+UsersRepository, que, como demonstrado previamente, por se tratar de um 
+Adaptador de Interfaces, é um módulo de nível inferior aos Casos de Uso.}
+
+\end{subsecao}
+
+\begin{subsecao}{Implementação do \acs{ISP}}\label{subsec:dev_isp}
 
 \paragrafo{Um exemplo muito recorrente do próximo princípio, isto é, o
-Princípio da Substituição de Liskov (\acs{LSP}), está no funcionamento 
+Princípio da Segregação de Interfaces (\acs{ISP}), está no funcionamento 
 das classes \emph{Repository} da aplicação.} 
-
 
 \vspace{5mm}
 \input{latex/codes/solid/IUsersRepository.ts.tex}
@@ -118,32 +158,29 @@ e FakeUsersRepository (Código \ref{alg:fakeusersrepository}).}
 \input{latex/codes/solid/UsersRepository.ts.tex}
 \vspace{5mm}
 
-\paragrafo{Podemos dizer que o \acs{LSP} é respeitado na relação entre esses
-três módulos pois qualquer uma das implementações da interface IUsersRepository
-é válida de ser importada nos Casos de Uso da aplicação, visto todas elas são 
-intercambiáveis, ou seja, tem métodos de mesmo nome e com mesmos parâmetros, 
-mudando apenas os detalhes de implementação dos mesmos.} 
+\paragrafo{Podemos dizer que o \acs{ISP} é respeitado na relação entre esses
+três módulos pois a interface IUsersRepository tem 100\% dos seus métodos usados 
+por suas implementações.} 
 
 \vspace{5mm}
 \input{latex/codes/solid/FakeUsersRepository.ts.tex}
 \vspace{5mm}
 
+\paragrafo{Na Figura \ref{fig:isp_example}, temos a representação gráfica de como 
+os módulos citados se relacionam e como eles constituem o \acs{ISP}. As setas 
+tracejadas representam a implementação da interface IUsersRepository.}
+
 \begin{figure}[!h]
   \centering
-  \includegraphics[scale=0.5]{lsp_example}
-  \caption{Representação do LSP}
-  \label{fig:lsp_example}
+  \includegraphics[scale=0.6]{isp_example}
+  \caption{Representação do ISP}
+  \label{fig:isp_example}
 \end{figure}
 
-\paragrafo{Na figura \ref{fig:lsp_example}, temos a representação gráfica de como 
-os módulos citados se relacionam e como eles constituem o Princípio da Substituição
-de Liskov. As setas tracejadas representam a implementação da interface
-IUsersRepository.}
-
-\paragrafo{Esse princípio pode ser quebrado se, por exemplo, a interface não 
-especificar um método requerido em algum dos casos de uso e terceirizar essa 
-responsabilidade diretamente para as subclasses. A intercambiabilidade é perdida,
-e assim, a possibilidade de reuso do código também.}
+\paragrafo{Esse princípio pode ser quebrado se, como exemplificado na Seção 
+\ref{subsec:ISP}, a interface especificar um método que uma de suas implementações
+não necessite. Ao fazer isso, perde-se os benefícios que uma abstração de interfaces
+pode promover, como o reuso do código.}
 
 \paragrafo{O benefício de se usar esse príncipio está na desacoplação do código.
 Sem esse princípio aplicado, por exemplo, seria necessário especificar o subtipo
@@ -152,15 +189,7 @@ Adaptador de Interfaces, é um módulo de nível inferior aos Casos de Uso.}
 
 \end{subsecao}
 
-\begin{subsecao}{Implementação e Benefícios do \acs{ISP}}\label{subsec:dev_isp}
-
-\paragrafo{A aplicação do princípio de segregação de interfaces está em } 
-\notaeditor{Nota: Completar a seção com o DIP}
-
-
-\end{subsecao}
-
-\begin{subsecao}{Implementação e Benefícios do \acs{DIP}}\label{subsec:dev_dip}
+\begin{subsecao}{Implementação do \acs{DIP}}\label{subsec:dev_dip}
 
 \paragrafo{A aplicação do Princípio da Inversão de Dependência pode ser encontrada
 em todos os Casos de Uso da aplicação que interajam com o banco de dados, visto
@@ -191,4 +220,19 @@ e da Figura \ref{fig:dip_violation}.}
   \label{fig:dip_violation}
 \end{figure}
 
+\end{subsecao}
+
+\begin{subsecao}{Benefícios do SOLID}\label{subsec:solid_benefits}
+\paragrafo{Com isso, podemos refletir sobre os benefícios da aplicação 
+desses princípios. O \acs{SRP} e o \acs{OCP}, por exemplo, garantem 
+a facilidade de leitura e entendimento do código ao separar funcionalidades 
+complexas em componentes menores.}
+\paragrafo{O \acs{LSP} e o \acs{ISP} exploram e determinam regras para o uso do 
+conceito de interface e herança de forma a garantir a coesão do código e que 
+boas abstrações sejam construídas.}
+\paragrafo{O \acs{DIP} permite que módulos de nível superior possam referenciar, 
+indiretamente, módulos de nível inferior sem acarretar acoplamento entre estes.}
+\paragrafo{Por fim, se atentar aos princípios SOLID traz como 
+principais benefício, de diferentes formas, um código mais manuseável e limpo, 
+menos suscetível a bugs inesperados e com maior potencial de crescimento00.}
 \end{subsecao}
