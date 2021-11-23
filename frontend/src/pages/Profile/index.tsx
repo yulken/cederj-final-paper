@@ -19,6 +19,7 @@ import { Container, Content, AnimationContainer } from './styles';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import AxiosError from '../../errors/AxiosError';
+import TabMenu from '../../components/TabMenu';
 
 interface ProfileFormData {
   name: string;
@@ -137,6 +138,7 @@ const Profile: React.FC = () => {
 
   return (
     <Container>
+      <TabMenu />
       <Content>
         <AnimationContainer>
           <h1>Seu Perfil</h1>

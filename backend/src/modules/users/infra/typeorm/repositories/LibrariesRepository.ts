@@ -12,7 +12,7 @@ export default class LibrariesRepository implements ILibrariesRepository {
   }
 
   public async findByUserId(user_id: string): Promise<Library[]> {
-    return this.ormRepository.find({ where: user_id });
+    return this.ormRepository.find({ where: { user_id } });
   }
 
   public async findByUserIdAndGameId({

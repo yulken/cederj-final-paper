@@ -7,11 +7,15 @@ import IGamesRepository from '@modules/games/repositories/IGamesRepository';
 import Order from '../infra/typeorm/entities/Order';
 import IOrdersRepository from '../repositories/IOrdersRepository';
 import IOrderGamesRepository from '../repositories/IOrderGamesRepository';
-import OrderGame from '../infra/typeorm/entities/OrderGame';
+
+interface ICartItem {
+  id: string;
+  price: number;
+}
 
 interface IRequest {
   user_id: string;
-  order_games: OrderGame[];
+  order_games: ICartItem[];
 }
 
 @injectable()
@@ -34,20 +38,21 @@ export default class CreateOrderService {
   ) {}
 
   public async execute({ user_id, order_games }: IRequest): Promise<Order> {
-    if (!(await this.usersRepository.findById(user_id))) {
+    const user = await this.usersRepository.findById(user_id);
+    if (!user) {
       throw new AppError('User does not exist');
     }
     let totalPrice = 0;
     await Promise.all(
       order_games.map(async item => {
         const library = await this.librariesRepository.findByUserIdAndGameId({
-          game_id: item.game_id,
+          game_id: item.id,
           user_id,
         });
         if (library.length > 0) {
           throw new AppError('User already has this game');
         }
-        if (!(await this.gamesRepository.findById(item.game_id))) {
+        if (!(await this.gamesRepository.findById(item.id))) {
           throw new AppError('Game does not exist');
         }
         totalPrice += item.price;
@@ -63,16 +68,18 @@ export default class CreateOrderService {
     await Promise.all(
       order_games.map(item => {
         this.orderGamesRepository.create({
-          game_id: item.game_id,
+          game_id: item.id,
           order_id: order.id,
           price: item.price,
         });
         return this.librariesRepository.create({
-          game_id: item.game_id,
+          game_id: item.id,
           user_id,
         });
       }),
     );
+
+    await this.usersRepository.removeFromBalance(user, totalPrice);
 
     return order;
   }

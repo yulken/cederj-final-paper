@@ -1,9 +1,9 @@
 import styled, { keyframes } from 'styled-components';
 import { shade } from 'polished';
-import signUpBackgroundImg from '../../assets/sign-up-background.png';
 
 export const Container = styled.div`
   height: 100vh;
+
   display: flex;
   align-items: stretch;
 `;
@@ -13,18 +13,18 @@ export const Content = styled.div`
   flex-direction: column;
   align-items: center;
   place-content: center;
+
   width: 100%;
-  max-width: 700px;
 `;
 
-const appearFromRight = keyframes`
+const appearFromTop = keyframes`
   from {
     opacity: 0;
-    transform: translateX(50px);
+    transform: translateY(-50px);
   }
   to{
     opacity: 1;
-    transform: translateX(0);
+    transform: translateY(0);
   }
 `;
 
@@ -33,7 +33,9 @@ export const AnimationContainer = styled.div`
   flex-direction: column;
   align-items: center;
   place-content: center;
-  animation: ${appearFromRight} 1s;
+
+  animation: ${appearFromTop} 2s;
+
   form {
     margin: 80px 0;
     width: 340px;
@@ -41,31 +43,36 @@ export const AnimationContainer = styled.div`
     h1 {
       margin-bottom: 24px;
     }
+
     a {
       color: #f4ede8;
       display: block;
       margin-top: 24px;
       text-decoration: none;
       transition: color 0.2s;
+
       &:hover {
         color: ${shade(0.2, '#f4ede8')};
       }
     }
   }
   > a {
-    color: #f4ede8;
+    color: #bb86fc;
     display: block;
     margin-top: 24px;
     text-decoration: none;
     transition: color 0.2s;
+
     display: flex;
     align-items: center;
+
     svg {
       margin-right: 16px;
       transition: color 0.2s;
     }
+
     &:hover {
-      color: ${shade(0.2, '#f4ede8')};
+      color: ${shade(0.2, '#bb86fc')};
     }
   }
 `;

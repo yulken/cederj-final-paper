@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 export const Container = styled.div`
   height: 100vh;
@@ -7,11 +7,23 @@ export const Container = styled.div`
   align-items: stretch;
 `;
 
+const appearFromTop = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  to{
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
+
 export const Content = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   place-content: center;
+  animation: ${appearFromTop} 0.5s;
 
   width: 100%;
 `;

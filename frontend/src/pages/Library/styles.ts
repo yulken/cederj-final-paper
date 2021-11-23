@@ -1,8 +1,4 @@
-import styled, { css, keyframes } from 'styled-components';
-
-interface CardProps {
-  status?: 'enabled' | 'disabled';
-}
+import styled, { keyframes } from 'styled-components';
 
 export const Container = styled.div`
   height: 100vh;
@@ -37,6 +33,10 @@ export const Content = styled.div`
     text-decoration: none;
     transition: color 0.2s;
   }
+
+  * {
+    margin-bottom: 10px;
+  }
 `;
 
 export const Gallery = styled.div`
@@ -49,31 +49,16 @@ export const Gallery = styled.div`
   width: 100%;
   gap: 30px;
 
-  > a {
+  a {
     color: #f4ede8;
     display: block;
     margin-top: 24px;
     text-decoration: none;
     transition: color 0.2s;
   }
-
-  > div {
-    margin-top: 24px;
-    text-decoration: none;
-    transition: color 0.2s;
-  }
 `;
 
-const cardVariations = {
-  enabled: css`
-    opacity: 1;
-  `,
-  disabled: css`
-    opacity: 0.5;
-  `,
-};
-
-export const Card = styled.div<CardProps>`
+export const Card = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -83,5 +68,4 @@ export const Card = styled.div<CardProps>`
     width: 150px;
     object-fit: cover;
   }
-  ${props => cardVariations[props.status || 'enabled']}
 `;

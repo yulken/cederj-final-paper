@@ -25,7 +25,6 @@ export default class RedeemCodeService {
   ) {}
 
   public async execute({ code, user_id }: IRequest): Promise<GamestoreCode> {
-    console.log(code);
     const item = await this.gamestoreCodesRepository.findByCode(code);
     if (!item) {
       throw new AppError('Code is invalid');

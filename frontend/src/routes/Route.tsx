@@ -6,6 +6,7 @@ import {
 } from 'react-router-dom';
 
 import { useAuth } from '../hooks/auth';
+import { useCart } from '../hooks/cart';
 
 interface RouteProps extends ReactDOMRouteProp {
   isPrivate?: boolean;
@@ -18,6 +19,10 @@ const Route: React.FC<RouteProps> = ({
   ...rest
 }) => {
   const { user } = useAuth();
+  const { cart, startCart } = useCart();
+  if (user && !cart) {
+    startCart;
+  }
   return (
     <ReactDOMRoute
       {...rest}
@@ -25,6 +30,7 @@ const Route: React.FC<RouteProps> = ({
         if (isPrivate && !user) {
           return <Redirect to={{ pathname: '/signin' }} />;
         }
+
         return <Component />;
       }}
     />

@@ -64,7 +64,7 @@ const SignUp: React.FC = () => {
 
         await validateResponse(api.post('/users', data));
 
-        history.push('/');
+        history.push('/signin');
 
         addToast({
           type: 'success',

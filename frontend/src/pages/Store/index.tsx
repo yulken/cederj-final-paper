@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 
 import { Link } from 'react-router-dom';
-import { FiArrowLeft } from 'react-icons/fi';
 import { Container, Content, Gallery, Card } from './styles';
+import { GameDetails } from '../Library';
+import TabMenu from '../../components/TabMenu';
 import api from '../../services/apiClient';
 import hedgehog from '../../assets/hedgehog.jpeg';
 
@@ -16,32 +17,42 @@ interface Game {
 
 const Store: React.FC = () => {
   const [games, setGames] = useState([]);
+  const [ownedGames, setOwnedGames] = useState<GameDetails[]>([]);
 
   useEffect(() => {
     const fetchGames = async (): Promise<void> => {
       const response = await api.get('games/');
       setGames(response.data);
     };
+    const fetchOwnedGames = async (): Promise<void> => {
+      const response = await api.get('library');
+      setOwnedGames(response.data);
+    };
     fetchGames();
+    fetchOwnedGames();
   }, []);
   return (
     <Container>
+      <TabMenu />
       <Content>
         <h1>Lista de Jogos</h1>
         <Gallery>
-          {games.map((game: Game) => (
-            <Link key={game.id} to={`games/${game.id}`}>
-              <Card>
+          {games.map((game: Game) =>
+            ownedGames.every(elem => elem.id !== game.id) ? (
+              <Link key={game.id} to={`games/${game.id}`}>
+                <Card status="enabled">
+                  <img src={hedgehog} alt="" />
+                  {game.name}
+                </Card>
+              </Link>
+            ) : (
+              <Card status="disabled">
                 <img src={hedgehog} alt="" />
                 {game.name}
               </Card>
-            </Link>
-          ))}
+            ),
+          )}
         </Gallery>
-        <Link to="/signin">
-          <FiArrowLeft />
-          Voltar para login
-        </Link>
       </Content>
     </Container>
   );
