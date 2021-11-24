@@ -13,7 +13,7 @@ export interface LibraryEntry {
   price: number;
   bought_in?: Date;
   isOnCart?: boolean;
-  func?(id: string, price: number): void;
+  func?(id: string, price: number, name: string): void;
 }
 
 const Game: React.FC<LibraryEntry> = ({
@@ -52,20 +52,11 @@ const Game: React.FC<LibraryEntry> = ({
               <td>{format(new Date(bought_in), 'dd/MM/yyyy')}</td>
             </tr>
           )}
-          {/* {!bought_in && (
-            <tr>
-              <td colSpan={2}>
-                <Form onSubmit={add}>
-                  <Button type="submit">Adicionar ao Carrinho</Button>
-                </Form>
-              </td>
-            </tr>
-          )} */}
           {func &&
             (isOnCart ? (
               <tr>
                 <td colSpan={2}>
-                  <Form onSubmit={() => func(id, price)}>
+                  <Form onSubmit={() => func(id, price, name)}>
                     <Button color="red" type="submit">
                       Remover do Carrinho
                     </Button>
@@ -75,7 +66,7 @@ const Game: React.FC<LibraryEntry> = ({
             ) : (
               <tr>
                 <td colSpan={2}>
-                  <Form onSubmit={() => func(id, price)}>
+                  <Form onSubmit={() => func(id, price, name)}>
                     <Button color="green" type="submit">
                       Adicionar ao Carrinho
                     </Button>

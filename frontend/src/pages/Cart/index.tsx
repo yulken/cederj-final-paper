@@ -83,9 +83,9 @@ const Cart: React.FC = () => {
         <h1>Carrinho</h1>
         <GameData>
           <tbody>
-            {gameList.map(({ id, price }) => (
+            {gameList.map(({ id, name, price }) => (
               <tr key={id}>
-                <td>{id}</td>
+                <td>{name}</td>
                 <td>{price}</td>
                 <td>
                   <Button

@@ -1,0 +1,417 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Esta página tem como propósito documentar e auxiliar a execução de fluxos exclusivos para uso administrativo",
+    "version": "1.0.0",
+    "title": "GameStore",
+    "contact": {
+      "email": "caiocftorres@gmail.com"
+    }
+  },
+  "host": "gamestore.caio-torres.dev:3333",
+  "tags": [
+    {
+      "name": "codes",
+      "description": "APIs de cadastro de códigos de Jogos e Dinheiro Virtual"
+    },
+    {
+      "name": "games",
+      "description": "APIs de cadastro e atualização de Jogos"
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/codes/cash": {
+      "post": {
+        "tags": [
+          "codes"
+        ],
+        "summary": "Cria código de créditos",
+        "description": "Cria um novo código de créditos para futura reivindicação",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Informe uma das seguintes opções (30, 50 100)",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateCashCode"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "schema": {
+              "$ref": "#/definitions/CreateCashCodeResponse"
+            }
+          },
+          "400": {
+            "description": "Entrada Inválida"
+          },
+          "500": {
+            "description": "Erro interno"
+          }
+        }
+      }
+    },
+    "/codes/game": {
+      "post": {
+        "tags": [
+          "codes"
+        ],
+        "summary": "Cria código de jogos",
+        "description": "Cria um novo código de jogo para futura reivindicação",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Informe o id do jogo a ser reivindicado",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateGameCode"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "schema": {
+              "$ref": "#/definitions/CreateGameCodeResponse"
+            }
+          },
+          "400": {
+            "description": "Entrada Inválida"
+          },
+          "500": {
+            "description": "Erro interno"
+          }
+        }
+      }
+    },
+    "/games": {
+      "post": {
+        "tags": [
+          "games"
+        ],
+        "summary": "Cria novos jogos",
+        "description": "Cria um novo jogo",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Informe o nome, valor, editora <b>E</b> data de lançamento do jogo a ser criado",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateGame"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "schema": {
+              "$ref": "#/definitions/CreateGameResponse"
+            }
+          },
+          "400": {
+            "description": "Entrada Inválida"
+          },
+          "500": {
+            "description": "Erro interno"
+          }
+        }
+      }
+    },
+    "/games/{game_id}": {
+      "put": {
+        "tags": [
+          "games"
+        ],
+        "summary": "Atualiza jogos",
+        "description": "Atualiza um jogo já criado",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "required": true,
+            "name": "game_id",
+            "type": "string",
+            "format": "uuid",
+            "description": "Id do jogo a ser atualizado"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Informe o valor e/ou data de lançamento do jogo a ser criado",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateGame"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sucesso",
+            "schema": {
+              "$ref": "#/definitions/UpdateGameResponse"
+            }
+          },
+          "400": {
+            "description": "Entrada Inválida"
+          },
+          "500": {
+            "description": "Erro interno"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CreateGame": {
+      "type": "object",
+      "required": [
+        "name",
+        "price",
+        "publisher",
+        "release_date"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Titulo do jogo",
+          "example": "DOOM Eternal"
+        },
+        "price": {
+          "type": "number",
+          "description": "Preço do jogo",
+          "example": 80
+        },
+        "publisher": {
+          "type": "string",
+          "description": "Editora do jogo",
+          "example": "Bethesda Softworks"
+        },
+        "release_date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Data de lançamento"
+        }
+      }
+    },
+    "CreateGameResponse": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Titulo do jogo",
+          "example": "DOOM Eternal"
+        },
+        "price": {
+          "type": "number",
+          "description": "Preço do jogo",
+          "example": 80
+        },
+        "publisher": {
+          "type": "string",
+          "description": "Editora do jogo",
+          "example": "Bethesda Softworks"
+        },
+        "release_date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Data de lançamento"
+        },
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "UpdateGame": {
+      "type": "object",
+      "required": [
+        "name",
+        "price",
+        "publisher",
+        "release_date"
+      ],
+      "properties": {
+        "price": {
+          "type": "number",
+          "description": "Preço do jogo",
+          "example": 80
+        },
+        "release_date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Data de lançamento"
+        }
+      }
+    },
+    "UpdateGameResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "name": {
+          "type": "string",
+          "description": "Titulo do jogo",
+          "example": "DOOM Eternal"
+        },
+        "price": {
+          "type": "number",
+          "description": "Preço do jogo",
+          "example": 80
+        },
+        "publisher": {
+          "type": "string",
+          "description": "Editora do jogo",
+          "example": "Bethesda Softworks"
+        },
+        "release_date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Data de lançamento"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "CreateGameCode": {
+      "type": "object",
+      "required": [
+        "game_id"
+      ],
+      "properties": {
+        "game_id": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Quantidade reivindicada através do código"
+        }
+      }
+    },
+    "CreateGameCodeResponse": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "product": {
+          "type": "object",
+          "properties": {
+            "game_id": {
+              "type": "string",
+              "format": "uuid",
+              "description": "Quantidade reivindicada através do código"
+            }
+          }
+        },
+        "is_redeemed": {
+          "type": "boolean"
+        },
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "CreateCashCode": {
+      "type": "object",
+      "required": [
+        "cash"
+      ],
+      "properties": {
+        "cash": {
+          "type": "integer",
+          "description": "Quantidade reivindicada através do código",
+          "example": 100
+        }
+      }
+    },
+    "CreateCashCodeResponse": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "product": {
+          "type": "object",
+          "properties": {
+            "cash": {
+              "type": "integer",
+              "description": "Quantidade reivindicada através do código",
+              "example": 100
+            }
+          }
+        },
+        "is_redeemed": {
+          "type": "boolean"
+        },
+        "id": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  }
+}
