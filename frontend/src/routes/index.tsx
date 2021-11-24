@@ -9,9 +9,11 @@ import {
   Library,
   RedeemCode,
   Cart,
+  History,
 } from '../pages';
 import LibraryGameDetails from '../pages/Library/GameDetails';
 import StoreGameDetails from '../pages/Store/GameDetails';
+import Order from '../pages/History/Order';
 
 const Routes: React.FC = () => (
   <Switch>
@@ -29,6 +31,8 @@ const Routes: React.FC = () => (
     />
     <Route path="/redeem-code" exact component={RedeemCode} isPrivate />
     <Route path="/cart" exact component={Cart} isPrivate />
+    <Route path="/history" exact component={History} isPrivate />
+    <Route path="/history/:order_id" exact component={Order} isPrivate />
   </Switch>
 );
 

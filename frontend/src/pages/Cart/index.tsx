@@ -31,6 +31,10 @@ const Cart: React.FC = () => {
   const handleConfirm = useCallback(
     async (list: Game[]) => {
       try {
+        if (user.balance < totalPrice) {
+          throw new Error('cod:saldo');
+        }
+
         await api.post('orders', {
           user_id: user.id,
           order_games: list,
@@ -46,6 +50,15 @@ const Cart: React.FC = () => {
         });
         startCart();
       } catch (err) {
+        if (err instanceof Error) {
+          if (err.message === 'cod:saldo')
+            addToast({
+              type: 'error',
+              title: 'Saldo Insuficiente',
+              description: 'Saldo insuficiente para compra.',
+            });
+          return;
+        }
         addToast({
           type: 'error',
           title: 'Erro Interno',
@@ -53,7 +66,15 @@ const Cart: React.FC = () => {
         });
       }
     },
-    [user.id, updateUser, history, addToast, startCart],
+    [
+      totalPrice,
+      user.balance,
+      user.id,
+      updateUser,
+      history,
+      addToast,
+      startCart,
+    ],
   );
   return (
     <Container>

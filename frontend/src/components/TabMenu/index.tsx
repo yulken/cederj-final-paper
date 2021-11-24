@@ -23,7 +23,7 @@ const TabMenu: React.FC<NOfElements> = ({ nOfItems }) => {
       <LinkLists>
         <Link to="/">Loja</Link>
         {user && <Link to="/library">Biblioteca</Link>}
-        {user && <Link to="/redeem-code">Códigos</Link>}
+        {user && <Link to="/redeem-code">Créditos</Link>}
         {user && <Link to="/history">Histórico</Link>}
       </LinkLists>
       <UserInfo>

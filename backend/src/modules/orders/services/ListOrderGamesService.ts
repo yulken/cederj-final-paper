@@ -1,3 +1,4 @@
+import log from '@shared/utils/log';
 import { injectable, inject } from 'tsyringe';
 import OrderGame from '../infra/typeorm/entities/OrderGame';
 
@@ -15,6 +16,7 @@ export default class ListOrderGamesService {
   ) {}
 
   public async execute({ order_id }: IRequest): Promise<OrderGame[]> {
+    log.debug('order_id', order_id);
     const orders = await this.orderGamesRepository.findByOrderId(order_id);
     return orders;
   }

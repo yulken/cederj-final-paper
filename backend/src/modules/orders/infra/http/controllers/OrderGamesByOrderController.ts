@@ -3,6 +3,7 @@ import { container } from 'tsyringe';
 import { classToClass } from 'class-transformer';
 import ListOrderGamesService from '@modules/orders/services/ListOrderGamesService';
 import ShowOrderGamesService from '@modules/orders/services/ShowOrderGamesService';
+import log from '@shared/utils/log';
 
 export default class OrderGamesByOrderController {
   public async index(request: Request, response: Response): Promise<Response> {

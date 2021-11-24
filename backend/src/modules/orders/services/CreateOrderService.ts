@@ -55,7 +55,7 @@ export default class CreateOrderService {
         if (!(await this.gamesRepository.findById(item.id))) {
           throw new AppError('Game does not exist');
         }
-        totalPrice += item.price;
+        totalPrice += Number(item.price);
         return;
       }),
     );

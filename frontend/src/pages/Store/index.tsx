@@ -42,13 +42,13 @@ const Store: React.FC = () => {
               <Link key={game.id} to={`games/${game.id}`}>
                 <Card status="enabled">
                   <img src={hedgehog} alt="" />
-                  {game.name}
+                  <div>{game.name}</div>
                 </Card>
               </Link>
             ) : (
               <Card status="disabled">
                 <img src={hedgehog} alt="" />
-                {game.name}
+                <div>{game.name}</div>
               </Card>
             ),
           )}
