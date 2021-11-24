@@ -1,0 +1,13 @@
+.reset {
+  background-color: white;
+  color: black;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: 0;
+  font-family: default;
+  font-size: default;
+  font-weight: default;
+  cursor: default;
+
+}

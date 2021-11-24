@@ -6,5 +6,16 @@ import Library from './Library';
 import RedeemCode from './RedeemCode';
 import Cart from './Cart';
 import History from './History';
+import Swagger from './Swagger';
 
-export { SignIn, SignUp, Profile, Store, Library, RedeemCode, Cart, History };
+export {
+  SignIn,
+  SignUp,
+  Profile,
+  Store,
+  Library,
+  RedeemCode,
+  Cart,
+  History,
+  Swagger,
+};

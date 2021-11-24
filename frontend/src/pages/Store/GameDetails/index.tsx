@@ -40,16 +40,16 @@ const Store: React.FC = () => {
   }, [game_id, game]);
 
   const add = useCallback(
-    (idSubmit, priceSubmit) => {
-      addToCart({ id: idSubmit, price: priceSubmit });
+    (idSubmit, priceSubmit, nameSubmit) => {
+      addToCart({ id: idSubmit, price: priceSubmit, name: nameSubmit });
       toggleCart(isGameFound(idSubmit));
     },
     [addToCart, isGameFound],
   );
 
   const remove = useCallback(
-    (idSubmit, priceSubmit) => {
-      removeFromCart({ id: idSubmit, price: priceSubmit });
+    (idSubmit, priceSubmit, nameSubmit) => {
+      removeFromCart({ id: idSubmit, price: priceSubmit, name: nameSubmit });
       toggleCart(isGameFound(idSubmit));
     },
     [removeFromCart, isGameFound],

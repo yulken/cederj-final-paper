@@ -3,6 +3,7 @@ import React, { createContext, useCallback, useState, useContext } from 'react';
 export interface Game {
   id: string;
   price: number;
+  name: string;
 }
 export interface Cart {
   games: Game[];

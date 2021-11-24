@@ -10,6 +10,7 @@ import {
   RedeemCode,
   Cart,
   History,
+  Swagger,
 } from '../pages';
 import LibraryGameDetails from '../pages/Library/GameDetails';
 import StoreGameDetails from '../pages/Store/GameDetails';
@@ -33,6 +34,7 @@ const Routes: React.FC = () => (
     <Route path="/cart" exact component={Cart} isPrivate />
     <Route path="/history" exact component={History} isPrivate />
     <Route path="/history/:order_id" exact component={Order} isPrivate />
+    <Route path="/admin/swagger" exact component={Swagger} />
   </Switch>
 );
 

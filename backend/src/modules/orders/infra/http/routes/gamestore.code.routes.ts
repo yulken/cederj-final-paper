@@ -5,10 +5,12 @@ import GamestoreCodeController from '../controllers/GamestoreCodeController';
 const GamestoreCodesRouter = Router();
 const GamestoreCodesController = new GamestoreCodeController();
 
-GamestoreCodesRouter.use(ensureAuthenticated);
-
 GamestoreCodesRouter.post('/cash', GamestoreCodesController.createCashCode);
 GamestoreCodesRouter.post('/game', GamestoreCodesController.createGameCode);
-GamestoreCodesRouter.post('/:code', GamestoreCodesController.redeem);
+GamestoreCodesRouter.post(
+  '/:code',
+  ensureAuthenticated,
+  GamestoreCodesController.redeem,
+);
 
 export default GamestoreCodesRouter;
