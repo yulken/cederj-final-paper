@@ -27,7 +27,7 @@ export default class CreateCashCodeService extends AbstractCodeTemplate {
   }
 
   protected async validateData({ cash }: IRequest): Promise<void> {
-    if (cash !== 30 && cash !== 50 && cash !== 100) {
+    if (Number(cash) !== 30 && Number(cash) !== 50 && Number(cash) !== 100) {
       throw new AppError('Invalid cash quantity');
     }
   }
