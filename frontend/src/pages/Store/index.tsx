@@ -5,7 +5,7 @@ import { Container, Content, Gallery, Card } from './styles';
 import { GameDetails } from '../Library';
 import TabMenu from '../../components/TabMenu';
 import api from '../../services/apiClient';
-import hedgehog from '../../assets/hedgehog.jpeg';
+import hedgehog from '../../assets/hedgehog.jpg';
 
 interface Game {
   id: string;

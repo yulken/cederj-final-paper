@@ -8,6 +8,8 @@ import '@shared/container';
 import log from '@shared/utils/log';
 import routes from './routes';
 import 'reflect-metadata';
+import https from 'https';
+import cert from '@config/cert';
 // todo configure production environment
 const app = express();
 app.use(cors());
@@ -30,6 +32,9 @@ app.use(
 
 const port = Number(process.env.APP_API_PORT) || 3333;
 const address = process.env.APP_API_ADDRESS || 'localhost';
-app.listen(port, address, () => {
+
+const server = https.createServer(cert, app)
+
+server.listen(port, () => {
   log.info(`Server started => ${address}:${port}!`);
 });

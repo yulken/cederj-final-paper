@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { Container, Content, Gallery, Card } from './styles';
 import { TabMenu } from '../../components';
 import api from '../../services/apiClient';
-import hedgehog from '../../assets/hedgehog.jpeg';
+import hedgehog from '../../assets/hedgehog.jpg';
 
 export interface GameDetails {
   id: string;

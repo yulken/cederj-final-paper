@@ -2,7 +2,7 @@ import React from 'react';
 import { format } from 'date-fns';
 import { Form } from '@unform/web';
 import { Content, GameData } from './styles';
-import hedgehog from '../../assets/hedgehog.jpeg';
+import hedgehog from '../../assets/hedgehog.jpg';
 import Button from '../Button';
 
 export interface LibraryEntry {
